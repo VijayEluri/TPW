@@ -4,7 +4,9 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 	
 <beans>
-	<!-- Example of SAF2 action instantiated by Spring -->
-    <bean id="helloWorldAction" class="br.org.sancalivre.HelloWorldAction" singleton="false" />
+	
+    
+    
+    
 </beans>
 

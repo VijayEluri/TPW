@@ -1,125 +1,108 @@
-/* A CSS Framework by Mike Stenhouse of Content with Style */
+body {
+    margin: 0;
+    padding: 0;
 
-/* SITE SPECIFIC LAYOUT */
-    body {
-        margin: 0;
-        padding: 0;
-        
-        background: white;
-              
-        text-align: center;
-    }
-    div#page {
-        width: 780px;
-        
-        margin:  0 auto;
-        padding: 0;
-        
-        background: white;
-        text-align: center;
-    }
-    
-    /* HEADER */
-        div#header {
-            margin: 0 0 5em 0;
-            padding: 40px 20px;
-            
-            color: white;
-            background: black;
-            
-            text-align: left;
-        }
-        div#branding {
-            float: left;
-            width: 40%;
-            
-            margin: 0;
-            padding: 10px 0 10px 20px;
-            
-            text-align: left;
-        }
-        div#search {
-            float: right;
-            width: 49%;
-            
-            margin: 0;
-            padding: 16px 20px 0 0;
-            
-            text-align: right;
-        }
-    /* END HEADER */
-    
-    
-    /* CONTENT */
-        div#content {
-            
-        }
-        
-        /* MAIN */
-            div#main {
-                
-            }
-        /* END MAIN */
-        
-        /* SUB */
-            div#sub {
-                
-            }
-        /* END SUB */
-        
-    /* END CONTENT */
-    
-    
-    /* FOOTER */
-        div#footer {
-            color: white;
-            background-color: black;
-        }
-        div#footer p {
-            font-size: 0.8em;
-            
-            margin: 0;
-            padding: 15px;
-        }
-    /* END FOOTER */
-/* END LAYOUT */
+    background: #a0a0a0;
+                        
+    text-align: center;
+}
 
+div#page {
+    width: 960px;
 
+    margin: 0 auto;
+    margin-top: 50px;
 
+    padding: 0;
+    
+    background: white;
+    text-align: center;
+}
 
-/* UL.SUBNAV */
-    ul.subnav {
-        margin: 0;
-        padding: 0;
-        
-        font-size: 0.8em;
-        list-style: none;
-    }
-    ul.subnav li {
-        margin: 0 0 1em 0;
-        padding: 0;
-        list-style: none;
-    }
-    ul.subnav li a,
-    ul.subnav li a:link,
-    ul.subnav li a:visited,
-    ul.subnav li a:active {
-        text-decoration: none;
-        font-weight: bold;
-        color: black;
-    }
-    ul.subnav li a:hover {
-        text-decoration: underline;
-    }
-    ul.subnav li strong {
-        padding: 0 0 0 12px;
-        background: url("../i/subnav-highlight.gif") left top no-repeat transparent;
-    }
-    ul.subnav li strong a,
-    ul.subnav li strong a:link,
-    ul.subnav li strong a:visited,
-    ul.subnav li strong a:active {
-        color: white;
-        background-color: black;
-    }
-/* END UL.SUBNAV */
+/* Header */
+div#header {
+    height: 80px;
+    color: white;
+    background: #467aa7;
+    
+    text-align: left;
+}
+
+div#header h1{
+	padding: 10px 0 0 20px;
+	font-size: 2.4em;
+	background-color: inherit;
+	color: #ffffff;
+	font-weight: normal;
+}
+
+/* Footer */
+div#footer {
+    color: white;
+    background-color: #78C1E5;
+}
+div#footer p {
+    font-size: 0.8em;
+    
+    margin: 0;
+    padding: 15px;
+}
+
+/* Menu */
+#menu ul {
+	margin: 0;
+	padding: 0;	
+}
+
+#menu {
+	background-color: #1E4A7E;
+	width: 958px;
+	display: table;
+	color: #ffffff;
+	height: 2.0em;
+	line-height: 2.0em;
+	margin: 1px;
+	padding: 0 0 0 0px;	
+}
+
+#menu li {
+	float: left;
+	list-style-type: none;
+	border-right: 1px solid #ffffff;
+	white-space: nowrap;
+}
+
+#menu li a {
+	display: block;
+	padding: 0 10px;
+	font-size: 0.8em;
+	font-weight: normal;
+	text-decoration: none;
+	background-color: inherit;
+	color: #ffffff;
+}
+
+#menu ul li a {
+	font: 13px verdana, arial, tahoma, sans-serif;
+	color: red;
+	float: left;
+	text-decoration: none;
+	padding: 5px 10px;
+	margin-left: 1px;
+	display: block;
+	font-size: 0.8em;
+	background-color: inherit;
+	color: #ffffff;
+}
+
+#menu ul li a:hover {
+	background: #6699FF;
+	color: #ffffff;
+}
+
+.divPadrao {
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+	background-color: #E1E1E1;
+	font: 13px verdana, arial, tahoma, sans-serif;
+}

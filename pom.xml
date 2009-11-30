@@ -6,9 +6,9 @@
 	<artifactId>tpw</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Struts 2 Starter</name>
-	<url>http://www.myComp.com</url>
-	<description>Struts 2 Starter</description>
+	<name>Sancalivrer</name>
+	<url>http://sancalivre.org.br</url>
+	<description>Sanca Livre</description>
 
 	<dependencies>
 		<!-- Junit -->

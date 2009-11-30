@@ -1,0 +1,90 @@
+.defaultTable {
+    border: 1px solid #C3C3C3;
+    border-right: 0;
+    border-top: 0;
+    text-align: center;
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    width: 100%;
+}
+
+.defaultTable th {
+    height: 30px;
+    background-color: #E1E1E1;
+    font-weight: bold;
+    border-right: 1px solid #C3C3C3;
+    border-top: 1px solid #C3C3C3;
+    padding: 2px;
+    text-align:center;
+    color: #002BAA;
+}
+
+.defaultTable th a {
+    font-weight: bold;
+    font-size: 9pt;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.defaultTable th a:HOVER {
+    text-decoration: underline;
+    color: red;
+}
+
+.defaultTable td {
+    border-top: 1px solid #C3C3C3;
+    border-right: 1px solid #C3C3C3;
+    padding: 3px;
+}
+
+.disabledRow {
+	background-color: red;
+} 
+
+.sepDiv {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-width: 1px;
+	border-color: #000000;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	width: 940px;
+	background-color: #F5F5F5;
+}
+
+.sepDivUp {
+	padding-top: 5px;
+	border-width: 1px;
+	border-color: #000000;
+	border-top-style: solid;
+}
+
+.sepDivDown {
+	padding-top: 5px;
+	border-width: 1px;
+	border-color: #000000;
+	border-bottom-style: solid;
+}
+
+.divTable {
+	text-align: center;
+	padding: 10px;
+	padding-left: 20px;	
+}
+
+.divTable h3 {
+	 font-family: sans-serif;
+	 font-style: normal;
+	 font-variant: normal;
+	 font-weight: normal;
+	 font-size: 2.2em;
+	 line-height: normal;
+	 font-size-adjust: none;
+	 font-stretch: normal;
+	 -x-system-font: none	
+}

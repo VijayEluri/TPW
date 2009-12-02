@@ -104,7 +104,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>testcase</finalName>
+		<finalName>tpw</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

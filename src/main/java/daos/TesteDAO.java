@@ -40,6 +40,6 @@ public class TesteDAO {
 
 	public void setDao(DAO<Teste, Integer> dao) {
 		this.dao = dao;
-	}
-
+	}	
+	
 }

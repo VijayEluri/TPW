@@ -27,7 +27,7 @@ public class TesteTest {
 		testeDAO = (TesteDAO) ctx.getBean("testeDAO");
 	}
 
-	@AfterClass
+	//@AfterClass
 	public static void clearDatabase() {
 		EntityManager em = Persistence.createEntityManagerFactory("tpw").createEntityManager();
 		em.getTransaction().begin();
@@ -47,7 +47,10 @@ public class TesteTest {
 	
 	private static void save() {		
 		Teste teste1 = (Teste) ctx.getBean("teste1");
+		Teste teste2 = (Teste) ctx.getBean("teste2");
+		
 		assertNotNull(teste1);
+		assertNotNull(teste2);
 		
 		// Salva no banco
 		teste1 = testeDAO.save(teste1);		
@@ -56,7 +59,8 @@ public class TesteTest {
 		assertNotNull(teste1);
 		assertEquals(1, teste1.getCodigo());
 		assertEquals("descricao 1", teste1.getDescricao());
-		assertEquals(10000.0, teste1.getValor());		
+		assertEquals(10000.0, teste1.getValor());
+				
 	}
 
 

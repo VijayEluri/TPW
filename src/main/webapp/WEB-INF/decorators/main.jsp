@@ -26,7 +26,7 @@
 		$('#content').corner("round-bottom");
 		$('.divPadrao').corner();
     </script>
-    
+   
     <title>Sanca Livre</title>
     
     <decorator:head/>

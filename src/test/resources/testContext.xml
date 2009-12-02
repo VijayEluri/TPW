@@ -26,6 +26,11 @@
         <property name="descricao" value="descricao 1"/>
         <property name="valor" value="10000" />
     </bean>
+    
+    <bean id="teste2" class="beans.Teste" singleton="false">
+        <property name="descricao" value="descricao 2"/>
+        <property name="valor" value="20000" />
+    </bean>
 
 </beans>
 

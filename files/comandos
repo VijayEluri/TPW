@@ -1,1 +1,3 @@
 mvn jetty:run
+mvn -Declipse.workspace=trab eclipse:add-maven-repo
+mvn eclipse:eclipse -Dwtpversion=R7

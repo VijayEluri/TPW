@@ -1,0 +1,2 @@
+CREATE SEQUENCE seq_teste START WITH 1;
+

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC 
-	"-//SPRING//DTD BEAN//EN" 
-	"http://www.springframework.org/dtd/spring-beans.dtd">
-	
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
 <beans>
-	
-    
-    
-    
+
+	<bean id="testeDAO" class="daos.TesteDAO" singleton="false">
+		<property name="dao">
+			<bean name="GenericJPADAO" class="daos.GenericJPADAO">
+				<constructor-arg value="beans.Teste" />
+			</bean>
+		</property>
+	</bean>
+
 </beans>
 

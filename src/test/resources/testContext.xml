@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC 
+	"-//SPRING//DTD BEAN//EN" 
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+	
+<beans>
+
+	<bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+    	<property name="customEditors">
+      		<map>
+        		<entry key="java.util.Date">
+          			<bean class="org.springframework.beans.propertyeditors.CustomDateEditor">
+            			<constructor-arg index="0">
+	              			<bean class="java.text.SimpleDateFormat">
+	                			<constructor-arg><value>d/M/yyyy</value></constructor-arg>
+	              			</bean>
+            			</constructor-arg>
+            			<constructor-arg index="1"><value>true</value></constructor-arg>
+          			</bean>
+        		</entry>      
+      		</map>
+    	</property>
+  	</bean>
+
+	<bean id="teste1" class="beans.Teste" singleton="false">
+        <property name="descricao" value="descricao 1"/>
+        <property name="valor" value="10000" />
+    </bean>
+
+</beans>
+

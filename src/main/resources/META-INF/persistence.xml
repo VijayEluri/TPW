@@ -4,18 +4,17 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
              version="1.0">
 
-    <persistence-unit name="testcase">
+    <persistence-unit name="tpw">
 
-		<!-- classes a serem persistidas     	    	
-    	<class>pacote.classe</class>
-    	 -->
+		<!-- classes a serem persistidas -->     	    	
+    	<class>beans.Teste</class>
    
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost/testcase" />
-			<property name="hibernate.connection.username" value="postgres" />
-			<property name="hibernate.connection.password" value="123" />
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost/tpwdb" />
+			<property name="hibernate.connection.username" value="tpwuser" />
+			<property name="hibernate.connection.password" value="tpwpass" />
 			<property name="hibernate.hbm2dll.auto" value="none" />
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

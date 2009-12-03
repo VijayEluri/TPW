@@ -1,6 +1,6 @@
 create table teste (
 	codigo int not null,
 	descricao varchar(100) not null,
-	valor money,
+	valor float,
 	primary key (codigo)
 );

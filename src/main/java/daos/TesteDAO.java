@@ -27,7 +27,10 @@ public class TesteDAO {
 	}
 
 	public Teste save(Teste teste) {
-		return dao.merge(teste);
+		if (teste.getCodigo() != null)
+			return dao.merge(teste);
+		dao.persist(teste);
+		return teste;
 	}
 
 	public Teste selectByCodigo(int codigo) {

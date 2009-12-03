@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import noticias.Noticia;
+import noticias.RoboNoticias;
 import noticias.SiteRSS;
 
 import org.springframework.context.ApplicationContext;
@@ -17,7 +18,7 @@ public class RssAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Noticia> noticias;
+	private List<Noticia> noticias, noticiasAux;
 	private ApplicationContext ctx; 
 	
 	public String index() {
@@ -27,15 +28,17 @@ public class RssAction extends ActionSupport {
 		
 		// Pega todos os links de notícias cadastrados no banco
 		List<SiteRSS> sites = dao.selectAll(); 
+				
+		for (SiteRSS site : sites) {
 		
-		for (int i = 0; i < sites.size(); i++) {
-			Noticia noticia = new Noticia();
-			noticia.setLink(sites.get(i).getLink());
-			noticia.setNoticia("bla bla asksdajkf jasdkj fksadjk f");
-			noticia.setTitulo("titulo " + i);
-			noticias.add(noticia);
+			RoboNoticias robo = new RoboNoticias(site.getLink());
+			noticiasAux = robo.getNoticias();
+			
+			for (Noticia noticia : noticiasAux)
+				noticias.add(noticia);
+			
 		}
-
+		
 		return "index";
 	}
 

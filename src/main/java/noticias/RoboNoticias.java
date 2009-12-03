@@ -1,11 +1,5 @@
 package noticias;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -42,23 +36,10 @@ public class RoboNoticias extends DefaultHandler {
 		
 		// Pega as noticias
 		try {
-			URL site = new URL(url);
-			URLConnection sld = site.openConnection();
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(sld.getInputStream()));
-			BufferedWriter out = 
-				new BufferedWriter(new FileWriter("/tmp/file.xml"));
-			String inputLine;
 			
-			while ((inputLine = in.readLine()) != null)  {
-				out.write(inputLine+"\n");
-			}
-			out.close();
-			in.close();
-			
-			InputStream ins = new BufferedInputStream(
-					new FileInputStream(new File("/tmp/file.xml")));
-			this.readXML(ins);
+			URL url = new URL(this.url);
+			URLConnection uc = url.openConnection();
+			this.readXML(uc.getInputStream());			
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -66,12 +47,14 @@ public class RoboNoticias extends DefaultHandler {
 	}
 	
 	/** Read XML from input stream and parse, generating SAX events */
-    public void readXML(InputStream inStream) {
+	public void readXML(InputStream inStream) {
         try {
             System.setProperty("org.xml.sax.driver", "org.apache.crimson.parser.XMLReaderImpl");
-            XMLReader reader = XMLReaderFactory.createXMLReader();
+
+            XMLReader reader = XMLReaderFactory.createXMLReader();                
             reader.setContentHandler(this);
-            reader.parse(new InputSource(new InputStreamReader(inStream)));
+            InputSource source = new InputSource(new InputStreamReader(inStream));            
+            reader.parse(source);
         } catch (Exception e) {
             e.printStackTrace();
         }

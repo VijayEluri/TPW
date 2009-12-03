@@ -7,6 +7,9 @@
 <struts>
 	<package name="myPackage" extends="struts-default" namespace="/jsp">
 
+		<action name="rss!*" method="{1}" class="rss">
+			<result name="index">/jsp/index.jsp</result>
+		</action>
 
 	</package>
 </struts>

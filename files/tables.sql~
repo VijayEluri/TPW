@@ -5,8 +5,8 @@ create table teste (
 	primary key (codigo)
 );
 
-create table sites_rss (
+create table sites_rss {
 	link varchar(255),
 	site varchar(255),
 	primary key (link)
-);
+};

@@ -32,5 +32,15 @@
         <property name="valor" value="20000" />
     </bean>
 
+	<bean id="rss1" class="noticias.SiteRSS" singleton="false">
+        <property name="link" value="http://rss.terra.com.br/0,,EI1,00.xml"/>
+        <property name="site" value="Terra" />
+    </bean>
+    
+    <bean id="rss2" class="noticias.SiteRSS" singleton="false">
+        <property name="link" value="http://rss.home.uol.com.br/index.xml"/>
+        <property name="site" value="UOL" />
+    </bean>
+
 </beans>
 

@@ -10,6 +10,16 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="siteRSSDAO" class="daos.SiteRSSDAO" singleton="false">
+		<property name="dao">
+			<bean name="GenericJPADAO" class="daos.GenericJPADAO">
+				<constructor-arg value="noticias.SiteRSS" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="rss" class="actions.RssAction" singleton="false" />
 
 </beans>
 

@@ -8,6 +8,7 @@
 
 		<!-- classes a serem persistidas -->     	    	
     	<class>beans.Teste</class>
+    	<class>noticias.SiteRSS</class>
    
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

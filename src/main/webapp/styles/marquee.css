@@ -1,0 +1,41 @@
+div.demo {
+	border: 3px solid #0BB427;
+	padding: 10px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 300px;
+}
+
+div.original {
+	border: 3px solid #B40400;
+	padding: 10px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+code {
+	padding: 3px;
+	background-color: #eee;
+}
+
+#divtitulo {
+	font-weight: bold;
+	font-size: large;
+	width: 300px;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.newsTitle {
+	font-weight: bold;
+	font-size: 13px;
+	font-family: Arial;
+}
+
+.newsBody {
+	font-size: 11px;
+	font-family: Arial;
+}

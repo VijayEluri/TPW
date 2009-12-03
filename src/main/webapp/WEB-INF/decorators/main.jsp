@@ -18,6 +18,7 @@
     <script type="text/javascript" src='/tpw/js/jquery.js'></script>
    	<script type="text/javascript" src='/tpw/js/jquery.corner.js'></script>
    	<script type="text/javascript" src='/tpw/js/jquery.qtip.js'></script>
+   	<script type="text/javascript" src='/tpw/js/jquery.marquee.js'></script>
     
     <script type="text/javascript">		
 		$('#page').corner();
@@ -25,6 +26,7 @@
 		$('#header h1').corner("round-top");
 		$('#content').corner("round-bottom");
 		$('.divPadrao').corner();
+		$('.demo').corner();
     </script>
 
     <title>Sanca Livre</title>
@@ -40,11 +42,11 @@
 
         <div id="menu">
     		<ul>
-                 <li><a href="#">menu1</a></li>
-                 <li><a href="#">menu2</a></li>                   
-                 <li><a href="#">menu3</a></li>
-                 <li><a href="#">menu4</a></li>
-                 <li><a href="#">menu5</a></li>
+                 <li><a href="#">Home</a></li>
+                 <li><a href="#">Blog</a></li>                   
+                 <li><a href="#">Minicursos</a></li>
+                 <li><a href="#">Eventos</a></li>
+                 <li><a href="#">Usuários</a></li>
             </ul>
         </div>
 

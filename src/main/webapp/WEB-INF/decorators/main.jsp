@@ -46,7 +46,7 @@
                  <li><a href="#">Blog</a></li>                   
                  <li><a href="#">Minicursos</a></li>
                  <li><a href="#">Eventos</a></li>
-                 <li><a href="#">Usuários</a></li>
+                 <li><a href="/tpw/jsp/usuario!listUsuarios.action">Usuários</a></li>
             </ul>
         </div>
 

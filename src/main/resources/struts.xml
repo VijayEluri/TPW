@@ -10,6 +10,11 @@
 		<action name="rss!*" method="{1}" class="rss">
 			<result name="index">/jsp/index.jsp</result>
 		</action>
+		
+		<action name="usuario!*" method="{1}" class="usuario">
+			<result name="listUsuarios">/jsp/usuarios/listUsuarios.jsp</result>
+			<result name="insertError">/jsp/usuarios/insertUsuario.jsp</result>
+		</action>
 
 	</package>
 </struts>

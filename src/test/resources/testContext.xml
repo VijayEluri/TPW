@@ -42,5 +42,14 @@
         <property name="site" value="UOL" />
     </bean>
 
+    <bean id="usuario1" class="beans.Usuario" singleton="false">
+        <property name="login" value="login1"/>
+        <property name="password" value="password1" />
+        <property name="nome" value="nome 1" />
+        <property name="email" value="email@email.com" />
+        <property name="tipoUsuario" value="ADMINISTRADOR" />
+    </bean>
+
+
 </beans>
 

@@ -19,7 +19,17 @@
 		</property>
 	</bean>
 	
+	<bean id="usuarioDAO" class="daos.UsuarioDAO" singleton="false">
+		<property name="dao">
+			<bean name="GenericJPADAO" class="daos.GenericJPADAO">
+				<constructor-arg value="beans.Usuario" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Actions -->
 	<bean id="rss" class="actions.RssAction" singleton="false" />
+	<bean id="usuario" class="actions.UsuarioAction" singleton="false" />
 
 </beans>
 

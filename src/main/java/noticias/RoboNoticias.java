@@ -1,19 +1,18 @@
 package noticias;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.helpers.XMLReaderFactory;
+//import javax.sql.rowset.spi.XmlReader;
 
-import com.sun.org.apache.xalan.internal.xsltc.runtime.Attributes;
+import org.xml.sax.helpers.DefaultHandler;
+
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 
 public class RoboNoticias extends DefaultHandler {
 
@@ -34,71 +33,35 @@ public class RoboNoticias extends DefaultHandler {
 	// Retorna as notícias da URL
 	public List<Noticia> getNoticias() {
 		
+		List <Noticia> noticias = new ArrayList<Noticia>();
+		
 		// Pega as noticias
-		try {
+		try{
+			URL rssurl = new URL(this.url);
+
+			System.out.println(url);
 			
-			URL url = new URL(this.url);
-			URLConnection uc = url.openConnection();
-			this.readXML(uc.getInputStream());			
+			XmlReader reader = new XmlReader(rssurl);
+			
+			SyndFeed feed = new SyndFeedInput().build(reader);
+
+			for (Iterator i = feed.getEntries().iterator(); i.hasNext();) {
+				Noticia n = new Noticia();
+				SyndEntry entry = (SyndEntry) i.next();
+				n.setLink(entry.getLink());
+				n.setNoticia(entry.getDescription().getValue());
+				n.setTitulo(entry.getTitle());
+				noticias.add(n);
+				//break;
+			}
+			if (reader != null)
+				reader.close();
+			return noticias;
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		return noticias;
+		return new ArrayList<Noticia>();
 	}
 	
-	/** Read XML from input stream and parse, generating SAX events */
-	public void readXML(InputStream inStream) {
-        try {
-            System.setProperty("org.xml.sax.driver", "org.apache.crimson.parser.XMLReaderImpl");
-
-            XMLReader reader = XMLReaderFactory.createXMLReader();                
-            reader.setContentHandler(this);
-            InputSource source = new InputSource(new InputStreamReader(inStream));            
-            reader.parse(source);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void startDocument() throws SAXException {
-    }
-
-    public void endDocument() throws SAXException {
-    }
-
-    public void characters(char[] buffer, int start, int length) {
-	    valor.append(buffer, start, length);
-    }
-    
-    public void startElement (String namespaceURI,
-                              String localName,
-                              String qName, 
-                              Attributes atts)
-        throws SAXException {
-
-    	valor.setLength(0);
-    }
-
-    public void endElement(String namespaceURI, 
-                           String localName,
-                           String qName)
-        throws SAXException {
-
-    	if (qName.equals("title")) {
-    		title = valor.toString();
-    	} else if (qName.equals("link")) {
-    		link = valor.toString();
-    	} else if (qName.equals("description")) {
-    		description = valor.toString();
-    	} else if (qName.equals("item")) {
-    		try {
-    			Noticia noticia = new Noticia();
-    			noticia.setLink(link);
-    			noticia.setNoticia(title);
-    			noticia.setTitulo(description);
-    			noticias.add(noticia);
-    		} catch (Exception e) { e.printStackTrace(); }
-    	}
-    	valor.setLength(0);
-    }
+	
 }

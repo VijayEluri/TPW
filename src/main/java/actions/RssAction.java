@@ -20,6 +20,9 @@ public class RssAction extends ActionSupport {
 
 	private List<Noticia> noticias, noticiasAux;
 	private ApplicationContext ctx; 
+
+	// Número máximo de notícias a ser pego de cada RSS
+	private final int MAX_NOTICIAS = 5;
 	
 	public String index() {
 		ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"});
@@ -28,17 +31,24 @@ public class RssAction extends ActionSupport {
 		
 		// Pega todos os links de notícias cadastrados no banco
 		List<SiteRSS> sites = dao.selectAll(); 
-				
+
 		for (SiteRSS site : sites) {
 		
 			RoboNoticias robo = new RoboNoticias(site.getLink());
 			noticiasAux = robo.getNoticias();
 			
-			for (Noticia noticia : noticiasAux)
+			int total = 0;
+			for (Noticia noticia : noticiasAux) {
 				noticias.add(noticia);
+				
+				// Se já pegou o número máximo de notícias pega o próximo feed
+				if (total++ >= MAX_NOTICIAS-1)
+					break;
+			}
+				
 			
 		}
-		
+						
 		return "index";
 	}
 

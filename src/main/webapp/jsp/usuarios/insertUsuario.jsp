@@ -34,10 +34,6 @@
 
 
 <body>
-
-<center>
-	<s:actionerror />
-</center>
 	
 <center>
 <div class="divPadrao" style="width: 500px"><s:form theme="simple"

@@ -51,7 +51,8 @@
         </div>
 
         <div id="content" class="clearfix">
-            <div id="main">
+            <div id="main">				
+				<center><div style="font: 13px verdana, arial, tahoma, sans-serif; color: red; width: 500px; text-align: left;"> <s:actionerror /> </div></center>				
             	<decorator:body/>
             </div>           
         </div>

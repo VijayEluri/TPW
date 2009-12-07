@@ -22,16 +22,6 @@
     	</property>
   	</bean>
 
-	<bean id="teste1" class="beans.Teste" singleton="false">
-        <property name="descricao" value="descricao 1"/>
-        <property name="valor" value="10000" />
-    </bean>
-    
-    <bean id="teste2" class="beans.Teste" singleton="false">
-        <property name="descricao" value="descricao 2"/>
-        <property name="valor" value="20000" />
-    </bean>
-
 	<bean id="rss1" class="noticias.SiteRSS" singleton="false">
         <property name="link" value="http://rss.terra.com.br/0,,EI1,00.xml"/>
         <property name="site" value="Terra" />

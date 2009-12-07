@@ -63,7 +63,7 @@ public class UsuarioAction extends ActionSupport {
 			addActionError("Login já existente");
 			error = true;
 		}
-
+		
 		if (error)
 			return "insertError";
 		

@@ -51,6 +51,7 @@
 	 
 		<display:column title="Nome" property="nome" style="width: 300px" />
 		<display:column title="Login" property="login" style="width: 100px" />
+		<display:column title="Tipo" property="tipoUsuario" style="width: 100px" />
 		<display:column title="Email" property="email" style="width: 200px"/>
 		<display:column title="Editar" style="width: 50px">
 	         <a href="${pageContext.request.contextPath}/jsp/usuario!editUsuario.action?usuario.login=${usuario.login}">editar</a>

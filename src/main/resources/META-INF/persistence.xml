@@ -7,9 +7,9 @@
     <persistence-unit name="tpw">
 
 		<!-- classes a serem persistidas -->     	    	
-    	<class>beans.Teste</class>
+    	<class>beans.Usuario</class>
     	<class>noticias.SiteRSS</class>
-   
+
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />

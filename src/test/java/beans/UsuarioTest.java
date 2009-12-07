@@ -66,7 +66,7 @@ public class UsuarioTest {
 		assertEquals("password1", usuario1.getPassword());
 		assertEquals("nome 1", usuario1.getNome());
 		assertEquals("email@email.com", usuario1.getEmail());
-		assertEquals(TipoUsuario.ADMINISTRADOR, usuario1.getTipoUsuario());
+		assertEquals("ADMINISTRADOR", usuario1.getTipoUsuario());
 
 		// Busca no banco o usuário gravado
 		usuario2 = dao.selectByLogin("login1");
@@ -86,7 +86,7 @@ public class UsuarioTest {
 		usuario1.setNome("nome alterado");
 		usuario1.setEmail("xxx@xxx.com");
 		usuario1.setPassword("*****");
-		usuario1.setTipoUsuario(TipoUsuario.ADMINISTRADOR);
+		usuario1.setTipoUsuario("ADMINISTRADOR");
 		
 		// Salva
 		usuario1 = dao.save(usuario1);
@@ -99,7 +99,7 @@ public class UsuarioTest {
 		assertEquals("nome alterado", usuario1.getNome());
 		assertEquals("xxx@xxx.com", usuario1.getEmail());
 		assertEquals("*****", usuario1.getPassword());
-		assertEquals(TipoUsuario.ADMINISTRADOR, usuario1.getTipoUsuario());
+		assertEquals("ADMINISTRADOR", usuario1.getTipoUsuario());
 	}
 	
 	private void delete() {

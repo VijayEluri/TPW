@@ -24,7 +24,7 @@ public class Usuario {
 
 	@Column(nullable = false, name="tipo")
 	@Enumerated(value=EnumType.STRING)
-	private TipoUsuario tipoUsuario;
+	private String tipoUsuario;
 
 	public String getLogin() {
 		return login;
@@ -58,11 +58,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public TipoUsuario getTipoUsuario() {
+	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 

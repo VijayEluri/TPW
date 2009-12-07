@@ -2,14 +2,6 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-
-	<bean id="testeDAO" class="daos.TesteDAO" singleton="false">
-		<property name="dao">
-			<bean name="GenericJPADAO" class="daos.GenericJPADAO">
-				<constructor-arg value="beans.Teste" />
-			</bean>
-		</property>
-	</bean>
 	
 	<bean id="siteRSSDAO" class="daos.SiteRSSDAO" singleton="false">
 		<property name="dao">

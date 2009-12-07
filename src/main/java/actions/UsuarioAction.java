@@ -32,24 +32,17 @@ public class UsuarioAction extends ActionSupport {
 		usuario = usuario == null ? new Usuario() : usuario;		
 	}
 
-	/**
-	 * Retorna a string "listUsuarios" que será lida pelo Struts. O Struts abre
-	 * o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
-	 * a listUsuarios) e redireciona para a página listUsuarios.jsp
-	 */
+	// Retorna a string "listUsuarios" que será lida pelo Struts. O Struts abre
+	// o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
+	// a listUsuarios) e redireciona para a página listUsuarios.jsp
 	public String listUsuarios() {
 		usuarios = dao.selectAll();
 		return "listUsuarios";
 	}
 
-	
-	/**
-	 * Insere o usuário no banco de dados. Esse método é chamado pelo form
-	 * da página insertUsuario.jsp
-	 * @return
-	 */
-	public String insertUsuario() {
-		
+	// Insere o usuário no banco de dados. Esse método é chamado pelo form
+	// da página insertUsuario.jsp
+	public String insertUsuario() {		
 		boolean error = false;
 		
 		// Verifica se as duas senhas conferem
@@ -69,6 +62,41 @@ public class UsuarioAction extends ActionSupport {
 		
 		dao.save(usuario);
 		usuarios = dao.selectAll();
+		return "listUsuarios";
+	}
+
+	// Redireciona para a página de edição do usuário
+	public String editUsuario() {
+		usuario = dao.selectByLogin(usuario.getLogin());
+		return "editUsuario";
+	}
+	
+	// Altera os dados do usuário
+	public String updateUsuario() {
+		boolean error = false;
+		
+		// Verifica se as duas senhas conferem
+		if (! usuario.getPassword().equals(confirmacao)) {
+			addActionError("Senhas não conferem");
+			error = true;
+		}
+
+		if (error)
+			return "updateError";
+
+		System.out.println("\n\n\n\n\n\n\n\n" + usuario.getLogin() + "\n\n\n\n\n\n");
+		
+		dao.save(usuario);
+		usuarios = dao.selectAll();
+
+		return "listUsuarios";
+	}
+	
+	// Exclui o usuário
+	public String deleteUsuario() {
+		dao.remove(usuario);
+		usuarios = dao.selectAll();
+
 		return "listUsuarios";
 	}
 	

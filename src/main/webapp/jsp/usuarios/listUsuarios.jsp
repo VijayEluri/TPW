@@ -34,6 +34,8 @@
             tip: true
          }
        });
+
+       $('#menu5').css("background-color", "#4198f6");
  
     });
  

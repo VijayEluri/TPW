@@ -26,7 +26,7 @@
 		$('#header h1').corner("round-top");
 		$('#content').corner("round-bottom");
 		$('.divPadrao').corner();
-		$('.demo').corner();
+		$('.demo').corner();			
     </script>
 
     <title>Sanca Livre</title>
@@ -42,11 +42,11 @@
 
         <div id="menu">
     		<ul>
-                 <li><a href="#">Home</a></li>
-                 <li><a href="#">Blog</a></li>                   
-                 <li><a href="#">Minicursos</a></li>
-                 <li><a href="#">Eventos</a></li>
-                 <li><a href="/tpw/jsp/usuario!listUsuarios.action">Usuários</a></li>
+                 <li id="menu1"><a href="/tpw/jsp/rss!index.action">Home</a></li>
+                 <li id="menu2"><a href="#">Blog</a></li>                   
+                 <li id="menu3"><a href="#">Minicursos</a></li>
+                 <li id="menu4"><a href="#">Eventos</a></li>
+                 <li id="menu5"><a href="/tpw/jsp/usuario!listUsuarios.action">Usuários</a></li>
             </ul>
         </div>
 

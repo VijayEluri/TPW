@@ -14,6 +14,8 @@
 		<action name="usuario!*" method="{1}" class="usuario">
 			<result name="listUsuarios">/jsp/usuarios/listUsuarios.jsp</result>
 			<result name="insertError">/jsp/usuarios/insertUsuario.jsp</result>
+			<result name="editUsuario">/jsp/usuarios/editUsuario.jsp</result>
+			<result name="updateError">/jsp/usuarios/editUsuario.jsp</result>
 		</action>
 
 	</package>

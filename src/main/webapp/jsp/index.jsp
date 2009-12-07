@@ -6,6 +6,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+		
+			$('#menu1').css("background-color", "#4198f6");
+	
+		});
+	</script>	
+
 	<s:head />
 </head>
 <body>

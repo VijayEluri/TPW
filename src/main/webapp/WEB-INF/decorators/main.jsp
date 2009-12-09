@@ -102,7 +102,7 @@
     		<ul>
                  <li id="menu1"><a href="/tpw/jsp/index!index.action">Home</a></li>
                  <li id="menu2"><a href="#">Blog</a></li>                   
-                 <li id="menu3"><a href="#">Minicursos</a></li>
+                 <li id="menu3"><a href="/tpw/jsp/minicurso!listMinicursos.action">Minicursos</a></li>
                  <li id="menu4"><a href="/tpw/jsp/evento!listEventos.action">Eventos</a></li>
                  <li id="menu5"><a href="/tpw/jsp/usuario!listUsuarios.action">Usuários</a></li>
             </ul>

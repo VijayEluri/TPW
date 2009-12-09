@@ -26,11 +26,20 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="minicursoDAO" class="daos.MinicursoDAO" singleton="false">
+		<property name="dao">
+			<bean name="GenericJPADAO" class="daos.GenericJPADAO">
+				<constructor-arg value="beans.Minicurso" />
+			</bean>
+		</property>
+	</bean>
 
 	<!-- Actions -->
 	<bean id="index" class="actions.IndexAction" singleton="false" />
 	<bean id="usuario" class="actions.UsuarioAction" singleton="false" />
 	<bean id="evento" class="actions.EventoAction" singleton="false" />
+	<bean id="minicurso" class="actions.MinicursoAction" singleton="false" />
 
 </beans>
 

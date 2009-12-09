@@ -20,3 +20,11 @@ create table evento(
 	descricao text,
 	responsavel varchar(255)
 );
+
+create table minicurso(
+	id serial not null primary key,
+	nome varchar(255),
+	data varchar(15),
+	descricao text,
+	responsavel varchar(255)
+);

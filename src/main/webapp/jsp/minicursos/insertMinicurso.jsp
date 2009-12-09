@@ -9,13 +9,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Dados do evento</title>
+<title>Dados do minicurso</title>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 
 		$('#btnSalvar').qtip( {
-			content : 'Salvar dados do evento',
+			content : 'Salvar dados do minicurso',
 			style : {
 				name : 'cream',
 				padding : '7px 13px',
@@ -27,50 +27,47 @@
 			}
 		});
 
-		$('#menu4').css("background-color", "#4198f6");
+		$('#menu3').css("background-color", "#4198f6");
 
 	});
 </script>
 
 </head>
 
-<body>
 
+<body>
+	
 <center>
 <div class="divPadrao" style="width: 500px"><s:form theme="simple"
-	action="evento!updateEvento" namespace="/jsp">
-
-	<input type="hidden" name="evento.id" value="${evento.id}"></input>
+	action="minicurso!insertMinicurso" namespace="/jsp">
 
 	<table width="100%">
 		<tr>
 			<td colspan="4" align="center">
-			<h3>Dados do evento</h3>
+			<h3>Dados do minicurso</h3>
 			</td>
 		</tr>
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Nome:</span></td>
-			<td colspan="3"><s:textfield name="evento.nome" maxlength="300"
-				cssStyle="width: 300px" /></td>
+			<td colspan="3"><s:textfield name="minicurso.nome" maxlength="300" cssStyle="width: 300px" /></td>
 		</tr>
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Descricao:</span></td>
-			<td colspan="3"><s:textfield name="evento.descricao"
-				maxlength="1500" cssStyle="width: 300px" /></td>
+			<td colspan="3"><s:textfield name="minicurso.descricao" maxlength="1500" cssStyle="width: 300px" /></td>
 		</tr>
 
-		<tr>
+		 <tr>
 			<td align="right"><span class="label" style="font-weight: bold">Data:</span></td>
-			<td colspan="3"><s:date name="evento.data" id="data"
-				format="dd/MM/yy" /> <s:textfield name="evento.data" /></td>
-		</tr>
+			<td colspan="3">
+				<s:date name="minicurso.data" id="data" format="dd/MM/yy"/>
+				<s:textfield name="minicurso.data" /></td>
+   		</tr>
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Responsavel:</span></td>
-			<td colspan="3"><s:textfield name="evento.responsavel"
-				maxlength="300" cssStyle="width: 300px" /></td>
+			<td colspan="3"><s:textfield name="minicurso.responsavel" maxlength="300" cssStyle="width: 300px" /></td>
 		</tr>
 
 		<tr>
@@ -82,8 +79,6 @@
 	</table>
 
 </s:form></div>
-
-
 </center>
 
 </body>

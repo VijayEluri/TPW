@@ -18,16 +18,15 @@
 	<s:head />
 </head>
 <body>
+
     <div id="doc" align="right">
         <div class="demo">
 	    <div id="divtitulo">Notícias sobre software-livre</div>
-            <marquee behavior="scroll" direction="up" scrollamount="1" width="100%">		
-			
+            
+            <marquee behavior="scroll" direction="up" scrollamount="1" width="100%">					
 				<s:iterator value="noticias" >
-			
-					<span class="newsTitle"><a href="${link}"><s:property value="titulo"/></a></span><br />
+					<span class="newsTitle"><a href="${link}" target="blank">${titulo}</a></span><br />
 					<span class="newsBody"><s:property value="noticia"/><br/><br/></span>
-							
 				</s:iterator>
 	    	</marquee>
 

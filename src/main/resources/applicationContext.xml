@@ -20,7 +20,7 @@
 	</bean>
 
 	<!-- Actions -->
-	<bean id="rss" class="actions.RssAction" singleton="false" />
+	<bean id="index" class="actions.IndexAction" singleton="false" />
 	<bean id="usuario" class="actions.UsuarioAction" singleton="false" />
 
 </beans>

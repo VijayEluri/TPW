@@ -1,2 +1,2 @@
 
-<% response.sendRedirect("jsp/rss!index.action"); %>
+<% response.sendRedirect("jsp/index!index.action"); %>

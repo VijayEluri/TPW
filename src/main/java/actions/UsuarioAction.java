@@ -26,8 +26,7 @@ public class UsuarioAction extends ActionSupport {
 	private String confirmacao;
 	
 	public UsuarioAction() {
-		ctx = new ClassPathXmlApplicationContext(
-				new String[] { "applicationContext.xml" });
+		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		dao = (UsuarioDAO) ctx.getBean("usuarioDAO");
 		usuario = usuario == null ? new Usuario() : usuario;		
 	}
@@ -44,6 +43,12 @@ public class UsuarioAction extends ActionSupport {
 	// da página insertUsuario.jsp
 	public String insertUsuario() {		
 		boolean error = false;
+		
+		// Testa se o login foi digitado
+		if (usuario.getLogin().length() == 0) {
+			addActionError("Login não pode ficar em branco");
+			error = true;
+		}
 		
 		// Verifica se as duas senhas conferem
 		if (! usuario.getPassword().equals(confirmacao)) {
@@ -83,8 +88,6 @@ public class UsuarioAction extends ActionSupport {
 
 		if (error)
 			return "updateError";
-
-		System.out.println("\n\n\n\n\n\n\n\n" + usuario.getLogin() + "\n\n\n\n\n\n");
 		
 		dao.save(usuario);
 		usuarios = dao.selectAll();

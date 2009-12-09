@@ -8,15 +8,12 @@ import org.junit.Test;
 
 public class RoboNoticiasTest {
 
-	
 	@Test
 	public void runTests() {
-		
 		//Acessando noticias do RSS
 		RoboNoticias rn = new RoboNoticias("http://br-linux.org/feed/");
 		List<Noticia> noticias = rn.getNoticias();
-		assertTrue(noticias.size() > 0);
-				
+		assertTrue(noticias.size() > 0);			
 	}
 	
 }

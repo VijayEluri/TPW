@@ -18,10 +18,19 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="eventoDAO" class="daos.EventoDAO" singleton="false">
+		<property name="dao">
+			<bean name="GenericJPADAO" class="daos.GenericJPADAO">
+				<constructor-arg value="beans.Evento" />
+			</bean>
+		</property>
+	</bean>
 
 	<!-- Actions -->
 	<bean id="index" class="actions.IndexAction" singleton="false" />
 	<bean id="usuario" class="actions.UsuarioAction" singleton="false" />
+	<bean id="evento" class="actions.EventoAction" singleton="false" />
 
 </beans>
 

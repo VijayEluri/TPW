@@ -12,3 +12,11 @@ create table usuario (
 	tipo varchar(50),
 	primary key(login)
 );
+
+create table evento(
+	id serial not null primary key,
+	nome varchar(255),
+	data varchar(15),
+	descricao text,
+	responsavel varchar(255)
+);

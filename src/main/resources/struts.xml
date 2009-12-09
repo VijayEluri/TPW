@@ -18,5 +18,12 @@
 			<result name="updateError">/jsp/usuarios/editUsuario.jsp</result>
 		</action>
 
+		<action name="evento!*" method="{1}" class="evento">
+			<result name="listEventos">/jsp/eventos/listEventos.jsp</result>
+			<result name="inserirError">/jsp/eventos/insertEvento.jsp</result>
+			<result name="editEvento">/jsp/eventos/editEvento.jsp</result>
+			<result name="updateError">/jsp/eventos/editEvento.jsp</result>
+		</action>
+
 	</package>
 </struts>

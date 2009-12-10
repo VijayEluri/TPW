@@ -2,13 +2,19 @@ package actions;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import beans.Post;
+import beans.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import daos.PostDAO;
+import daos.UsuarioDAO;
 
 public class PostAction extends ActionSupport {
 
@@ -17,38 +23,56 @@ public class PostAction extends ActionSupport {
 	private Post post;
 	private List<Post> posts;
 	ClassPathXmlApplicationContext ctx;
-	private PostDAO dao;
+	private PostDAO postDao;
+	private UsuarioDAO usuarioDao;
+	
+	private HttpServletRequest request;
+	private HttpSession session;
 	
 	public PostAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
-		dao = (PostDAO) ctx.getBean("postDAO");
+		postDao = (PostDAO) ctx.getBean("postDAO");
+		usuarioDao = (UsuarioDAO) ctx.getBean("usuarioDAO");
 		post = post == null ? new Post() : post;
 	}
 	
 	public String listPosts() {
-		posts = dao.selectAll();
+		posts = postDao.selectAll();
 		return "listPosts";
 	}
 	
 	public String insertPost() {
 		boolean error = false;
+
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+
+		String login = (String) session.getAttribute("login");
+		
+		Usuario usuario = (Usuario) usuarioDao.selectByLogin(login);
 		
 		// Testa se o login foi digitado
-		if (post.getUsuario() == null) {
+		if (usuario.getLogin() == null) {
 			addActionError("Erro ao identificar usuário");
 			error = true;
 		}
 		
-		if (error) return "insertError";
+		if (!usuario.getTipoUsuario().equals("ADMINISTRADOR")) {
+			addActionError("Erro nao é administrador");
+			error = true;
+		}
 		
-		dao.save(post);
-		posts = dao.selectAll();
+		if (error) return "insertError";
+
+		post.setUsuario(usuario);
+		postDao.save(post);
+		posts = postDao.selectAll();
 		
 		return "listPosts";
 	}
 	
 	public String editPost(){
-		post = dao.selectById(post.getId());
+		post = postDao.selectById(post.getId());
 		return "editPost";
 	}
 	
@@ -65,16 +89,16 @@ public class PostAction extends ActionSupport {
 			error = true;
 		}
 		
-		dao.save(post);
-		posts = dao.selectAll();
+		postDao.save(post);
+		posts = postDao.selectAll();
 		
 		if (error) return "insertError";
 		return "listPosts";
 	}
 	
 	public String deletePost() {
-		dao.remove(post);
-		posts = dao.selectAll();
+		postDao.remove(post);
+		posts = postDao.selectAll();
 
 		return "listPosts";
 	}

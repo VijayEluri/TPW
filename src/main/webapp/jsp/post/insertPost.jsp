@@ -39,7 +39,7 @@
 	
 <center>
 <div class="divPadrao" style="width: 500px"><s:form theme="simple"
-	action="usuario!insertUsuario" namespace="/jsp">
+	action="post!insertPost" namespace="/jsp">
 
 	<table width="100%">
 		<tr>

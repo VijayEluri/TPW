@@ -20,6 +20,7 @@
 
 		<action name="post!*" method="{1}" class="post">
 			<result name="listPosts">/jsp/post/listPosts.jsp</result>
+			<result name="insertError">/jsp/post/insertPost.jsp</result>
 		</action>
 
 	</package>

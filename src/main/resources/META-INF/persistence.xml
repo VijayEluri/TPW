@@ -6,7 +6,9 @@
 
     <persistence-unit name="tpw">
 
-		<!-- classes a serem persistidas -->     	    	
+		<!-- classes a serem persistidas -->
+		<class>beans.Minicurso</class>
+		<class>beans.Evento</class>     	    	
     	<class>beans.Usuario</class>
     	<class>noticias.SiteRSS</class>
 

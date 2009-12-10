@@ -13,6 +13,8 @@ create table usuario (
 	primary key(login)
 );
 
+INSERT INTO usuario VALUES ('admin','admin','administrador',NULL,'ADMINISTRADOR');
+
 create table post (
 	id int,
 	titulo varchar(100),
@@ -20,4 +22,20 @@ create table post (
 	texto text,
 	login varchar(50),
 	primary key (id)
+);
+
+create table evento(
+	id serial not null primary key,
+	nome varchar(255),
+	data timestamp,
+	descricao text,
+	responsavel varchar(255)
+);
+
+create table minicurso(
+	id serial not null primary key,
+	nome varchar(255),
+	data timestamp,
+	descricao text,
+	responsavel varchar(255)
 );

@@ -1,7 +1,12 @@
 package actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -35,7 +40,22 @@ public class UsuarioAction extends ActionSupport {
 	// o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
 	// a listUsuarios) e redireciona para a página listUsuarios.jsp
 	public String listUsuarios() {
-		usuarios = dao.selectAll();
+		HttpServletRequest request;
+		HttpSession session;
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+		String tmpLogin = (String) session.getAttribute("login");
+		String tmpTipoUsuario = (String) session.getAttribute("tipoUsuario");
+		if (tmpTipoUsuario != null && tmpTipoUsuario.equals("ADMINISTRADOR")){
+			usuarios = dao.selectAll();
+		} else {
+			if (tmpLogin != null){
+				List<Usuario> tmpList = new ArrayList<Usuario>();
+				tmpList.add(dao.selectByLogin(tmpLogin));
+				usuarios = tmpList;
+			} else
+				usuarios = null;
+		}
 		return "listUsuarios";
 	}
 
@@ -66,7 +86,7 @@ public class UsuarioAction extends ActionSupport {
 			return "insertError";
 		
 		dao.save(usuario);
-		usuarios = dao.selectAll();
+		listUsuarios();
 		return "listUsuarios";
 	}
 
@@ -90,7 +110,8 @@ public class UsuarioAction extends ActionSupport {
 			return "updateError";
 		
 		dao.save(usuario);
-		usuarios = dao.selectAll();
+		
+		listUsuarios();
 
 		return "listUsuarios";
 	}
@@ -98,7 +119,7 @@ public class UsuarioAction extends ActionSupport {
 	// Exclui o usuário
 	public String deleteUsuario() {
 		dao.remove(usuario);
-		usuarios = dao.selectAll();
+		listUsuarios();
 
 		return "listUsuarios";
 	}

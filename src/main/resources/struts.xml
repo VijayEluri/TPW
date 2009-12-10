@@ -23,5 +23,19 @@
 			<result name="insertError">/jsp/post/insertPost.jsp</result>
 		</action>
 
+		<action name="evento!*" method="{1}" class="evento">
+			<result name="listEventos">/jsp/eventos/listEventos.jsp</result>
+			<result name="insertError">/jsp/eventos/insertEvento.jsp</result>
+			<result name="editEvento">/jsp/eventos/editEvento.jsp</result>
+			<result name="updateError">/jsp/eventos/editEvento.jsp</result>
+		</action>
+		
+		<action name="minicurso!*" method="{1}" class="minicurso">
+			<result name="listMinicursos">/jsp/minicursos/listMinicursos.jsp</result>
+			<result name="insertError">/jsp/minicursos/insertMinicurso.jsp</result>
+			<result name="editMinicurso">/jsp/minicursos/editMinicurso.jsp</result>
+			<result name="updateError">/jsp/minicursos/editMinicurso.jsp</result>
+		</action>
+
 	</package>
 </struts>

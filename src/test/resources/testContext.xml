@@ -40,6 +40,17 @@
         <property name="tipoUsuario" value="ADMINISTRADOR" />
     </bean>
 
+	<bean id="evento1" class="beans.Evento" singleton="false">
+        <property name="nome" value="nome 1" />
+        <property name="descricao" value="descricao 1" />
+        <property name="responsavel" value="responsavel 1" />
+    </bean>
+    
+    <bean id="minicurso1" class="beans.Minicurso" singleton="false">
+        <property name="nome" value="nome 1" />
+        <property name="descricao" value="descricao 1" />
+        <property name="responsavel" value="responsavel 1" />
+    </bean>
 
 </beans>
 

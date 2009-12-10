@@ -7,7 +7,7 @@ import beans.Usuario;
 
 public class EventoDAO {
 
-	private DAO<Evento, Long> dao;
+	private DAO<Evento, Integer> dao;
 
 	public List<Evento> selectAll() {
 		return dao.list();
@@ -16,7 +16,7 @@ public class EventoDAO {
 	public Evento save(Evento evento) {
 		if (evento.getId() != null)
 			return dao.merge(evento);
-		dao.merge(evento);
+		dao.persist(evento);
 		return evento;
 	}
 	
@@ -24,15 +24,15 @@ public class EventoDAO {
 		dao.remove(evento);
 	}
 	
-	public Evento selectById(Long id) {
+	public Evento selectById(Integer id) {
 		return dao.find(id);
 	}
 	
-	public DAO<Evento, Long> getDao() {
+	public DAO<Evento, Integer> getDao() {
 		return dao;
 	}
 
-	public void setDao(DAO<Evento, Long> dao) {
+	public void setDao(DAO<Evento, Integer> dao) {
 		this.dao = dao;
 	}
 

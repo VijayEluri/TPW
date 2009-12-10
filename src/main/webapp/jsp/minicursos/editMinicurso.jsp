@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<s:head theme="ajax" />
 <title>Dados do minicurso</title>
 
 <script type="text/javascript">
@@ -63,8 +64,7 @@
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Data:</span></td>
-			<td colspan="3"><s:date name="minicurso.data" id="data"
-				format="dd/MM/yy" /> <s:textfield name="minicurso.data" /></td>
+			<td colspan="3"><s:datetimepicker name="strData" displayFormat="dd/MM/yyyy"/></td>
 		</tr>
 
 		<tr>

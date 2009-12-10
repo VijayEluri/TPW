@@ -11,19 +11,19 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "evento")
-@SequenceGenerator(name = "evento_id_seq", sequenceName = "evento_id_seq")   
+@Table(name = "evento")   
 public class Evento {
-
+	
 	@Id
+	@SequenceGenerator(name = "evento_id_seq", sequenceName = "evento_id_seq", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="evento_id_seq")
-	private Long id;
+	private Integer id;
 
 	@Column(nullable = false)
 	private String nome;
 
 	@Column
-	private String data;
+	private Date data;
 
 	@Column
 	private String descricao;
@@ -31,11 +31,11 @@ public class Evento {
 	@Column
 	private String responsavel;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -47,11 +47,11 @@ public class Evento {
 		this.nome = nome;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

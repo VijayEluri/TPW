@@ -16,7 +16,7 @@ create table usuario (
 create table evento(
 	id serial not null primary key,
 	nome varchar(255),
-	data varchar(15),
+	data timestamp,
 	descricao text,
 	responsavel varchar(255)
 );
@@ -24,7 +24,7 @@ create table evento(
 create table minicurso(
 	id serial not null primary key,
 	nome varchar(255),
-	data varchar(15),
+	data timestamp,
 	descricao text,
 	responsavel varchar(255)
 );

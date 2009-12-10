@@ -1,5 +1,8 @@
 package actions;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -18,6 +21,8 @@ public class MinicursoAction extends ActionSupport {
 	private Minicurso minicurso;
 	private List<Minicurso> minicursos;
 
+	private String strData;
+	
 	private MinicursoDAO dao;
 
 	private ApplicationContext ctx;
@@ -119,6 +124,21 @@ public class MinicursoAction extends ActionSupport {
 
 	public void setConfirmacao(String confirmacao) {
 		this.confirmacao = confirmacao;
+	}
+	
+	public String getStrData(){
+		return new SimpleDateFormat("dd/MM/yyyy").format(minicurso.getData());
+	}
+	
+	public void setStrData(String strData){
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			minicurso.setData((Date) formatter.parse(strData));
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

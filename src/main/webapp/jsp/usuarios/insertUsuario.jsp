@@ -73,10 +73,14 @@
 			<td colspan="3"><s:textfield name="usuario.email" maxlength="50" cssStyle="width: 300px" /></td>
 		</tr>
 
-		 <tr>
-			<td align="right"><span class="label" style="font-weight: bold">Tipo:</span></td>
-			<td colspan="3"><s:select list="#{'NORMAL':'Normal', 'ADMINISTRADOR':'Administrador'}" name="usuario.tipoUsuario" /></td>
-		</tr>
+		<% if (session.getAttribute("tipoUsuario")!=null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
+			 <tr>
+				<td align="right"><span class="label" style="font-weight: bold">Tipo:</span></td>
+				<td colspan="3"><s:select list="#{'NORMAL':'Normal', 'ADMINISTRADOR':'Administrador'}" name="usuario.tipoUsuario" /></td>
+			</tr>
+		<% } else { %>
+			<input type="hidden" name="usuario.tipoUsuario" value="NORMAL"></input>
+		<% } %>
 
 		<tr>
 			<td colspan="5">

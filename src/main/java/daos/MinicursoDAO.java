@@ -6,7 +6,7 @@ import beans.Minicurso;
 
 public class MinicursoDAO {
 
-	private DAO<Minicurso, Long> dao;
+	private DAO<Minicurso, Integer> dao;
 
 	public List<Minicurso> selectAll() {
 		return dao.list();
@@ -15,7 +15,7 @@ public class MinicursoDAO {
 	public Minicurso save(Minicurso evento) {
 		if (evento.getId() != null)
 			return dao.merge(evento);
-		dao.merge(evento);
+		dao.persist(evento);
 		return evento;
 	}
 	
@@ -23,15 +23,15 @@ public class MinicursoDAO {
 		dao.remove(evento);
 	}
 	
-	public Minicurso selectById(Long id) {
+	public Minicurso selectById(Integer id) {
 		return dao.find(id);
 	}
 	
-	public DAO<Minicurso, Long> getDao() {
+	public DAO<Minicurso, Integer> getDao() {
 		return dao;
 	}
 
-	public void setDao(DAO<Minicurso, Long> dao) {
+	public void setDao(DAO<Minicurso, Integer> dao) {
 		this.dao = dao;
 	}
 

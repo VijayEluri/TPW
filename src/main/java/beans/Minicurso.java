@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,19 +11,19 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "minicurso")
-@SequenceGenerator(name = "minicurso_id_seq", sequenceName = "minicurso_id_seq")   
+@Table(name = "minicurso")   
 public class Minicurso {
 
 	@Id
+	@SequenceGenerator(name = "minicurso_id_seq", sequenceName = "minicurso_id_seq", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="minicurso_id_seq")
-	private Long id;
+	private Integer id;
 
 	@Column(nullable = false)
 	private String nome;
 
 	@Column
-	private String data;
+	private Date data;
 
 	@Column
 	private String descricao;
@@ -29,11 +31,11 @@ public class Minicurso {
 	@Column
 	private String responsavel;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -45,11 +47,11 @@ public class Minicurso {
 		this.nome = nome;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

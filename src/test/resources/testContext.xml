@@ -40,6 +40,10 @@
         <property name="tipoUsuario" value="ADMINISTRADOR" />
     </bean>
 
+    <bean id="post1" class="beans.Post" singleton="false">
+        <property name="titulo" value="titulo teste"/>
+        <property name="texto" value="Texto de exemplo" />
+        <property name="usuario" ref="usuario1" />
+    </bean>
 
 </beans>
-

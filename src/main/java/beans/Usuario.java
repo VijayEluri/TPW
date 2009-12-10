@@ -1,15 +1,16 @@
 package beans;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.NamedNativeQuery;
 
 @Entity
 @Table(name = "usuario")
@@ -29,6 +30,9 @@ public class Usuario {
 	@Column(nullable = false, name="tipo")
 	@Enumerated(value=EnumType.STRING)
 	private String tipoUsuario;
+	
+	@OneToMany (mappedBy="usuario", fetch=FetchType.LAZY, cascade=CascadeType.ALL )
+	private List<Post> posts;
 
 	public String getLogin() {
 		return login;
@@ -70,4 +74,11 @@ public class Usuario {
 		this.tipoUsuario = tipoUsuario;
 	}
 
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 }

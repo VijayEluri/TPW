@@ -18,5 +18,9 @@
 			<result name="updateError">/jsp/usuarios/editUsuario.jsp</result>
 		</action>
 
+		<action name="post!*" method="{1}" class="post">
+			<result name="listPosts">/jsp/post/listPosts.jsp</result>
+		</action>
+
 	</package>
 </struts>

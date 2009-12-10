@@ -18,10 +18,20 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="postDAO" class="daos.PostDAO" singleton="false">
+		<property name="dao">
+			<bean name="GenericJPADAO" class="daos.GenericJPADAO">
+				<constructor-arg value="beans.Post" />
+			</bean>
+		</property>
+	</bean>
+	
 
 	<!-- Actions -->
 	<bean id="index" class="actions.IndexAction" singleton="false" />
 	<bean id="usuario" class="actions.UsuarioAction" singleton="false" />
+	<bean id="post" class="actions.PostAction" singleton="false" />
 
 </beans>
 

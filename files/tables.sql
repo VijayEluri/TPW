@@ -12,3 +12,12 @@ create table usuario (
 	tipo varchar(50),
 	primary key(login)
 );
+
+create table post (
+	id int,
+	titulo varchar(100),
+	data timestamp,
+	texto text,
+	login varchar(50),
+	primary key (id)
+);

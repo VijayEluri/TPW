@@ -30,9 +30,7 @@ public class Post {
 	@Column
 	private String texto;
 
-//    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
-    @ManyToOne( cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.REFRESH} )
-//	@ManyToOne( )
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH} )
     @JoinColumn(name="login", referencedColumnName="login")
 	private Usuario usuario;
     

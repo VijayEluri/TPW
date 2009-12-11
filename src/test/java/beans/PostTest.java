@@ -46,45 +46,45 @@ public class PostTest {
 	private Usuario usuario;
 	
 	@Test
-	public void runTests() {
-		
+	public void runTests() {		
 		// Testa o save
 		save();
-		
+
 		// Testa o update
 		update();
-		
+
 		// Remove o teste gravado anteriormente
 		delete();
-				
-		
 	}
 	
 	private void save() {		
 		post1 = (Post) ctx.getBean("post1");
 		assertNotNull(post1);
-
 		
-		// Salva no banco
+		// Salva no banco o post1
 		post1 = daoPost.save(post1);
-		usuario = post1.getUsuario();
-		assertNotNull(usuario);
-	
-		// Verifica os dados retornados
+		assertEquals(1, post1.getId());
 		assertNotNull(post1);
 		assertEquals("titulo teste", post1.getTitulo());
 		assertEquals("Texto de exemplo", post1.getTexto());
-		assertEquals("login1", usuario.getLogin());
-		assertEquals(1, post1.getId());
-
-		// Busca no banco o usuário gravado
+				
+		// Recupera do banco o post gravado (id 1) e compara com o post1
 		post2 = daoPost.selectById(1);
-		
-		// Compara os dois
 		assertNotNull(post2);
 		assertEquals(post1.getId(), post2.getId());
+		assertEquals(post1.getTitulo(), post2.getTitulo());
 		assertEquals(post1.getTexto(), post2.getTexto());
-		assertEquals(post1.getUsuario().getLogin(), post2.getUsuario().getLogin());			
+		
+		// Verifica se o usuário do post foi gravado corretamente
+		usuario = (Usuario) ctx.getBean("usuario1");
+		Usuario usuarioPost = post2.getUsuario();
+		
+		assertNotNull(usuario);
+		assertEquals(usuario.getLogin(), usuarioPost.getLogin());
+		assertEquals(usuario.getEmail(), usuarioPost.getEmail());
+		assertEquals(usuario.getNome(), usuarioPost.getNome());
+		assertEquals(usuario.getPassword(), usuarioPost.getPassword());
+		assertEquals(usuario.getTipoUsuario(), usuarioPost.getTipoUsuario());
 	}
 
 	private void update() {

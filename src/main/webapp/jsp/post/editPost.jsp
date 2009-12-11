@@ -32,12 +32,37 @@
 	});
 </script>
 
+<script type="text/javascript" src="/tpw/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+
+	tinyMCE.init({	
+		mode : "textareas",
+		theme : "advanced",
+
+		// Theme options
+		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true
+	});
+
+	function toggleEditor(id) {
+		if (!tinyMCE.get(id))
+			tinyMCE.execCommand('mceAddControl', false, id);
+		else
+			tinyMCE.execCommand('mceRemoveControl', false, id);
+	}
+
+</script>
+
 </head>
 
 <body>
 	
 <center>
-	<div class="divPadrao" style="width: 500px">
+	<div class="divPadrao" style="width: 800px">
 
 	<s:form theme="simple" action="post!updatePost" namespace="/jsp">
 
@@ -52,13 +77,13 @@
 			<tr>
 				<td align="right"><span class="label" style="font-weight: bold">Titulo:</span></td>
 				<td colspan="3"><s:textfield name="post.titulo" maxlength="255"
-					cssStyle="width: 300px" /></td>
+					cssStyle="width: 99%" /></td>
 			</tr>
 	
 			<tr>
 				<td align="right"><span class="label" style="font-weight: bold">Texto:</span></td>
 				<td colspan="3"><s:textarea name="post.texto"
-					cssStyle="width: 300px; height: 300px" /></td>
+					cssStyle="width: 100%; height: 500px" /></td>
 			</tr>
 			<tr>
 				<td colspan="5">

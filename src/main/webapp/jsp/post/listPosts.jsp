@@ -46,16 +46,16 @@
  
 	<h3>Blog</h3>
 	 
-	<s:iterator value="posts">
+	<s:iterator value="posts" status="id">
 		<br/><span class=postsTitulo>${titulo}</span>
 		
 		
-		<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${post.id}">editar</a>
-		<a href="javascript:del('${post.id}');">remover</a>
+		<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}">editar</a>
+		<a href="javascript:del('${id}');">remover</a>
 	    
 	    
 		<br/><br/>
-		<span class=postsTexto>${texto}</span><br/>
+		<span class=postsTexto>${texto}</span>
 		<span class=postsFooter>${data} - ${usuario.login}</span><br/><br/>
 	</s:iterator>
 </div>

@@ -11,10 +11,7 @@ public class PostDAO {
 	}
 	
 	public Post save(Post post){
-		if (post.getId() != null)
-			return dao.merge(post);
-		dao.persist(post);
-		return post;
+		return dao.merge(post);	
 	}
 	
 	public void remove (Post post) {

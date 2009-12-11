@@ -31,7 +31,7 @@ public class Usuario {
 	@Enumerated(value=EnumType.STRING)
 	private String tipoUsuario;
 	
-	@OneToMany (mappedBy="usuario", fetch=FetchType.LAZY, cascade=CascadeType.ALL )
+	@OneToMany (mappedBy="usuario", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
 	public String getLogin() {

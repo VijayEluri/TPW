@@ -47,6 +47,7 @@ public class PostAction extends ActionSupport {
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 
+		// Pega o login do usuário na sessão
 		String login = (String) session.getAttribute("login");
 		
 		Usuario usuario = (Usuario) usuarioDao.selectByLogin(login);
@@ -65,6 +66,7 @@ public class PostAction extends ActionSupport {
 		if (error) return "insertError";
 
 		post.setUsuario(usuario);
+		
 		postDao.save(post);
 		posts = postDao.selectAll();
 		

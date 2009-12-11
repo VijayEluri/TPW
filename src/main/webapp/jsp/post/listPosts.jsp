@@ -50,7 +50,7 @@
 	sort="list" id="post" requestURI="${pageContext.request.contextPath}/jsp/post!listPosts.action">
 	 
 	 	<display:column title="Titulo" property="titulo" style="width: 100px" />
-		<display:column title="Data" property="data" style="width: 100px" />
+		<display:column title="Data/Hora" property="data" format="{0, date, dd/MM/yyyy HH:mm:ss}" style="width: 100px" />
 		<display:column title="Texto" property="texto" style="width: 400px"/>
 		<display:column title="Editar" style="width: 50px">
 	         <a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${post.id}">editar</a>

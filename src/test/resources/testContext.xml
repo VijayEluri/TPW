@@ -45,6 +45,11 @@
         <property name="texto" value="Texto de exemplo" />
         <property name="usuario" ref="usuario1" />
     </bean>
+    
+    <bean id="post2" class="beans.Post" singleton="false">
+        <property name="titulo" value="titulo teste2"/>
+        <property name="texto" value="Texto de exemplo2" />
+    </bean>
 
 	<bean id="evento1" class="beans.Evento" singleton="false">
         <property name="nome" value="nome 1" />

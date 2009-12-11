@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
@@ -23,12 +21,12 @@ public class PostTest {
 	private static PostDAO daoPost;
 	private static UsuarioDAO daoUsuario;
 	
-	
 	@BeforeClass
 	public static void prepare() {
 		clearDatabase();
 		ctx = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml", "testContext.xml"});
 		daoPost = (PostDAO) ctx.getBean("postDAO");
+		daoUsuario = (UsuarioDAO) ctx.getBean("usuarioDAO");
 	}
 
 	@AfterClass
@@ -61,13 +59,24 @@ public class PostTest {
 		post1 = (Post) ctx.getBean("post1");
 		assertNotNull(post1);
 		
+		usuario = (Usuario) ctx.getBean("usuario1");
+		assertNotNull(usuario);
+		
+		// Salva o usuário no banco
+		usuario = daoUsuario.save(usuario);
+		usuario = daoUsuario.selectByLogin("login1");
+		assertNotNull(usuario);
+		
+		// Associa o post ao usuário
+		post1.setUsuario(usuario);
+
 		// Salva no banco o post1
 		post1 = daoPost.save(post1);
 		assertEquals(1, post1.getId());
 		assertNotNull(post1);
 		assertEquals("titulo teste", post1.getTitulo());
 		assertEquals("Texto de exemplo", post1.getTexto());
-				
+		
 		// Recupera do banco o post gravado (id 1) e compara com o post1
 		post2 = daoPost.selectById(1);
 		assertNotNull(post2);
@@ -76,7 +85,6 @@ public class PostTest {
 		assertEquals(post1.getTexto(), post2.getTexto());
 		
 		// Verifica se o usuário do post foi gravado corretamente
-		usuario = (Usuario) ctx.getBean("usuario1");
 		Usuario usuarioPost = post2.getUsuario();
 		
 		assertNotNull(usuario);
@@ -85,6 +93,18 @@ public class PostTest {
 		assertEquals(usuario.getNome(), usuarioPost.getNome());
 		assertEquals(usuario.getPassword(), usuarioPost.getPassword());
 		assertEquals(usuario.getTipoUsuario(), usuarioPost.getTipoUsuario());
+		
+		// Associa o post a um usuário jã existente
+		post2 = (Post) ctx.getBean("post2");
+		usuario = daoUsuario.selectByLogin("login1");
+		post2.setUsuario(usuario);
+		post2 = daoPost.save(post2);
+		
+		post2 = daoPost.selectById(2);
+		
+		assertNotNull(post2);
+		assertEquals("titulo teste2", post2.getTitulo());
+		assertEquals("Texto de exemplo2", post2.getTexto());
 	}
 
 	private void update() {
@@ -104,10 +124,10 @@ public class PostTest {
 	}
 	
 	private void delete() {
-		// Remove o usuario
+		post1 = daoPost.selectById(1);
+		assertNotNull(post1);
 		daoPost.remove(post1);
 		
-		// Busca o usuario1 no banco
 		post1 = daoPost.selectById(1);
 		
 		// Deve retornar null

@@ -46,20 +46,18 @@
  
 	<h3>Blog</h3>
 	 
-	<display:table list="${posts}" class="defaultTable" pagesize="100" cellspacing="0" cellpadding="0"
-	sort="list" id="post" requestURI="${pageContext.request.contextPath}/jsp/post!listPosts.action">
-	 
-	 	<display:column title="Titulo" property="titulo" style="width: 100px" />
-		<display:column title="Data/Hora" property="data" format="{0, date, dd/MM/yyyy HH:mm:ss}" style="width: 100px" />
-		<display:column title="Texto" property="texto" style="width: 400px"/>
-		<display:column title="Editar" style="width: 50px">
-	         <a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${post.id}">editar</a>
-	    </display:column>
-	    <display:column title="Remover" style="width: 50px">
-	         <a href="javascript:del('${post.id}');">remover</a>
-	    </display:column>
-	 
-	</display:table>
+	<s:iterator value="posts">
+		<br/><span class=postsTitulo>${titulo}</span>
+		
+		
+		<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${post.id}">editar</a>
+		<a href="javascript:del('${post.id}');">remover</a>
+	    
+	    
+		<br/><br/>
+		<span class=postsTexto>${texto}</span><br/>
+		<span class=postsFooter>${data} - ${usuario.login}</span><br/><br/>
+	</s:iterator>
 </div>
  
 <center>

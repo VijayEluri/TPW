@@ -25,8 +25,8 @@
             
             <marquee behavior="scroll" direction="up" scrollamount="1" width="100%">					
 				<s:iterator value="noticias" >
-					<span class="newsTitle"><a href="${link}" target="blank">${titulo}</a></span><br />
-					<span class="newsBody"><s:property value="noticia"/><br/><br/></span>
+					<span class="newsTitle"><a href="${link}" target="blank">${titulo}</a><br /></span>
+					<span class="newsBody"><s:property value="noticia"/><br/><br></span>
 				</s:iterator>
 	    	</marquee>
 

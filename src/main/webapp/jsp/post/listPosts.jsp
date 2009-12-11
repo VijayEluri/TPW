@@ -42,27 +42,31 @@
 </head>
 <body>
  
-<div class="divTable">
- 
-	<h3>Blog</h3>
-	 
+<div class="divTable" style="width: 900px">
+ 	 
 	<s:iterator value="posts" status="id">
-		<br/><span class=postsTitulo>${titulo}</span>
-		
-		
-		<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}">editar</a>
-		<a href="javascript:del('${id}');">remover</a>
-	    
-	    
-		<br/><br/>
-		<span class=postsTexto>${texto}</span>
-		<span class=postsFooter>${data} - ${usuario.login}</span><br/><br/>
+		<table>
+			<tr>
+				<td width="80%" style="text-align: left">
+					<span class="postTitulo">${titulo}</span><br />
+					<span class="postFooter">${data} - ${usuario.nome}</span><br/><br/>
+				</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}">editar</a>
+					<a href="javascript:del('${id}');">remover</a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><span class="postTexto">${texto}</span></td>
+			</tr>								
+		</table>
 	</s:iterator>
+
 </div>
  
 <center>
 <div class="sepDiv">
-	<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/post/insertPost.jsp'">Inserir post</button>
+	<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/post/insertPost.jsp'">Novo post</button>
 </div>
 </center>
  

@@ -118,12 +118,19 @@ div#footer p {
 	background-color: #356595;
 }
 
-.postsTitulo {
+.postTexto {
+	text-align: justify;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+	
+.postTitulo {
 	font-size: 22px;
 	font-weight: bold;
+	text-align: left;
 }
 
-.postsFooter {
+.postFooter {
 	font-size: 10px;
 	font-style: italic;
+	padding-top: 10px;
 }

@@ -58,7 +58,7 @@ public class PostAction extends ActionSupport {
 		}
 		
 		if (!usuario.getTipoUsuario().equals("ADMINISTRADOR")) {
-			addActionError("Erro nao é administrador");
+			addActionError("Erro você deve estar logado como administrador");
 			error = true;
 		}
 		
@@ -79,27 +79,36 @@ public class PostAction extends ActionSupport {
 	public String updatePost() {
 		boolean error = false;
 
-		if (post.getId() == null) {
-			addActionError("Erro ao identificar post");
-			error = true;
-		}
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+
+		String login = (String) session.getAttribute("login");
 		
-		if (post.getUsuario() == null) {
+		Usuario usuario = (Usuario) usuarioDao.selectByLogin(login);
+		
+		// Testa se o login foi digitado
+		if (usuario.getLogin() == null) {
 			addActionError("Erro ao identificar usuário");
 			error = true;
 		}
 		
+		if (!usuario.getTipoUsuario().equals("ADMINISTRADOR")) {
+			addActionError("Erro você deve estar logado como administrador");
+			error = true;
+		}
+		
+		if (error) return "insertError";
+
+		post.setUsuario(usuario);
 		postDao.save(post);
 		posts = postDao.selectAll();
 		
-		if (error) return "insertError";
 		return "listPosts";
 	}
 	
 	public String deletePost() {
 		postDao.remove(post);
 		posts = postDao.selectAll();
-
 		return "listPosts";
 	}
 

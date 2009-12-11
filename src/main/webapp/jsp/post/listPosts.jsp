@@ -10,12 +10,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Blog</title>
  
+ <script type="text/javascript">
+	function del(id) {
+		if (confirm('Confirma exclusão?')) {
+			document.location.href = "${pageContext.request.contextPath}/jsp/post!deletePost.action?post.id=" + id;
+		}
+	}
+</script>
+ 
 <script type="text/javascript">
- 
-    $(document).ready(function() {
-       $('#menu2').css("background-color", "#4198f6");
-    });
- 
+
+	$(document).ready(function() {
+
+		$('#btnInsert').qtip( {
+			content : 'Inserir um novo post',
+			style : {
+				name : 'cream',
+				padding : '7px 13px',
+				width : {
+					max : 210,
+					min : 0
+				},
+				tip : true
+			}
+		});
+
+		$('#menu2').css("background-color", "#4198f6");
+	});
 </script>
  
 </head>
@@ -24,24 +45,21 @@
 <div class="divTable">
  
 	<h3>Blog</h3>
-<!--	 
-	<display:table list="${blog}" class="defaultTable" pagesize="100" cellspacing="0" cellpadding="0"
-	sort="list" id="post" requestURI="${pageContext.request.contextPath}/jsp/usuario!listUsuarios.action">
 	 
-		<display:column title="Id" property="id" style="width: 50px" />
+	<display:table list="${posts}" class="defaultTable" pagesize="100" cellspacing="0" cellpadding="0"
+	sort="list" id="post" requestURI="${pageContext.request.contextPath}/jsp/post!listPosts.action">
+	 
 	 	<display:column title="Titulo" property="titulo" style="width: 100px" />
 		<display:column title="Data" property="data" style="width: 100px" />
 		<display:column title="Texto" property="texto" style="width: 400px"/>
-		<display:column title="Usuario" property="usuario.login" style="width: 100px"/>
 		<display:column title="Editar" style="width: 50px">
-	         <a href="${pageContext.request.contextPath}/jsp/usuario!editPost.action">editar</a>
+	         <a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${post.id}">editar</a>
 	    </display:column>
 	    <display:column title="Remover" style="width: 50px">
-	         <a href="javascript:del('${usuario.login}');">remover</a>
+	         <a href="javascript:del('${post.id}');">remover</a>
 	    </display:column>
 	 
 	</display:table>
-  -->
 </div>
  
 <center>

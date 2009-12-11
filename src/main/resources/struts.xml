@@ -21,6 +21,8 @@
 		<action name="post!*" method="{1}" class="post">
 			<result name="listPosts">/jsp/post/listPosts.jsp</result>
 			<result name="insertError">/jsp/post/insertPost.jsp</result>
+			<result name="editPost">/jsp/post/editPost.jsp</result>
+			<result name="updatePost">/jsp/post/editPost.jsp</result>
 		</action>
 
 		<action name="evento!*" method="{1}" class="evento">

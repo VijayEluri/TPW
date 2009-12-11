@@ -78,7 +78,7 @@ public class PostTest {
 		assertEquals(1, post1.getId());
 
 		// Busca no banco o usuário gravado
-		post2 = usuario.getPosts().get(0);
+		post2 = daoPost.selectById(1);
 		
 		// Compara os dois
 		assertNotNull(post2);

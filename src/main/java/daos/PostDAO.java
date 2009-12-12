@@ -7,7 +7,7 @@ public class PostDAO {
 	private DAO<Post, Integer> dao;
 
 	public List<Post> selectAll() {
-		return dao.list();
+		return dao.listByNamedQuery("post.lastPosts", null);
 	}
 	
 	public Post save(Post post){

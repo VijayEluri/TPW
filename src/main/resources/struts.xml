@@ -23,6 +23,8 @@
 			<result name="insertError">/jsp/post/insertPost.jsp</result>
 			<result name="editPost">/jsp/post/editPost.jsp</result>
 			<result name="updatePost">/jsp/post/editPost.jsp</result>
+			<result name="updateError">/jsp/post/editPost.jsp</result>			
+			<result name="deleteError">/jsp/post/listPosts.jsp</result>
 		</action>
 
 		<action name="evento!*" method="{1}" class="evento">

@@ -51,10 +51,12 @@
 					<span class="postTitulo">${titulo}</span><br />
 					<span class="postFooter">${data} - ${usuario.nome}</span><br/><br/>
 				</td>
+				<% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
 				<td>
 					<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}">editar</a>
 					<a href="javascript:del('${id}');">remover</a>
 				</td>
+				<% } %>
 			</tr>
 			<tr>
 				<td colspan="2"><span class="postTexto">${texto}</span></td>
@@ -63,12 +65,13 @@
 	</s:iterator>
 
 </div>
- 
+<% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %> 
 <center>
 <div class="sepDiv">
 	<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/post/insertPost.jsp'">Novo post</button>
 </div>
 </center>
+<% } %>
  
 </body>
 </html>

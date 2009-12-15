@@ -14,6 +14,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import daos.UsuarioDAO;
 
 @Entity
 @Table(name = "minicurso")   
@@ -95,4 +103,25 @@ public class Minicurso {
 		this.responsavel = responsavel;
 	}
 
+	public boolean getUsuarioInscrito(){
+		Usuario u;
+		HttpServletRequest request;
+		HttpSession session;
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+		String tmpLogin = (String) session.getAttribute("login");
+		ApplicationContext ctxUsuario;
+		UsuarioDAO daoUsuario;
+		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
+		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
+		u=daoUsuario.selectByLogin(tmpLogin);
+		
+		if (u!=null){
+			if (this.getUsuarios()!=null){
+				return this.getUsuarios().contains(u);
+			}
+		}
+		return false;
+	}
+	
 }

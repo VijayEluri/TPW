@@ -120,6 +120,9 @@ public class MinicursoAction extends ActionSupport {
 			minicurso.getUsuarios().add(u);
 		}
 		dao.save(minicurso);
+		
+		listMinicursos();
+		
 		return "enterMinicurso";
 	}
 	
@@ -142,6 +145,9 @@ public class MinicursoAction extends ActionSupport {
 			}
 		}
 		dao.save(minicurso);
+		
+		listMinicursos();
+		
 		return "enterMinicurso";
 	}
 	

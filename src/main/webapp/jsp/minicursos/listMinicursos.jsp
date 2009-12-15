@@ -19,7 +19,7 @@
 
 	function exitMinicurso (id) {
 		if (confirm('Confirma Nao Participacao?')) {
-			document.location.href = "${pageContext.request.contextPath}/jsp/evento!exitMinicurso.action?minicurso.id=" + id;
+			document.location.href = "${pageContext.request.contextPath}/jsp/minicurso!exitMinicurso.action?minicurso.id=" + id;
 		}
 	}
 </script>
@@ -72,20 +72,28 @@
 	    		</display:column>
 			<% } else { %>
 				<display:column title="Participar" style="width: 50px">
-					<a href="${pageContext.request.contextPath}/jsp/minicurso!enterMinicurso.action?minicurso.id=${minicurso.id}">Participar</a>
+					<% if ( !((beans.Minicurso) minicurso).getUsuarioInscrito())  {%>
+						<a href="${pageContext.request.contextPath}/jsp/minicurso!enterMinicurso.action?minicurso.id=${minicurso.id}">Participar</a>
+					<% } %>
 				</display:column>
 				<display:column title="Nao Participar" style="width: 50px">
-					<a href="javascript:exitEvent('${minicurso.id}');">Nao Participar</a>
+					<% if ( ((beans.Minicurso) minicurso).getUsuarioInscrito())  {%>
+						<a href="javascript:exitMinicurso('${minicurso.id}');">Nao Participar</a>
+					<% } %>
 				</display:column> 
 			<% } %>
 		<% } %>
  	</display:table>
 </div>
- 
+
 <center>
+<% if ((session.getAttribute("login") != null)) { 
+		if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
 <div class="sepDiv">
 	<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/minicursos/insertMinicurso.jsp'">Inserir minicurso</button>
 </div>
+<% 		}
+	}%>
 </center>
  
 </body>

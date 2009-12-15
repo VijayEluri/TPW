@@ -72,10 +72,14 @@
 				</display:column>
 	    	<% } else { %>
 	    		<display:column title="Participar" style="width: 50px">
-					<a href="${pageContext.request.contextPath}/jsp/evento!enterEvento.action?evento.id=${evento.id}">Participar</a>
+	    			<% if ( !((beans.Evento) evento).getUsuarioInscrito())  {%>
+						<a href="${pageContext.request.contextPath}/jsp/evento!enterEvento.action?evento.id=${evento.id}">Participar</a>
+					<% } %>
 				</display:column>
 				<display:column title="Nao Participar" style="width: 50px">
-					<a href="javascript:exitEvent('${evento.id}');">Nao Participar</a>
+					<% if ( ((beans.Evento) evento).getUsuarioInscrito())  {%>
+						<a href="javascript:exitEvent('${evento.id}');">Nao Participar</a>
+					<% } %>
 				</display:column>
 	    	<% } %>
 	 	<% } %>

@@ -62,8 +62,8 @@
 		<display:column title="Data" property="data" style="width: 100px" />
 		<display:column title="Responsavel" property="responsavel" style="width: 100px"/>
 		
-		<% if ((session.getAttribute("login") != null)) { %>
-			<% if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>
+		<% if ((session.getAttribute("login") != null)) { 
+			   if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>
 				<display:column title="Editar" style="width: 50px">
 	        		<a href="${pageContext.request.contextPath}/jsp/evento!editEvento.action?evento.id=${evento.id}">editar</a>
 				</display:column>

@@ -42,6 +42,13 @@
 			<result name="editMinicurso">/jsp/minicursos/editMinicurso.jsp</result>
 			<result name="updateError">/jsp/minicursos/editMinicurso.jsp</result>
 		</action>
+		
+		<action name="rss!*" method="{1}" class="rss">
+			<result name="listSiteRSS">/jsp/rss/listRSS.jsp</result>
+			<result name="listError">/jsp/rss/listRSS.jsp</result>
+			<result name="deleteError">/jsp/rss/listRSS.jsp</result>
+			<result name="insertError">/jsp/rss/listRSS.jsp</result>
+		</action>
 
 	</package>
 </struts>

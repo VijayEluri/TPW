@@ -104,7 +104,13 @@
                  <li id="menu2"><a href="/tpw/jsp/post!listPosts.action">Blog</a></li>                   
                  <li id="menu3"><a href="/tpw/jsp/minicurso!listMinicursos.action">Minicursos</a></li>
                  <li id="menu4"><a href="/tpw/jsp/evento!listEventos.action">Eventos</a></li>
-                 <li id="menu5"><a href="/tpw/jsp/usuario!listUsuarios.action">Usuários</a></li>
+                 <li id="menu5"><a href="/tpw/jsp/usuario!listUsuarios.action">Minha conta</a></li>
+                 <% if ((session.getAttribute("login") != null)) { %>
+				 	<% if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>
+                 <li id="menu6"><a href="/tpw/jsp/rss!listSiteRSS.action">Editar RSS</a></li>
+                 <%	   }
+				 	}
+				 	%>
             </ul>
         </div>
 

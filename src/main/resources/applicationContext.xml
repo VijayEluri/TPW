@@ -49,6 +49,7 @@
 	<bean id="post" class="actions.PostAction" singleton="false" />
 	<bean id="evento" class="actions.EventoAction" singleton="false" />
 	<bean id="minicurso" class="actions.MinicursoAction" singleton="false" />
+	<bean id="rss" class="actions.RSSAction" singleton="false" />
 
 </beans>
 

@@ -93,7 +93,7 @@ public class EventoAction extends ActionSupport {
 		ApplicationContext ctxUsuario;
 		UsuarioDAO daoUsuario;
 		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
-		daoUsuario = (UsuarioDAO) ctx.getBean("usuarioDAO");
+		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
 		u=daoUsuario.selectByLogin(tmpLogin);
 		if (u!=null){
 			if (evento.getUsuarios()==null)
@@ -115,7 +115,7 @@ public class EventoAction extends ActionSupport {
 		ApplicationContext ctxUsuario;
 		UsuarioDAO daoUsuario;
 		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
-		daoUsuario = (UsuarioDAO) ctx.getBean("usuarioDAO");
+		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
 		u=daoUsuario.selectByLogin(tmpLogin);
 		if (u!=null){
 			if (evento.getUsuarios()!=null){
@@ -189,7 +189,6 @@ public class EventoAction extends ActionSupport {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

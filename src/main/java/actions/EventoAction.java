@@ -41,14 +41,10 @@ public class EventoAction extends ActionSupport {
 	 */
 	private List<Evento> eventos;
 	
-	/**
-	 * Dao para conexao com o banco
-	 */
+	//Dao para conexao com o banco
 	private EventoDAO dao;
 
-	/**
-	 * Spring
-	 */
+	//Spring
 	private ApplicationContext ctx;
 
 	// Confirmação da password

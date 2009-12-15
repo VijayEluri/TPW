@@ -74,6 +74,11 @@
 	<s:iterator value="posts" status="id">
 		<div class="postTitulo">
 			<span>${titulo}</span>
+						
+			<% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
+				<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}"><img id="edit" src="/tpw/images/edit.png" height="23px" /></a>
+				<a href="javascript:del('${id}');"><img id="trash" src="/tpw/images/trash.png" height="23px" /></a>				
+			<% } %>
 		</div>
 		<div>
 			<span class="postTexto">${texto}</span>
@@ -81,11 +86,6 @@
 		
 		<div class="postFooter">
 			Postado por: ${usuario.nome} - data: ${data}
-			
-			<% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
-				<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}"><img id="edit" src="/tpw/images/edit.png" height="23px" /></a>
-				<a href="javascript:del('${id}');"><img id="trash" src="/tpw/images/trash.png" height="23px" /></a>				
-			<% } %>
 		</div>										
 	</s:iterator>
 

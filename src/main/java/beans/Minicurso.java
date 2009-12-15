@@ -24,34 +24,65 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import daos.UsuarioDAO;
 
+/**
+ * 
+ * @author vendra
+ * @see Evento
+ * Classe responsável pelo cadastro de Minicursos
+ *
+ */
 @Entity
 @Table(name = "minicurso")
 @NamedQuery(name="minicurso.last", query="SELECT m FROM Minicurso m ORDER BY m.data DESC limit 3")
 public class Minicurso {
 
+	/**
+	 * id do minicurso
+	 */
 	@Id
 	@SequenceGenerator(name = "minicurso_id_seq", sequenceName = "minicurso_id_seq", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="minicurso_id_seq")
 	private Integer id;
 
+	/**
+	 * Quantidade de Vagas totais para o evento
+	 */
 	@Column
 	private Integer qtVagas;
 	
+	/**
+	 * Numero de inscritos para o minicurso
+	 */
 	@Column
 	private Integer qtInscritos;
 	
+	/**
+	 * Nome do minicurso
+	 */
 	@Column(nullable = false)
 	private String nome;
 
+	/**
+	 * Data que ocorrerá o minicurso
+	 */
 	@Column
 	private Date data;
 
+	/**
+	 * Descricao detalhada sobre o minicurso
+	 */
 	@Column
 	private String descricao;
 
+	/**
+	 * Responsável que irá ministrar o minicurso
+	 */
 	@Column
 	private String responsavel;
 
+	/**
+	 * Lista de usuários inscritos no minicurso
+	 */
 	@ManyToMany(
 		cascade={CascadeType.PERSIST, CascadeType.MERGE},
 		targetEntity = Usuario.class
@@ -63,6 +94,11 @@ public class Minicurso {
 	)
 	private Set<Usuario> usuarios;
 
+	/*
+	 * ====================================
+	 * Setters e Getters
+	 * ====================================
+	 */
 	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -93,19 +129,6 @@ public class Minicurso {
 
 	public void setQtInscritos(Integer qtInscritos) {
 		this.qtInscritos = qtInscritos;
-	}
-
-	public void addQtInscrito(){
-		if (qtInscritos==null)
-			qtInscritos = new Integer(0);
-		qtInscritos++;
-	}
-	
-	public void delQtInscrito(){
-		if (qtInscritos==null)
-			qtInscritos = new Integer(0);
-		else
-			qtInscritos--;
 	}
 	
 	public String getNome() {
@@ -140,19 +163,50 @@ public class Minicurso {
 		this.responsavel = responsavel;
 	}
 
+	/**
+	 * Incrementa o contador de inscritos no evento
+	 */
+	public void addQtInscrito(){
+		if (qtInscritos==null)
+			qtInscritos = new Integer(0);
+		qtInscritos++;
+	}
+	
+	/**
+	 * Decrementa o contador de inscritos no evento
+	 */
+	public void delQtInscrito(){
+		if (qtInscritos==null)
+			qtInscritos = new Integer(0);
+		else
+			qtInscritos--;
+	}
+	
+	/**
+	 * Método reponsável por verificar se o usuário está inscrito no evento
+	 * Usado no listEventos.jsp para mostrar as opcoes de se inscrever ou sair
+	 * @return Se o usuário logado (na sessão) está inscrito no evento
+	 */
 	public boolean getUsuarioInscrito(){
+		
+		//Usuario
 		Usuario u;
+		
+		//Recebe o usuario logado
 		HttpServletRequest request;
 		HttpSession session;
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Lendo as informacoes do usuario logado no banco
 		ApplicationContext ctxUsuario;
 		UsuarioDAO daoUsuario;
 		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
 		u=daoUsuario.selectByLogin(tmpLogin);
 		
+		//Verifica se o usuário está logado e se está contido na lista de usuários inscritos
 		if (u!=null){
 			if (this.getUsuarios()!=null){
 				return this.getUsuarios().contains(u);

@@ -32,6 +32,12 @@ public class Minicurso {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="minicurso_id_seq")
 	private Integer id;
 
+	@Column
+	private Integer qtVagas;
+	
+	@Column
+	private Integer qtInscritos;
+	
 	@Column(nullable = false)
 	private String nome;
 
@@ -71,6 +77,35 @@ public class Minicurso {
 		this.id = id;
 	}
 
+	public Integer getQtVagas() {
+		return qtVagas;
+	}
+
+	public void setQtVagas(Integer qtVagas) {
+		this.qtVagas = qtVagas;
+	}
+	
+	public Integer getQtInscritos() {
+		return qtInscritos;
+	}
+
+	public void setQtInscritos(Integer qtInscritos) {
+		this.qtInscritos = qtInscritos;
+	}
+
+	public void addQtInscrito(){
+		if (qtInscritos==null)
+			qtInscritos = new Integer(0);
+		qtInscritos++;
+	}
+	
+	public void delQtInscrito(){
+		if (qtInscritos==null)
+			qtInscritos = new Integer(0);
+		else
+			qtInscritos--;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

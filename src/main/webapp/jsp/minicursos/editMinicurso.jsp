@@ -74,6 +74,16 @@
 		</tr>
 
 		<tr>
+			<td align="right"><span class="label" style="font-weight: bold">Qtd. Vagas:</span></td>
+			<td colspan="3"><s:textfield name="minicurso.qtVagas" maxlength="30" cssStyle="width: 30px" /></td>
+		</tr>
+		
+		<tr>
+			<td align="right"><span class="label" style="font-weight: bold">Qtd. Inscritos:</span></td>
+			<td colspan="3"><s:textfield name="minicurso.qtInscritos" maxlength="30" cssStyle="width: 30px" /></td>
+		</tr>
+
+		<tr>
 			<td colspan="5">
 			<div style="margin-top: 20px; text-align: right" class="sepDivUp">
 			<s:submit id="btnSalvar" value="Salvar" /></div>

@@ -61,6 +61,8 @@
 	<display:column title="Descricao" property="descricao" style="width: 200px" />
 	<display:column title="Data" property="data" style="width: 100px" />
 	<display:column title="Responsavel" property="responsavel" style="width: 100px"/>
+	<display:column title="Vagas Totais" property="qtVagas" style="width: 100px" />
+	<display:column title="Qtd Inscritos" property="qtInscritos" style="width: 100px"/>
 	
 	 	<% if ((session.getAttribute("login") != null)) { %>
 			<% if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>

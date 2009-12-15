@@ -47,7 +47,7 @@
 			<td colspan="4" align="center">
 			<h3>Dados do minicurso</h3>
 			</td>
-		</tr>
+		</tr>	
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Nome:</span></td>
@@ -67,6 +67,16 @@
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Responsavel:</span></td>
 			<td colspan="3"><s:textfield name="minicurso.responsavel" maxlength="300" cssStyle="width: 300px" /></td>
+		</tr>
+
+		<tr>
+			<td align="right"><span class="label" style="font-weight: bold">Qtd. Vagas:</span></td>
+			<td colspan="3"><s:textfield name="minicurso.qtVagas" maxlength="30" cssStyle="width: 30px" /></td>
+		</tr>
+
+		<tr>
+			<td align="right"><span class="label" style="font-weight: bold">Qtd. Inscritos:</span></td>
+			<td colspan="3"><s:textfield name="minicurso.qtInscritos" maxlength="30" cssStyle="width: 30px" value="0" /></td>
 		</tr>
 
 		<tr>

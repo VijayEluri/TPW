@@ -70,20 +70,19 @@
 		<table width="100%">
 			<tr>
 				<td colspan="4" align="center">
-				<h3>Dados do post</h3>
+				<h3>Editar post</h3>
+				</td>
+			</tr>
+	
+			<tr>				
+				<td colspan="4">
+					<span class="label" style="font-weight: bold">Titulo</span> <br />
+					<s:textfield name="post.titulo" maxlength="255"	cssStyle="width: 99%" />
 				</td>
 			</tr>
 	
 			<tr>
-				<td align="right"><span class="label" style="font-weight: bold">Titulo:</span></td>
-				<td colspan="3"><s:textfield name="post.titulo" maxlength="255"
-					cssStyle="width: 99%" /></td>
-			</tr>
-	
-			<tr>
-				<td align="right"><span class="label" style="font-weight: bold">Texto:</span></td>
-				<td colspan="3"><s:textarea name="post.texto"
-					cssStyle="width: 100%; height: 500px" /></td>
+				<td colspan="4"><s:textarea name="post.texto" cssStyle="width: 100%; height: 500px" /></td>
 			</tr>
 			<tr>
 				<td colspan="5">

@@ -68,7 +68,7 @@
  
 <center>
 <div class="sepDiv">
-	<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/usuarios/insertUsuario.jsp'">Inserir usuário</button>
+	<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/usuarios/insertUsuario.jsp'">Novo usuário</button>
 </div>
 </center>
  

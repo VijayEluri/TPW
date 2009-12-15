@@ -32,6 +32,11 @@ create table evento(
 	responsavel varchar(255)
 );
 
+create table Evento_Usuario(
+	id integer,
+	login varchar(50)
+);
+
 create table minicurso(
 	id serial not null primary key,
 	nome varchar(255),

@@ -3,16 +3,23 @@ package actions;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import beans.Evento;
+import beans.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import daos.EventoDAO;
+import daos.UsuarioDAO;
 
 public class EventoAction extends ActionSupport {
 
@@ -73,6 +80,50 @@ public class EventoAction extends ActionSupport {
 	public String editEvento() {
 		evento = dao.selectById(evento.getId());
 		return "editEvento";
+	}
+	
+	public String enterEvento(){
+		evento = dao.selectById(evento.getId());
+		Usuario u = new Usuario();
+		HttpServletRequest request;
+		HttpSession session;
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+		String tmpLogin = (String) session.getAttribute("login");
+		ApplicationContext ctxUsuario;
+		UsuarioDAO daoUsuario;
+		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
+		daoUsuario = (UsuarioDAO) ctx.getBean("usuarioDAO");
+		u=daoUsuario.selectByLogin(tmpLogin);
+		if (u!=null){
+			if (evento.getUsuarios()==null)
+				evento.setUsuario(new HashSet<Usuario>());
+			evento.getUsuarios().add(u);
+		}
+		dao.save(evento);
+		return "enterEvento";
+	}
+	
+	public String exitEvento(){
+		evento = dao.selectById(evento.getId());
+		Usuario u = new Usuario();
+		HttpServletRequest request;
+		HttpSession session;
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+		String tmpLogin = (String) session.getAttribute("login");
+		ApplicationContext ctxUsuario;
+		UsuarioDAO daoUsuario;
+		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
+		daoUsuario = (UsuarioDAO) ctx.getBean("usuarioDAO");
+		u=daoUsuario.selectByLogin(tmpLogin);
+		if (u!=null){
+			if (evento.getUsuarios()!=null){
+				evento.getUsuarios().remove(u);
+			}
+		}
+		dao.save(evento);
+		return "enterEvento";
 	}
 	
 	// Altera os dados do usuário

@@ -28,6 +28,7 @@
 		</action>
 
 		<action name="evento!*" method="{1}" class="evento">
+			<result name="enterEvento">/jsp/eventos/listEventos.jsp</result>
 			<result name="listEventos">/jsp/eventos/listEventos.jsp</result>
 			<result name="insertError">/jsp/eventos/insertEvento.jsp</result>
 			<result name="editEvento">/jsp/eventos/editEvento.jsp</result>

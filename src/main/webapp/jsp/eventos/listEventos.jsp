@@ -16,6 +16,12 @@
 			document.location.href = "${pageContext.request.contextPath}/jsp/evento!deleteEvento.action?evento.id=" + id;
 		}
 	}
+
+	function exitEvent (id) {
+		if (confirm('Confirma Nao Participacao?')) {
+			document.location.href = "${pageContext.request.contextPath}/jsp/evento!exitEvento.action?evento.id=" + id;
+		}
+	}
 </script>
  
 <script type="text/javascript">
@@ -55,21 +61,36 @@
 		<display:column title="Descricao" property="descricao" style="width: 200px" />
 		<display:column title="Data" property="data" style="width: 100px" />
 		<display:column title="Responsavel" property="responsavel" style="width: 100px"/>
-		<display:column title="Editar" style="width: 50px">
-	         <a href="${pageContext.request.contextPath}/jsp/evento!editEvento.action?evento.id=${evento.id}">editar</a>
-	    </display:column>
-	    <display:column title="Remover" style="width: 50px">
-	         <a href="javascript:del('${evento.id}');">remover</a>
-	    </display:column>
-	 
+		
+		<% if ((session.getAttribute("login") != null)) { %>
+			<% if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>
+				<display:column title="Editar" style="width: 50px">
+	        		<a href="${pageContext.request.contextPath}/jsp/evento!editEvento.action?evento.id=${evento.id}">editar</a>
+				</display:column>
+				<display:column title="Remover" style="width: 50px">
+					<a href="javascript:del('${evento.id}');">remover</a>
+				</display:column>
+	    	<% } else { %>
+	    		<display:column title="Participar" style="width: 50px">
+	        		<a href="${pageContext.request.contextPath}/jsp/evento!enterEvento.action?evento.id=${evento.id}">Participar</a>
+				</display:column>
+				<display:column title="Nao Participar" style="width: 50px">
+					<a href="javascript:exitEvent('${evento.id}');">Nao Participar</a>
+				</display:column>
+	    	<% } %>
+	 	<% } %>
 	</display:table>
  
 </div>
  
 <center>
+<% if ((session.getAttribute("login") != null)) { 
+		if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
 <div class="sepDiv">
-	<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/eventos/insertEvento.jsp'">Inserir evento</button>
+			<button id="btnInsert" onclick="location.href='${pageContext.request.contextPath}/jsp/eventos/insertEvento.jsp'">Inserir evento</button>
 </div>
+	<%	}
+	}%>
 </center>
  
 </body>

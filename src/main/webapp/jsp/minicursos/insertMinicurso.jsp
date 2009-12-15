@@ -39,7 +39,7 @@
 <body>
 	
 <center>
-<div class="divPadrao" style="width: 500px"><s:form theme="simple"
+<div class="divPadrao" style="width: 700px"><s:form theme="simple"
 	action="minicurso!insertMinicurso" namespace="/jsp">
 
 	<table width="100%">
@@ -47,7 +47,7 @@
 			<td colspan="4" align="center">
 			<h3>Dados do minicurso</h3>
 			</td>
-		</tr>
+		</tr>	
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Nome:</span></td>
@@ -56,7 +56,9 @@
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Descricao:</span></td>
-			<td colspan="3"><s:textfield name="minicurso.descricao" maxlength="1500" cssStyle="width: 300px" /></td>
+			<td colspan="3">
+				<s:textarea name="minicurso.descricao" cssStyle="width:90%; height: 100px;"></s:textarea>
+			</td>
 		</tr>
 
 		 <tr>
@@ -67,6 +69,16 @@
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Responsavel:</span></td>
 			<td colspan="3"><s:textfield name="minicurso.responsavel" maxlength="300" cssStyle="width: 300px" /></td>
+		</tr>
+
+		<tr>
+			<td align="right"><span class="label" style="font-weight: bold">Qtd. Vagas:</span></td>
+			<td colspan="3"><s:textfield name="minicurso.qtVagas" maxlength="30" cssStyle="width: 30px" /></td>
+		</tr>
+
+		<tr>
+			<td align="right"><span class="label" style="font-weight: bold">Qtd. Inscritos:</span></td>
+			<td colspan="3"><s:textfield name="minicurso.qtInscritos" maxlength="30" cssStyle="width: 30px" value="0" /></td>
 		</tr>
 
 		<tr>

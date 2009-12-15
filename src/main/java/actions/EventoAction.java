@@ -70,6 +70,9 @@ public class EventoAction extends ActionSupport {
 
 		if (error)
 			return "insertError";
+
+		if (evento.getQtInscritos()==null)
+			evento.setQtInscritos(new Integer(0));
 		
 		dao.save(evento);
 		eventos = dao.selectAll();
@@ -100,6 +103,15 @@ public class EventoAction extends ActionSupport {
 				evento.setUsuario(new HashSet<Usuario>());
 			evento.getUsuarios().add(u);
 		}
+		if (evento.getQtInscritos()==null) evento.setQtInscritos(new Integer(0));
+		if (evento.getQtVagas()==null) evento.setQtVagas(new Integer(0));
+		if (evento.getQtInscritos()<evento.getQtVagas())
+			evento.addQtInscrito();
+		else {
+			addActionError("Evento lotado!");
+			listEventos();
+			return "listError";
+		}
 		dao.save(evento);
 		
 		listEventos();
@@ -125,6 +137,7 @@ public class EventoAction extends ActionSupport {
 				evento.getUsuarios().remove(u);
 			}
 		}
+		evento.delQtInscrito();
 		dao.save(evento);
 		
 		listEventos();

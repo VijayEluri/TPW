@@ -18,7 +18,7 @@
 	}
 
 	function exitMinicurso (id) {
-		if (confirm('Confirma Nao Participacao?')) {
+		if (confirm('Confirma nao participacao neste minicurso?')) {
 			document.location.href = "${pageContext.request.contextPath}/jsp/minicurso!exitMinicurso.action?minicurso.id=" + id;
 		}
 	}
@@ -41,6 +41,32 @@
          }
        });
 
+       $('#btnEnter').qtip({
+           content: 'Se inscrever no minicurso',
+           style: {
+              name: 'cream',
+              padding: '7px 13px',
+              width: {
+                 max: 210,
+                 min: 0
+              },
+             tip: true
+          }
+        });
+
+       $('#btnExit').qtip({
+           content: 'Voce esta inscrito no minicurso. Clique para sair do minicurso.',
+           style: {
+              name: 'cream',
+              padding: '7px 13px',
+              width: {
+                 max: 210,
+                 min: 0
+              },
+             tip: true
+          }
+        });
+       
        $('#menu3').css("background-color", "#4198f6");
  
     });
@@ -61,6 +87,8 @@
 	<display:column title="Descricao" property="descricao" style="width: 200px" />
 	<display:column title="Data" property="data" style="width: 100px" />
 	<display:column title="Responsavel" property="responsavel" style="width: 100px"/>
+	<display:column title="Vagas Totais" property="qtVagas" style="width: 100px" />
+	<display:column title="Qtd Inscritos" property="qtInscritos" style="width: 100px"/>
 	
 	 	<% if ((session.getAttribute("login") != null)) { %>
 			<% if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>
@@ -71,14 +99,12 @@
 	         		<a href="javascript:del('${minicurso.id}');">remover</a>
 	    		</display:column>
 			<% } else { %>
-				<display:column title="Participar" style="width: 50px">
+				<display:column title="Inscrever/Sair" style="width: 50px">
 					<% if ( !((beans.Minicurso) minicurso).getUsuarioInscrito())  {%>
-						<a href="${pageContext.request.contextPath}/jsp/minicurso!enterMinicurso.action?minicurso.id=${minicurso.id}">Participar</a>
+						<a href="${pageContext.request.contextPath}/jsp/minicurso!enterMinicurso.action?minicurso.id=${minicurso.id}"><img id='btnEnter' src='/tpw/images/inscrever.gif' border=0/></a>
 					<% } %>
-				</display:column>
-				<display:column title="Nao Participar" style="width: 50px">
 					<% if ( ((beans.Minicurso) minicurso).getUsuarioInscrito())  {%>
-						<a href="javascript:exitMinicurso('${minicurso.id}');">Nao Participar</a>
+						<a href="javascript:exitMinicurso('${minicurso.id}');"><img id='btnExit' src='/tpw/images/naoinscrever.jpg' border=0/></a>
 					<% } %>
 				</display:column> 
 			<% } %>

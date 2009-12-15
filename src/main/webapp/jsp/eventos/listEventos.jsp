@@ -18,7 +18,7 @@
 	}
 
 	function exitEvent (id) {
-		if (confirm('Confirma Nao Participacao?')) {
+		if (confirm('Confirma nao participacao no evento?')) {
 			document.location.href = "${pageContext.request.contextPath}/jsp/evento!exitEvento.action?evento.id=" + id;
 		}
 	}
@@ -41,6 +41,32 @@
          }
        });
 
+       $('#btnInsert').qtip({
+           content: 'Inserir um novo minicurso',
+           style: {
+              name: 'cream',
+              padding: '7px 13px',
+              width: {
+                 max: 210,
+                 min: 0
+              },
+             tip: true
+          }
+        });
+
+        $('#btnEnter').qtip({
+            content: 'Se inscrever no minicurso',
+            style: {
+               name: 'cream',
+               padding: '7px 13px',
+               width: {
+                  max: 210,
+                  min: 0
+               },
+              tip: true
+           }
+         });
+
        $('#menu4').css("background-color", "#4198f6");
  
     });
@@ -61,9 +87,11 @@
 		<display:column title="Descricao" property="descricao" style="width: 200px" />
 		<display:column title="Data" property="data" style="width: 100px" />
 		<display:column title="Responsavel" property="responsavel" style="width: 100px"/>
-		
-		<% if ((session.getAttribute("login") != null)) { 
-			   if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>
+
+		<display:column title="Vagas Totais" property="qtVagas" style="width: 100px" />
+		<display:column title="Qtd Inscritos" property="qtInscritos" style="width: 100px"/>
+		<% if ((session.getAttribute("login") != null)) { %>
+			<% if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>
 				<display:column title="Editar" style="width: 50px">
 	        		<a href="${pageContext.request.contextPath}/jsp/evento!editEvento.action?evento.id=${evento.id}">editar</a>
 				</display:column>
@@ -71,14 +99,12 @@
 					<a href="javascript:del('${evento.id}');">remover</a>
 				</display:column>
 	    	<% } else { %>
-	    		<display:column title="Participar" style="width: 50px">
-	    			<% if ( !((beans.Evento) evento).getUsuarioInscrito())  {%>
-						<a href="${pageContext.request.contextPath}/jsp/evento!enterEvento.action?evento.id=${evento.id}">Participar</a>
+	    		<display:column title="Inscrever/Sair" style="width: 50px">
+					<% if ( !((beans.Evento) evento).getUsuarioInscrito())  {%>
+						<a href="${pageContext.request.contextPath}/jsp/evento!enterEvento.action?evento.id=${evento.id}"><img id='btnEnter' src='/tpw/images/inscrever.gif' border=0/></a>
 					<% } %>
-				</display:column>
-				<display:column title="Nao Participar" style="width: 50px">
 					<% if ( ((beans.Evento) evento).getUsuarioInscrito())  {%>
-						<a href="javascript:exitEvent('${evento.id}');">Nao Participar</a>
+						<a href="javascript:exitEvent('${evento.id}');"><img id='btnExit' src='/tpw/images/naoinscrever.jpg' border=0/></a>
 					<% } %>
 				</display:column>
 	    	<% } %>

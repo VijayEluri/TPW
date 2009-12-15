@@ -119,6 +119,15 @@ public class MinicursoAction extends ActionSupport {
 				minicurso.setUsuario(new HashSet<Usuario>());
 			minicurso.getUsuarios().add(u);
 		}
+		if (minicurso.getQtInscritos()==null) minicurso.setQtInscritos(new Integer(0));
+		if (minicurso.getQtVagas()==null) minicurso.setQtVagas(new Integer(0));
+		if (minicurso.getQtInscritos()<minicurso.getQtVagas())
+			minicurso.addQtInscrito();
+		else {
+			addActionError("Minicurso lotado!");
+			listMinicursos();
+			return "listError";
+		}
 		dao.save(minicurso);
 		
 		listMinicursos();
@@ -144,6 +153,7 @@ public class MinicursoAction extends ActionSupport {
 				minicurso.getUsuarios().remove(u);
 			}
 		}
+		minicurso.delQtInscrito();
 		dao.save(minicurso);
 		
 		listMinicursos();

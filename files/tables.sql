@@ -26,6 +26,8 @@ create table post (
 
 create table evento(
 	id serial not null primary key,
+	qtVagas integer,
+	qtInscritos integer,
 	nome varchar(255),
 	data timestamp,
 	descricao text,
@@ -37,15 +39,17 @@ create table Evento_Usuario(
 	login varchar(50)
 );
 
-create table Minicurso_Usuario(
-	id integer,
-	login varchar(50)
-);
-
 create table minicurso(
 	id serial not null primary key,
+	qtVagas integer,
+	qtInscritos integer,
 	nome varchar(255),
 	data timestamp,
 	descricao text,
 	responsavel varchar(255)
+);
+
+create table Minicurso_Usuario(
+	id integer,
+	login varchar(50)
 );

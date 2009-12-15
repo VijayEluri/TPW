@@ -3,6 +3,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -31,6 +32,17 @@
 	    	</marquee>
 
         </div>
-    </div>	
+    </div>
+    
+    <div id="minicursos" align="left">    	
+    	<center><h3>Minicursos recentes</h3></center>
+    	
+    	<s:iterator value="minicursos">
+    		<span class="newsTitle">${nome} - <fmt:formatDate value="${data}" pattern="dd/MM/yyyy" type="date" /><br /></span>
+   			${descricao} <br />
+   			Vagas disponíveis: ${qtVagas - qtInscritos} <br /> <br />   	
+    	</s:iterator>	
+    </div>
+        
 </body>
 </html>

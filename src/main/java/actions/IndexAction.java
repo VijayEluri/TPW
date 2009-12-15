@@ -14,10 +14,12 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import beans.Minicurso;
 import beans.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import daos.MinicursoDAO;
 import daos.SiteRSSDAO;
 import daos.UsuarioDAO;
 
@@ -31,9 +33,12 @@ public class IndexAction extends ActionSupport {
 	private Usuario usuario;
 	
 	private UsuarioDAO usuarioDAO;
-
+	private MinicursoDAO minicursoDAO;
+	
 	private HttpServletRequest request;
 	private HttpSession session;
+
+	private List<Minicurso> minicursos;
 	
 	// Número máximo de notícias a ser pego de cada RSS
 	private final int MAX_NOTICIAS = 5;
@@ -41,11 +46,13 @@ public class IndexAction extends ActionSupport {
 	public IndexAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"});
 		usuarioDAO = (UsuarioDAO) ctx.getBean("usuarioDAO");
+		minicursoDAO = (MinicursoDAO) ctx.getBean("minicursoDAO");
 		usuario = usuario == null ? new Usuario() : usuario;
 	}
 		
 	public String index() {		
 		fillRSS();
+		minicursos = minicursoDAO.selectLast();
 		return "index";
 	}
 
@@ -134,6 +141,14 @@ public class IndexAction extends ActionSupport {
 
 	public void setSession(HttpSession session) {
 		this.session = session;
+	}
+
+	public List<Minicurso> getMinicursos() {
+		return minicursos;
+	}
+
+	public void setMinicursos(List<Minicurso> minicursos) {
+		this.minicursos = minicursos;
 	}
 	
 }

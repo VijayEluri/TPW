@@ -35,6 +35,33 @@
 			}
 		});
 
+		$('#trash').qtip( {
+			content : 'Excluir post',
+			style : {
+				name : 'cream',
+				padding : '7px 13px',
+				width : {
+					max : 210,
+					min : 0
+				},
+				tip : true
+			}
+		});
+
+		$('#edit').qtip( {
+			content : 'Editar post',
+			style : {
+				name : 'cream',
+				padding : '7px 13px',
+				width : {
+					max : 210,
+					min : 0
+				},
+				tip : true
+			}
+		});
+		
+		
 		$('#menu2').css("background-color", "#4198f6");
 	});
 </script>
@@ -43,28 +70,27 @@
 <body>
  
 <div class="divTable" style="width: 900px">
- 	 
+ 
 	<s:iterator value="posts" status="id">
-		<table>
-			<tr>
-				<td width="80%" style="text-align: left">
-					<span class="postTitulo">${titulo}</span><br />
-					<span class="postFooter">${data} - ${usuario.nome}</span><br/><br/>
-				</td>
-				<% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
-				<td>
-					<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}">editar</a>
-					<a href="javascript:del('${id}');">remover</a>
-				</td>
-				<% } %>
-			</tr>
-			<tr>
-				<td colspan="2"><span class="postTexto">${texto}</span></td>
-			</tr>								
-		</table>
+		<div class="postTitulo">
+			<span>${titulo}</span>
+		</div>
+		<div>
+			<span class="postTexto">${texto}</span>
+		</div>
+		
+		<div class="postFooter">
+			Postado por: ${usuario.nome} - data: ${data}
+			
+			<% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
+				<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}"><img id="edit" src="/tpw/images/edit.png" height="23px" /></a>
+				<a href="javascript:del('${id}');"><img id="trash" src="/tpw/images/trash.png" height="23px" /></a>				
+			<% } %>
+		</div>										
 	</s:iterator>
 
 </div>
+
 <% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %> 
 <center>
 <div class="sepDiv">
@@ -74,4 +100,4 @@
 <% } %>
  
 </body>
-</html>
+</html

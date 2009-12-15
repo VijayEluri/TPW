@@ -124,13 +124,31 @@ div#footer p {
 }
 	
 .postTitulo {
+	width: 905px;;
+	background-color: #F0F0F0;	
+	text-align: left;
+	padding: 10px 10px 10px 10px;
+}
+
+.postTitulo span {
 	font-size: 22px;
 	font-weight: bold;
-	text-align: left;
 }
 
 .postFooter {
+	border-top: dotted 1px;
 	font-size: 10px;
 	font-style: italic;
 	padding-top: 10px;
+	margin-bottom: 30px;
+}
+
+.postFooter a {
+	text-decoration: none;
+	font-variant: normal;
+	background-color: #FFFFFF;
+}
+
+.postFooter a:hover {
+	color: red;
 }

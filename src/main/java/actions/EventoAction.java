@@ -101,6 +101,9 @@ public class EventoAction extends ActionSupport {
 			evento.getUsuarios().add(u);
 		}
 		dao.save(evento);
+		
+		listEventos();
+		
 		return "enterEvento";
 	}
 	
@@ -123,6 +126,9 @@ public class EventoAction extends ActionSupport {
 			}
 		}
 		dao.save(evento);
+		
+		listEventos();
+		
 		return "enterEvento";
 	}
 	

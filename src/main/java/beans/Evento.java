@@ -103,7 +103,7 @@ public class Evento {
 		this.responsavel = responsavel;
 	}
 
-	public String getUsuarioInscrito(){
+	public boolean getUsuarioInscrito(){
 		Usuario u;
 		HttpServletRequest request;
 		HttpSession session;
@@ -118,10 +118,10 @@ public class Evento {
 		
 		if (u!=null){
 			if (this.getUsuarios()!=null){
-				return (this.getUsuarios().contains(u))?"true":"false";
+				return this.getUsuarios().contains(u);
 			}
 		}
-		return "false";
+		return false;
 	}
 	
 }

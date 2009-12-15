@@ -37,6 +37,11 @@ create table Evento_Usuario(
 	login varchar(50)
 );
 
+create table Minicurso_Usuario(
+	id integer,
+	login varchar(50)
+);
+
 create table minicurso(
 	id serial not null primary key,
 	nome varchar(255),

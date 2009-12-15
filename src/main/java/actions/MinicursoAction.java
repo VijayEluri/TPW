@@ -102,7 +102,7 @@ public class MinicursoAction extends ActionSupport {
 
 	/**
 	 *  Recebe minicurso do banco
-	 *  Redireciona para a página de edição do usuário
+	 *  Redireciona para a página de edição do minicurso
 	 * @return "editMinicurso" para o struts
 	 */
 	public String editMinicurso() {
@@ -112,7 +112,7 @@ public class MinicursoAction extends ActionSupport {
 	
 	/**
 	 * Altera os dados do minicurso
-	 * @return "listMinicursos" para o banco
+	 * @return "listMinicursos" para o struts
 	 */
 	public String updateMinicurso() {
 		boolean error = false;

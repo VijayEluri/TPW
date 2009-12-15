@@ -16,35 +16,62 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import daos.UsuarioDAO;
 
+/**
+ * Classe responsável por cuidar das acoes do Usuario.
+ * Geralmente chamadas pelo struts. 
+ * @author vendra
+ *
+ */
 public class UsuarioAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Usuario da acao
+	 */
 	private Usuario usuario;
+	
+	/**
+	 * Lista de usuarios
+	 */
 	private List<Usuario> usuarios;
 
+	//Dao para acesso com o banco
 	private UsuarioDAO dao;
 
+	//Spring
 	private ApplicationContext ctx;
 
 	// Confirmação da password
 	private String confirmacao;
 	
+	/**
+	 * Construtor: Inicializa o evento, dao e ctx
+	 */
 	public UsuarioAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		dao = (UsuarioDAO) ctx.getBean("usuarioDAO");
 		usuario = usuario == null ? new Usuario() : usuario;		
 	}
 
-	// Retorna a string "listUsuarios" que será lida pelo Struts. O Struts abre
-	// o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
-	// a listUsuarios) e redireciona para a página listUsuarios.jsp
+	/**
+	 * Retorna a string "listUsuarios" que será lida pelo Struts. O Struts abre
+	 * o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
+	 * a listUsuarios) e redireciona para a página listUsuarios.jsp
+	 * @return "listUsuarios" para o struts
+	 */
 	public String listUsuarios() {
+		
+		//Verifica se usuario esta logado
 		HttpServletRequest request;
 		HttpSession session;
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Verifica o tipo do usuario
+		//Se for administrador ira mostrar todos.
+		//Senao mostra somente ele.
 		String tmpTipoUsuario = (String) session.getAttribute("tipoUsuario");
 		if (tmpTipoUsuario != null && tmpTipoUsuario.equals("ADMINISTRADOR")){
 			usuarios = dao.selectAll();
@@ -59,8 +86,11 @@ public class UsuarioAction extends ActionSupport {
 		return "listUsuarios";
 	}
 
-	// Insere o usuário no banco de dados. Esse método é chamado pelo form
-	// da página insertUsuario.jsp
+	/**
+	 * Insere o usuário no banco de dados. Esse método é chamado pelo form
+	 * da página insertUsuario.jsp
+	 * @return "listUsuarios" para o struts
+	 */
 	public String insertUsuario() {		
 		boolean error = false;
 		
@@ -90,13 +120,20 @@ public class UsuarioAction extends ActionSupport {
 		return "listUsuarios";
 	}
 
-	// Redireciona para a página de edição do usuário
+	/**
+	 *  Recebe usuario do banco
+	 *  Redireciona para a página de edição do usuário
+	 * @return "editMinicurso" para o struts
+	 */
 	public String editUsuario() {
 		usuario = dao.selectByLogin(usuario.getLogin());
 		return "editUsuario";
 	}
 	
-	// Altera os dados do usuário
+	/**
+	 * Altera os dados do usuario
+	 * @return "listUsuarios" para o struts
+	 */
 	public String updateUsuario() {
 		boolean error = false;
 		
@@ -116,7 +153,10 @@ public class UsuarioAction extends ActionSupport {
 		return "listUsuarios";
 	}
 	
-	// Exclui o usuário
+	/**
+	 * Exclui usuario do banco
+	 * @return "listUsuarios" para o struts
+	 */
 	public String deleteUsuario() {
 		dao.remove(usuario);
 		listUsuarios();
@@ -124,6 +164,12 @@ public class UsuarioAction extends ActionSupport {
 		return "listUsuarios";
 	}
 	
+	
+	/*
+	 * ==================
+	 * Getters e Setters
+	 * ==================
+	 */
 	public Usuario getUsuario() {
 		return usuario;
 	}

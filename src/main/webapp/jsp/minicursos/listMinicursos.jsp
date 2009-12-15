@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.Date" %>
  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="/struts-tags" prefix="s" %>
@@ -100,10 +101,10 @@
 	    		</display:column>
 			<% } else { %>
 				<display:column title="Inscrever/Sair" style="width: 50px">
-					<% if ( !((beans.Minicurso) minicurso).getUsuarioInscrito())  {%>
+					<% if ( !((beans.Minicurso) minicurso).getUsuarioInscrito() && ((beans.Minicurso) minicurso).getData().after(new Date())) {%>
 						<a href="${pageContext.request.contextPath}/jsp/minicurso!enterMinicurso.action?minicurso.id=${minicurso.id}"><img id='btnEnter' src='/tpw/images/inscrever.gif' border=0/></a>
 					<% } %>
-					<% if ( ((beans.Minicurso) minicurso).getUsuarioInscrito())  {%>
+					<% if ( ((beans.Minicurso) minicurso).getUsuarioInscrito() && ((beans.Minicurso) minicurso).getData().after(new Date()))  {%>
 						<a href="javascript:exitMinicurso('${minicurso.id}');"><img id='btnExit' src='/tpw/images/naoinscrever.jpg' border=0/></a>
 					<% } %>
 				</display:column> 

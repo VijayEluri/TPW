@@ -43,7 +43,18 @@ public class Usuario {
 	)	
 	private Set<Evento> eventos;
 
-	public Set<Evento> getEmployers() {
+	@ManyToMany(
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+		    mappedBy = "usuarios",
+		    targetEntity = Minicurso.class
+	)
+	private Set<Minicurso> minicursos;
+	
+	public Set<Minicurso> getMinicursos(){
+		return minicursos;
+	}
+	
+	public Set<Evento> getEventos() {
 		return eventos;
 	}
 	

@@ -72,14 +72,10 @@
 				</display:column>
 	    	<% } else { %>
 	    		<display:column title="Participar" style="width: 50px">
-	    			<s:if test="${evento.usuarioInscrito}=='false'">
-	    				<a href="${pageContext.request.contextPath}/jsp/evento!enterEvento.action?evento.id=${evento.id}">Participar</a>
-	    			</s:if>		
+					<a href="${pageContext.request.contextPath}/jsp/evento!enterEvento.action?evento.id=${evento.id}">Participar</a>
 				</display:column>
 				<display:column title="Nao Participar" style="width: 50px">
-					<s:if test="${evento.usuarioInscrito}=='true'">
-						<a href="javascript:exitEvent('${evento.id}');">Nao Participar</a>
-					</s:if>
+					<a href="javascript:exitEvent('${evento.id}');">Nao Participar</a>
 				</display:column>
 	    	<% } %>
 	 	<% } %>

@@ -1,12 +1,17 @@
 package beans;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,6 +36,25 @@ public class Minicurso {
 	@Column
 	private String responsavel;
 
+	@ManyToMany(
+		cascade={CascadeType.PERSIST, CascadeType.MERGE},
+		targetEntity = Usuario.class
+	)
+	@JoinTable(
+		name="Minicurso_Usuario",
+		joinColumns=@JoinColumn(name="id"),
+		inverseJoinColumns=@JoinColumn(name="login")
+	)
+	private Set<Usuario> usuarios;
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+		
+	public void setUsuario(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

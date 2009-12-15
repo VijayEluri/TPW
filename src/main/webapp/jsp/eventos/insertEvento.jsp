@@ -39,7 +39,7 @@
 <body>
 	
 <center>
-<div class="divPadrao" style="width: 500px"><s:form theme="simple"
+<div class="divPadrao" style="width: 700px"><s:form theme="simple"
 	action="evento!insertEvento" namespace="/jsp">
 
 	<table width="100%">
@@ -56,7 +56,7 @@
 
 		<tr>
 			<td align="right"><span class="label" style="font-weight: bold">Descricao:</span></td>
-			<td colspan="3"><s:textfield name="evento.descricao" maxlength="1500" cssStyle="width: 300px" /></td>
+			<td colspan="3"><s:textarea name="evento.descricao" cssStyle="width:80%; height: 100px;"></s:textarea></td>
 		</tr>
 
 		 <tr>

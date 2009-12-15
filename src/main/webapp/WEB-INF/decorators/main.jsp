@@ -28,7 +28,7 @@
 		$('.divPadrao').corner();
 		$('.demo').corner();
 		$('#login').corner();
-
+		$('#minicursos').corner();
 		
 		$(document).ready(function() {
 

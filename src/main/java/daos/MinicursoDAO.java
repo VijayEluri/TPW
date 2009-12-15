@@ -12,6 +12,10 @@ public class MinicursoDAO {
 		return dao.list();
 	}
 
+	public List<Minicurso> selectLast() {
+		return dao.listByNamedQuery("minicurso.last", null);
+	}
+
 	public Minicurso save(Minicurso evento) {
 		if (evento.getId() != null)
 			return dao.merge(evento);

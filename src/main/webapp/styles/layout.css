@@ -24,6 +24,7 @@ div#header {
     height: 127px;
     color: white;
     background: #467aa7;
+	background-image: url("/tpw/images/fundo.png");
     
     text-align: left;
 }

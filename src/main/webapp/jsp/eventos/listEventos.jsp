@@ -42,21 +42,21 @@
          }
        });
 
-       $('#btnInsert').qtip({
-           content: 'Inserir um novo minicurso',
-           style: {
-              name: 'cream',
-              padding: '7px 13px',
-              width: {
-                 max: 210,
-                 min: 0
-              },
-             tip: true
-          }
-        });
-
         $('#btnEnter').qtip({
-            content: 'Se inscrever no minicurso',
+            content: 'Se inscrever no evento',
+            style: {
+               name: 'cream',
+               padding: '7px 13px',
+               width: {
+                  max: 210,
+                  min: 0
+               },
+              tip: true
+           }
+         });
+
+        $('#btnExit').qtip({
+            content: 'Voce esta inscrito no evento. Clique para sair do evento.',
             style: {
                name: 'cream',
                padding: '7px 13px',

@@ -7,20 +7,16 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import util.Seguranca;
 import beans.Minicurso;
 import beans.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import daos.MinicursoDAO;
-import daos.UsuarioDAO;
 
 /**
  * Classe responsável por cuidar das acoes do Minicurso.
@@ -84,22 +80,14 @@ public class MinicursoAction extends ActionSupport {
 	 * @return "listMinicursos" para o struts
 	 */
 	public String insertMinicurso() {		
-		boolean error = false;
-		
-		// Testa se o ID nao foi digitado
-		if (minicurso.getId() != null && minicurso.getId() > 0) {
-			addActionError("Id deve ficar em branco");
-			error = true;
-		}
-		
+		boolean error = !Seguranca.checkAdministrador(this);
+
 		// Verifica se foi digitado o nome
 		if (minicurso.getNome() == null || minicurso.getNome().length()==0) {
 			addActionError("Nome do minicurso não informado");
 			error = true;
 		}
-
-		if (error)
-			return "insertError";
+		if (error) return "insertError";
 		
 		dao.save(minicurso);
 		minicursos = dao.selectAll();
@@ -121,16 +109,14 @@ public class MinicursoAction extends ActionSupport {
 	 * @return "listMinicursos" para o struts
 	 */
 	public String updateMinicurso() {
-		boolean error = false;
+		boolean error = !Seguranca.checkAdministrador(this);
 		
 		// Verifica se foi digitado o nome
 		if (minicurso.getNome() == null || minicurso.getNome().length()==0) {
 			addActionError("Nome do minicurso não informado");
 			error = true;
 		}
-
-		if (error)
-			return "updateError";
+		if (error) return "updateError";
 		
 		dao.save(minicurso);
 		minicursos = dao.selectAll();
@@ -143,26 +129,13 @@ public class MinicursoAction extends ActionSupport {
 	 * @return "enterMinicurso" para o struts
 	 */
 	public String enterMinicurso(){
+		if(!Seguranca.checkUsuario(this)) return "listError";
 		
 		//Certifica-se que todos os dados do minicurso foram carregados do banco
 		minicurso = dao.selectById(minicurso.getId());
 		
 		//Usuario - Sera preenchido com os dados do usuario logado
-		Usuario u = new Usuario();
-		
-		//Recebe o usuario que está logado (na sessao)
-		HttpServletRequest request;
-		HttpSession session;
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
-		String tmpLogin = (String) session.getAttribute("login");
-		
-		//Le os dados do usuario logado no banco
-		ApplicationContext ctxUsuario;
-		UsuarioDAO daoUsuario;
-		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
-		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
-		u=daoUsuario.selectByLogin(tmpLogin);
+		Usuario u = Seguranca.getUsuario();
 		
 		//Adiciona o usuario na lista de usuarios inscritos
 		if (u!=null){
@@ -196,26 +169,13 @@ public class MinicursoAction extends ActionSupport {
 	 * @return "enterMinicurso" para o struts
 	 */
 	public String exitMinicurso(){
+		if(!Seguranca.checkUsuario(this)) return "listError";
 		
 		//Certifica-se que os dados do minicurso estao carregados do banco
 		minicurso = dao.selectById(minicurso.getId());
 		
 		//Usuario
-		Usuario u = new Usuario();
-		
-		//Pega o usuario logado (na sessao)
-		HttpServletRequest request;
-		HttpSession session;
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
-		String tmpLogin = (String) session.getAttribute("login");
-		
-		//Recebe os dados do usuario logado do banco
-		ApplicationContext ctxUsuario;
-		UsuarioDAO daoUsuario;
-		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
-		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
-		u=daoUsuario.selectByLogin(tmpLogin);
+		Usuario u = Seguranca.getUsuario();
 		
 		//Remove usuario logado da lista de usuarios inscritos no minicurso
 		if (u!=null){
@@ -237,9 +197,11 @@ public class MinicursoAction extends ActionSupport {
 	}
 	
 	/**
-	 * Exclui o usuário do banco
+	 * Exclui o minicurso do banco
 	 */
 	public String deleteMinicurso() {
+		if(!Seguranca.checkAdministrador(this)) return "listError";
+		
 		dao.remove(minicurso);
 		minicursos = dao.selectAll();
 
@@ -250,6 +212,8 @@ public class MinicursoAction extends ActionSupport {
 	 * Mostra a página de detalhes do minicurso 
 	 */
 	public String details() {
+		if(!Seguranca.checkAdministrador(this)) return "listError";
+		
 		minicurso = dao.selectById(minicurso.getId());
 		inscritos = new ArrayList<Usuario>();
 		

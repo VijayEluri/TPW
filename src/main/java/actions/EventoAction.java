@@ -7,20 +7,16 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import util.Seguranca;
 import beans.Evento;
 import beans.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import daos.EventoDAO;
-import daos.UsuarioDAO;
 
 /**
  * Classe responsável por cuidar das acoes do Evento.
@@ -82,13 +78,7 @@ public class EventoAction extends ActionSupport {
 	 *  @return "listEventos" para o struts
 	 */
 	public String insertEvento() {		
-		boolean error = false;
-		
-		// Testa se o ID nao foi digitado
-		if (evento.getId() != null && evento.getId() > 0) {
-			addActionError("Id deve ficar em branco");
-			error = true;
-		}
+		boolean error = !Seguranca.checkAdministrador(this);
 		
 		// Verifica se foi digitado o nome
 		if (evento.getNome() == null || evento.getNome().length()==0) {
@@ -122,26 +112,13 @@ public class EventoAction extends ActionSupport {
 	 * @return "enterEvento" para o struts
 	 */
 	public String enterEvento(){
+		if (!Seguranca.checkAdministrador(this)) return "listError";
 		
 		//Certifica-se que todos os dados do evento foram carregados do banco
 		evento = dao.selectById(evento.getId());
 		
 		//Usuario - Sera preenchido com os dados do usuario logado
-		Usuario u = new Usuario();
-		
-		//Recebe o usuario que está logado (na sessao)
-		HttpServletRequest request;
-		HttpSession session;
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
-		String tmpLogin = (String) session.getAttribute("login");
-		
-		//Le os dados do usuario logado no banco
-		ApplicationContext ctxUsuario;
-		UsuarioDAO daoUsuario;
-		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
-		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
-		u=daoUsuario.selectByLogin(tmpLogin);
+		Usuario u = Seguranca.getUsuario();
 		
 		//Adiciona o usuario na lista de usuarios inscritos
 		if (u!=null){
@@ -175,26 +152,13 @@ public class EventoAction extends ActionSupport {
 	 * @return "enterEvento" para o struts
 	 */
 	public String exitEvento(){
+		if(!Seguranca.checkUsuario(this)) return "listError";
 		
 		//Certifica-se que os dados do evento estao carregados do banco
 		evento = dao.selectById(evento.getId());
 		
 		//Usuario
-		Usuario u = new Usuario();
-		
-		//Pega o usuario logado (na sessao)
-		HttpServletRequest request;
-		HttpSession session;
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
-		String tmpLogin = (String) session.getAttribute("login");
-		
-		//Recebe os dados do usuario logado do banco
-		ApplicationContext ctxUsuario;
-		UsuarioDAO daoUsuario;
-		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
-		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
-		u=daoUsuario.selectByLogin(tmpLogin);
+		Usuario u = Seguranca.getUsuario();
 		
 		//Remove usuario logado da lista de usuarios inscritos no evento
 		if (u!=null){
@@ -220,7 +184,7 @@ public class EventoAction extends ActionSupport {
 	 * @return "listEventos" para o struts
 	 */
 	public String updateEvento() {
-		boolean error = false;
+		boolean error = !Seguranca.checkAdministrador(this);
 		
 		// Verifica se foi digitado o nome
 		if (evento.getNome() == null || evento.getNome().length()==0) {
@@ -228,8 +192,7 @@ public class EventoAction extends ActionSupport {
 			error = true;
 		}
 
-		if (error)
-			return "updateError";
+		if (error) return "updateError";
 		
 		dao.save(evento);
 		eventos = dao.selectAll();
@@ -242,6 +205,8 @@ public class EventoAction extends ActionSupport {
 	 * @return "listEventos" para o struts
 	 */
 	public String deleteEvento() {
+		if(!Seguranca.checkAdministrador(this)) return "listError";
+		
 		dao.remove(evento);
 		eventos = dao.selectAll();
 
@@ -252,6 +217,8 @@ public class EventoAction extends ActionSupport {
 	 * Mostra a página de detalhes do evento 
 	 */
 	public String details() {
+		if(!Seguranca.checkAdministrador(this)) return "listError";
+		
 		evento = dao.selectById(evento.getId());
 		inscritos = new ArrayList<Usuario>();
 		

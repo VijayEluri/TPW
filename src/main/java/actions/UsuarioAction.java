@@ -6,13 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import util.Seguranca;
 import beans.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -64,24 +61,15 @@ public class UsuarioAction extends ActionSupport {
 	 * @return "listUsuarios" para o struts
 	 */
 	public String listUsuarios() {
-		
-		//Verifica se usuario esta logado
-		HttpServletRequest request;
-		HttpSession session;
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
-		String tmpLogin = (String) session.getAttribute("login");
-		
 		//Verifica o tipo do usuario
 		//Se for administrador ira mostrar todos.
 		//Senao mostra somente ele.
-		String tmpTipoUsuario = (String) session.getAttribute("tipoUsuario");
-		if (tmpTipoUsuario != null && tmpTipoUsuario.equals("ADMINISTRADOR")){
+		if (Seguranca.checkAdministrador(null)){
 			usuarios = dao.selectAll();
 		} else {
-			if (tmpLogin != null){
+			if (Seguranca.checkUsuario(null)){
 				List<Usuario> tmpList = new ArrayList<Usuario>();
-				tmpList.add(dao.selectByLogin(tmpLogin));
+				tmpList.add(Seguranca.getUsuario());
 				usuarios = tmpList;
 			} else
 				usuarios = null;
@@ -113,6 +101,11 @@ public class UsuarioAction extends ActionSupport {
 		if (dao.selectByLogin(usuario.getLogin()) != null) {
 			addActionError("Login já existente");
 			error = true;
+		}
+		
+		// Verifica se nao esta inserindo um admin
+		if (usuario.getTipoUsuario().equals("ADMINISTRADOR")){
+			if (!Seguranca.checkAdministrador(this)) error = true;
 		}
 
 		//Faz a criptografia MD5 da senha do usuario
@@ -157,6 +150,17 @@ public class UsuarioAction extends ActionSupport {
 			addActionError("Senhas não conferem");
 			error = true;
 		}
+		// Verifica se nao esta inserindo um admin
+		if (usuario.getTipoUsuario().equals("ADMINISTRADOR")){
+			if (!Seguranca.checkAdministrador(this)) error = true;
+		}
+		
+		// verifica se o usuario não está modificando alheias e não é administrador
+		if (!Seguranca.getUsuario().getLogin().equals(usuario.getLogin())){
+				if (!Seguranca.checkAdministrador(this)){
+					error = true;
+				}
+		}
 
 		//Faz a criptografia MD5 da senha do usuario
 		try {
@@ -185,6 +189,14 @@ public class UsuarioAction extends ActionSupport {
 	 * @return "listUsuarios" para o struts
 	 */
 	public String deleteUsuario() {
+		// verifica se o usuario não está excluindo outros e não é administrador
+		
+		if (Seguranca.getUsuario().getLogin().equals(usuario.getLogin())==false){
+				if (!Seguranca.checkAdministrador(this)){
+					return "listError";
+				}
+		}
+		
 		dao.remove(usuario);
 		listUsuarios();
 

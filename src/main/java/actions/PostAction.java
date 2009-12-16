@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import util.Seguranca;
 import beans.Post;
 import beans.Usuario;
 
@@ -71,35 +72,10 @@ public class PostAction extends ActionSupport {
 	 * @return "listPosts" para o struts
 	 */
 	public String insertPost() {
-		Usuario usuario = null;
-		boolean error = false;
-
-		//Sessao
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
+		if (!Seguranca.checkAdministrador(this)) return "insertError";
 		
-		// Pega o login do usuário na sessão
-		String login = (String) session.getAttribute("login");
-		
-		if (login == null) {
-			addActionError("Você deve estar logado");
-			error = true;
-		}
-		else {
-			usuario = (Usuario) usuarioDao.selectByLogin(login);
-			
-			// Testa se o login foi digitado
-			if (usuario == null) {
-				addActionError("Erro ao identificar usuário");
-				error = true;
-			}
-			else if (!usuario.getTipoUsuario().equals("ADMINISTRADOR")) {
-				addActionError("Erro você deve estar logado como administrador");
-				error = true;
-			}
-		}
-		
-		if (error) return "insertError";
+		//Recupera o usuário
+		Usuario usuario = Seguranca.getUsuario();
 
 		//Seta o usuario que postou o Blog
 		post.setUsuario(usuario);
@@ -126,35 +102,10 @@ public class PostAction extends ActionSupport {
 	 * @return "listPosts" para o struts
 	 */
 	public String updatePost() {
-		Usuario usuario = null;
-		boolean error = false;
+		if (!Seguranca.checkAdministrador(this)) return "updateError";
 
-		//Sessao
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
-
-		//Recebe os dados do usuario logado
-		String login = (String) session.getAttribute("login");
-
-		if (login == null) {
-			addActionError("Você deve estar logado");
-			error = true;
-		}
-		else {		
-			usuario = (Usuario) usuarioDao.selectByLogin(login);
-			
-			// Testa se o login foi digitado
-			if (usuario == null) {
-				addActionError("Erro ao identificar usuário");
-				error = true;
-			}	
-			else if (!usuario.getTipoUsuario().equals("ADMINISTRADOR")) {
-				addActionError("Erro você deve estar logado como administrador");
-				error = true;
-			}
-		}
-		
-		if (error) return "updateError";
+		//Recupera o usuario
+		Usuario usuario = Seguranca.getUsuario();
 
 		//Seta o usuario que fez o post
 		post.setUsuario(usuario);
@@ -171,36 +122,7 @@ public class PostAction extends ActionSupport {
 	 * @return "listPosts" para o struts
 	 */
 	public String deletePost() {
-		
-		boolean error = false;
-
-		//Sessao
-		request = ServletActionContext.getRequest();
-		session = request.getSession();
-
-		//Recebe os dados do usuario logado
-		String login = (String) session.getAttribute("login");
-
-		if (login == null) {
-			addActionError("Você deve estar logado");
-			error = true;
-		}
-		else {
-			
-			Usuario usuario = (Usuario) usuarioDao.selectByLogin(login);
-			
-			// Testa se o login foi digitado
-			if (usuario == null) {
-				addActionError("Erro ao identificar usuário");
-				error = true;
-			}
-			else if (!usuario.getTipoUsuario().equals("ADMINISTRADOR")) {
-				addActionError("Erro você deve estar logado como administrador");
-				error = true;
-			}
-		}
-		
-		if (error) return "deleteError";
+		if (!Seguranca.checkAdministrador(this)) return "deleteError";
 		
 		//Executa a remocao no banco
 		postDao.remove(post);

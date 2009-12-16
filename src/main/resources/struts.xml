@@ -16,6 +16,7 @@
 			<result name="insertError">/jsp/usuarios/insertUsuario.jsp</result>
 			<result name="editUsuario">/jsp/usuarios/editUsuario.jsp</result>
 			<result name="updateError">/jsp/usuarios/editUsuario.jsp</result>
+			<result name="listError">/jsp/usuarios/listUsuarios.jsp</result>
 		</action>
 
 		<action name="post!*" method="{1}" class="post">
@@ -42,6 +43,7 @@
 			<result name="listMinicursos">/jsp/minicursos/listMinicursos.jsp</result>
 			<result name="insertError">/jsp/minicursos/insertMinicurso.jsp</result>
 			<result name="editMinicurso">/jsp/minicursos/editMinicurso.jsp</result>
+			<result name="editError">/jsp/minicursos/editMinicurso.jsp</result>
 			<result name="updateError">/jsp/minicursos/editMinicurso.jsp</result>
 			<result name="listError">/jsp/minicursos/listMinicursos.jsp</result>
 			<result name="detailsMinicurso">/jsp/minicursos/detailsMinicurso.jsp</result>

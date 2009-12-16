@@ -197,17 +197,16 @@ public class EventoAction extends ActionSupport {
 	}
 	
 	public String getStrData(){
-		return new SimpleDateFormat("dd/MM/yyyy").format(evento.getData());
+		return new SimpleDateFormat("MM/dd/yyyy HH:mm").format(evento.getData());
 	}
 	
 	public void setStrData(String strData){
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		
 		try {
 			evento.setData((Date) formatter.parse(strData));
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 }

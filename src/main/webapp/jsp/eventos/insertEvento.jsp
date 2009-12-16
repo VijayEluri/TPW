@@ -12,6 +12,26 @@
 <s:head theme="ajax" />
 <title>Dados do evento</title>
 
+<link type="text/css" href="/tpw/styles/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/tpw/js/jquery-1.3.2.min.js"></script>
+<!-- core, slider, datepicker -->
+<script type="text/javascript" src="/tpw/js/jquery-ui-1.7.2.custom.min.js"></script>
+<script type="text/javascript" src="/tpw/js/timepicker.js"></script>
+
+<script type="text/javascript">
+$(function() {
+    $('#datetime').datepicker({
+    	duration: '',
+        showTime: true,
+        constrainInput: false,
+        stepMinutes: 1,
+        stepHours: 1,
+        altTimeField: '',
+        time24h: true
+     });
+});
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -61,7 +81,7 @@
 
 		 <tr>
 			<td align="right"><span class="label" style="font-weight: bold">Data:</span></td>
-			<td colspan="3"><s:datetimepicker name="strData" displayFormat="dd/MM/yyyy"/></td>
+			<td colspan="3"><s:textfield name="strData" id="datetime"/> </td>
    		</tr>
 
 		<tr>

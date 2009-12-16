@@ -194,11 +194,11 @@ public class MinicursoAction extends ActionSupport {
 	}
 	
 	public String getStrData(){
-		return new SimpleDateFormat("dd/MM/yyyy").format(minicurso.getData());
+		return new SimpleDateFormat("MM/dd/yyyy HH:mm").format(minicurso.getData());
 	}
 	
 	public void setStrData(String strData){
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		
 		try {
 			minicurso.setData((Date) formatter.parse(strData));

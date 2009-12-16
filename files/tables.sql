@@ -35,8 +35,8 @@ create table evento(
 );
 
 create table Evento_Usuario(
-	id integer,
-	login varchar(50)
+	id integer references evento(id) on delete cascade,
+	login varchar(50) references usuario(login) on delete cascade
 );
 
 create table minicurso(
@@ -50,6 +50,18 @@ create table minicurso(
 );
 
 create table Minicurso_Usuario(
-	id integer,
-	login varchar(50)
+	id integer references minicurso(id) on delete cascade,
+	login varchar(50) references usuario(login) on delete cascade
 );
+
+create language 'plpgsql';
+
+CREATE OR REPLACE FUNCTION minicurso_evento_usuario_delete() RETURNS trigger AS '
+BEGIN
+  UPDATE minicurso SET qtInscritos = qtInscritos-1 WHERE EXISTS( select 1 from minicurso_usuario where minicurso_usuario.id = minicurso.id and minicurso_usuario.login = OLD.login);
+  UPDATE evento SET qtInscritos = qtInscritos-1 WHERE EXISTS( select 1 from evento_usuario where evento_usuario.id = evento.id and evento_usuario.login = OLD.login);
+  RETURN old;
+END
+' LANGUAGE plpgsql;
+
+CREATE TRIGGER TG_minicurso_evento_usuario_delete BEFORE DELETE ON usuario FOR EACH ROW EXECUTE PROCEDURE minicurso_evento_usuario_delete();

@@ -6,8 +6,15 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * Teste do Post
+ * @author vendra
+ */
 public class RoboNoticiasTest {
 
+	/*
+	 * Metodo contendo os testes
+	 */
 	@Test
 	public void runTests() {
 		//Acessando noticias do RSS

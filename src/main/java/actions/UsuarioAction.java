@@ -6,6 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -190,12 +194,22 @@ public class UsuarioAction extends ActionSupport {
 	 */
 	public String deleteUsuario() {
 		// verifica se o usuario não está excluindo outros e não é administrador
-		
 		if (Seguranca.getUsuario().getLogin().equals(usuario.getLogin())==false){
 				if (!Seguranca.checkAdministrador(this)){
 					return "listError";
 				}
 		}
+
+		//Verifica se usuario logado esta se deletando
+		HttpServletRequest request;
+		HttpSession session;
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Se ele se apagou, entao invalida a secao
+		if (usuario.getLogin().equals(tmpLogin))
+			session.invalidate();
 		
 		dao.remove(usuario);
 		listUsuarios();

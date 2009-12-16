@@ -15,6 +15,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import daos.EventoDAO;
 
+/**
+ * Teste do Evento
+ * @author vendra
+ *
+ */
 public class EventoTest {
 
 	private static ApplicationContext ctx;
@@ -22,6 +27,9 @@ public class EventoTest {
 
 	Evento evento1, evento2;
 	
+	/*
+	 * Prepara acesso ao DAO
+	 */
 	@BeforeClass
 	public static void prepare() {
 		clearDatabase();
@@ -29,6 +37,9 @@ public class EventoTest {
 		dao = (EventoDAO) ctx.getBean("eventoDAO");
 	}
 
+	/*
+	 * Metodo chamado ao final dos testes, limpa a tabela e zera a sequence 
+	 */
 	@AfterClass
 	public static void clearDatabase() {
 		EntityManager em = Persistence.createEntityManagerFactory("tpw").createEntityManager();
@@ -39,6 +50,9 @@ public class EventoTest {
 		em.close();
 	}
 	
+	/*
+	 * Metodo contendo os testes
+	 */
 	@Test
 	public void runTests() {
 		
@@ -54,6 +68,9 @@ public class EventoTest {
 		
 	}
 	
+	/*
+	 * Metodo que testa ao salvar no banco
+	 */
 	private void save() {		
 		evento1 = (Evento) ctx.getBean("evento1");		
 		assertNotNull(evento1);
@@ -81,6 +98,9 @@ public class EventoTest {
 		assertEquals(evento1.getResponsavel(), evento2.getResponsavel());				
 	}
 
+	/*
+	 * Metodo que testa modificacoes
+	 */
 	private void update() {
 	
 		// Altera os dados
@@ -101,6 +121,9 @@ public class EventoTest {
 		assertEquals("responsavel alterado", evento1.getResponsavel());
 	}
 	
+	/*
+	 * Metodo que testa exclusao
+	 */
 	private void delete() {
 	
 		// Remove o usuario

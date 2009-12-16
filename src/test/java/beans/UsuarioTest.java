@@ -15,13 +15,21 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import daos.UsuarioDAO;
 
+/**
+ * Teste do Post
+ * @author stapait
+ */
 public class UsuarioTest {
 
 	private static ApplicationContext ctx;
 	private static UsuarioDAO dao;
 
+	//Usuario usado para teste
 	Usuario usuario1, usuario2;
 	
+	/*
+	 * Prepara acesso ao DAO
+	 */
 	@BeforeClass
 	public static void prepare() {
 		clearDatabase();
@@ -29,6 +37,9 @@ public class UsuarioTest {
 		dao = (UsuarioDAO) ctx.getBean("usuarioDAO");
 	}
 
+	/*
+	 * Metodo chamado ao final dos testes, limpa a tabela e zera a sequence 
+	 */
 	@AfterClass
 	public static void clearDatabase() {
 		EntityManager em = Persistence.createEntityManagerFactory("tpw").createEntityManager();
@@ -38,6 +49,9 @@ public class UsuarioTest {
 		em.close();
 	}
 	
+	/*
+	 * Metodo contendo os testes
+	 */
 	@Test
 	public void runTests() {
 		
@@ -53,6 +67,9 @@ public class UsuarioTest {
 		
 	}
 	
+	/*
+	 * Metodo que testa ao salvar no banco
+	 */
 	private void save() {		
 		usuario1 = (Usuario) ctx.getBean("usuario1");		
 		assertNotNull(usuario1);
@@ -80,6 +97,9 @@ public class UsuarioTest {
 		assertEquals(usuario1.getTipoUsuario(), usuario2.getTipoUsuario());				
 	}
 
+	/*
+	 * Metodo que testa modificacoes
+	 */
 	private void update() {
 	
 		// Altera os dados do usuário
@@ -102,6 +122,9 @@ public class UsuarioTest {
 		assertEquals("ADMINISTRADOR", usuario1.getTipoUsuario());
 	}
 	
+	/*
+	 * Metodo que testa exclusao
+	 */
 	private void delete() {
 	
 		// Remove o usuario

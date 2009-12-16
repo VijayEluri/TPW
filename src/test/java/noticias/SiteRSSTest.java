@@ -17,13 +17,21 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import daos.SiteRSSDAO;
 
+/**
+ * Teste do Post
+ * @author stapait
+ */
 public class SiteRSSTest {
 
 	private static ApplicationContext ctx;
 	private static SiteRSSDAO dao;
 
+	//RSS usado para teste
 	SiteRSS rss1, rss2;
 
+	/*
+	 * Prepara acesso ao DAO
+	 */
 	@BeforeClass
 	public static void prepare() {
 		clearDatabase();
@@ -31,6 +39,9 @@ public class SiteRSSTest {
 		dao = (SiteRSSDAO) ctx.getBean("siteRSSDAO");
 	}
 
+	/*
+	 * Metodo chamado ao final dos testes, limpa a tabela e zera a sequence 
+	 */
 	@AfterClass
 	public static void clearDatabase() {
 		EntityManager em = Persistence.createEntityManagerFactory("tpw")
@@ -41,6 +52,9 @@ public class SiteRSSTest {
 		em.close();
 	}
 
+	/*
+	 * Metodo contendo os testes
+	 */
 	@Test
 	public void runTests() {
 
@@ -55,6 +69,9 @@ public class SiteRSSTest {
 
 	}
 
+	/*
+	 * Metodo que testa ao salvar no banco
+	 */
 	private void save() {
 		rss1 = (SiteRSS) ctx.getBean("rss1");
 		assertNotNull(rss1);
@@ -81,6 +98,9 @@ public class SiteRSSTest {
 		assertEquals(2, sites.size());
 	}
 
+	/*
+	 * Metodo que testa modificacoes
+	 */
 	private void update() {
 	
 		// Altera os dados do rss
@@ -99,6 +119,9 @@ public class SiteRSSTest {
 		assertEquals("site alterado", rss1.getSite());
 	}
 
+	/*
+	 * Metodo que testa exclusao
+	 */
 	private void delete() {
 
 		// Remove o rss1

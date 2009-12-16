@@ -1,6 +1,7 @@
 package daos;
 
 import java.util.List;
+
 import beans.Post;
 
 /**
@@ -19,6 +20,14 @@ public class PostDAO {
 	 */
 	public List<Post> selectAll() {
 		return dao.listByNamedQuery("post.lastPosts", null);
+	}
+	
+	/**
+	 * Seleciona os ultimos post
+	 * @return Lista de Post
+	 */
+	public List<Post> selectLast() {
+		return dao.listByNamedQuery("post.last", null);
 	}
 	
 	/**

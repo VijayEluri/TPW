@@ -3,7 +3,6 @@ package daos;
 import java.util.List;
 
 import beans.Evento;
-import beans.Usuario;
 
 /**
  * DAO do Evento
@@ -23,6 +22,14 @@ public class EventoDAO {
 		return dao.listByNamedQuery("evento.all", null);
 	}
 
+	/**
+	 * Seleciona os ultimos eventos
+	 * @return Lista de Evento
+	 */
+	public List<Evento> selectLast() {
+		return dao.listByNamedQuery("evento.last", null);
+	}
+	
 	/**
 	 * Salva o evento
 	 * @param evento

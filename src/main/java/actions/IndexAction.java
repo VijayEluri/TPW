@@ -17,12 +17,16 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import beans.Evento;
 import beans.Minicurso;
+import beans.Post;
 import beans.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import daos.EventoDAO;
 import daos.MinicursoDAO;
+import daos.PostDAO;
 import daos.SiteRSSDAO;
 import daos.UsuarioDAO;
 
@@ -54,16 +58,22 @@ public class IndexAction extends ActionSupport {
 	 */
 	private UsuarioDAO usuarioDAO;
 	private MinicursoDAO minicursoDAO;
-
+	private EventoDAO eventoDAO;
+	private PostDAO postDAO;
+	
 	//Sessao
 	private HttpServletRequest request;
 	private HttpSession session;
 
-	/**
-	 * Lista de Minicursos
-	 */
+	//Lista de Minicursos
 	private List<Minicurso> minicursos;
 
+	// Lista de Eventos
+	private List<Evento> eventos;
+
+	// Lista de Posts
+	private List<Post> posts;
+	
 	// Número máximo de notícias a ser pego de cada RSS
 	private final int MAX_NOTICIAS = 5;
 
@@ -74,6 +84,8 @@ public class IndexAction extends ActionSupport {
 		ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"});
 		usuarioDAO = (UsuarioDAO) ctx.getBean("usuarioDAO");
 		minicursoDAO = (MinicursoDAO) ctx.getBean("minicursoDAO");
+		eventoDAO = (EventoDAO) ctx.getBean("eventoDAO");
+		postDAO = (PostDAO) ctx.getBean("postDAO");
 		usuario = usuario == null ? new Usuario() : usuario;
 	}
 
@@ -83,10 +95,19 @@ public class IndexAction extends ActionSupport {
 	 */
 	public String index() {		
 		fillRSS();
-		minicursos = minicursoDAO.selectLast();
+		
+		// Atualiza minicursos, eventos e blot
+		getDados();
+				
 		return "index";
 	}
 
+	private void getDados() {
+		minicursos = minicursoDAO.selectLast();
+		eventos = eventoDAO.selectLast();
+		posts = postDAO.selectLast();
+	}
+	
 	/*
 	 * Preenche a lista de Noticias com os dados dos RSS
 	 */
@@ -166,6 +187,10 @@ public class IndexAction extends ActionSupport {
 
 		//Preenche as noticias
 		fillRSS();
+		
+		// Atualiza minicursos, eventos e blot
+		getDados();
+		
 		return "index";
 	}
 
@@ -184,6 +209,10 @@ public class IndexAction extends ActionSupport {
 		
 		//Preenche as noticias
 		fillRSS();
+		
+		// Atualiza minicursos, eventos e blot
+		getDados();
+		
 		return "index";
 	}
 
@@ -231,6 +260,22 @@ public class IndexAction extends ActionSupport {
 
 	public void setMinicursos(List<Minicurso> minicursos) {
 		this.minicursos = minicursos;
+	}
+
+	public List<Evento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 }

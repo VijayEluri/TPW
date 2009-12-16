@@ -24,7 +24,7 @@
         <div class="demo">
 	    <div id="divtitulo">Notícias sobre software-livre</div>
             
-            <marquee behavior="scroll" direction="up" scrollamount="1" width="100%">					
+            <marquee behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 330px">					
 				<s:iterator value="noticias" >
 					<span class="newsTitle"><a href="${link}" target="blank">${titulo}</a><br /></span>
 					<span class="newsBody"><s:property value="noticia"/><br/><br></span>
@@ -35,14 +35,47 @@
     </div>
     
     <div id="minicursos" align="left">    	
-    	<center><h3>Minicursos recentes</h3></center>
+    	
+    	<center><h3>Próximos minicursos</h3></center>
     	
     	<s:iterator value="minicursos">
     		<span class="newsTitle">${nome} - <fmt:formatDate value="${data}" pattern="dd/MM/yyyy" type="date" /><br /></span>
    			${descricao} <br />
    			Vagas disponíveis: ${qtVagas - qtInscritos} <br /> <br />   	
     	</s:iterator>	
+    	
+    	<center><h3>Próximos eventos</h3></center>
+    	
+    	<s:iterator value="eventos">
+    		<span class="newsTitle">${nome} - <fmt:formatDate value="${data}" pattern="dd/MM/yyyy" type="date" /><br /></span>
+   			${descricao} <br />
+   			Vagas disponíveis: ${qtVagas - qtInscritos} <br /> <br />   	
+    	</s:iterator>
+    	
     </div>
+       
+    <div class="divTable" style="width: 900px">
+ 
+	<s:iterator value="posts" status="id">
+		<div class="postTitulo">
+			<span>${titulo}</span>
+						
+			<% if (session.getAttribute("tipoUsuario") != null && session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) { %>
+				<a href="${pageContext.request.contextPath}/jsp/post!editPost.action?post.id=${id}"><img id="edit" src="/tpw/images/edit.png" height="23px" /></a>
+				<a href="javascript:del('${id}');"><img id="trash" src="/tpw/images/trash.png" height="23px" /></a>				
+			<% } %>
+		</div>
+		<div>
+			<span class="postTexto">${texto}</span>
+		</div>
+		
+		<div class="postFooter">
+			Postado por: ${usuario.nome} - data: ${data}
+		</div>										
+	</s:iterator>
+
+</div>
+    
         
 </body>
 </html>

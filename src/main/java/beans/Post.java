@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 /**
@@ -23,7 +24,10 @@ import org.hibernate.annotations.NamedQuery;
  */
 @Entity
 @Table(name = "post")
-@NamedQuery(name="post.lastPosts", query="SELECT p FROM Post p ORDER BY p.id DESC")
+@NamedQueries({
+	@NamedQuery(name="post.lastPosts", query="SELECT p FROM Post p ORDER BY p.id DESC"),
+	@NamedQuery(name="post.last", query="SELECT p FROM Post p ORDER BY p.data DESC limit 3")
+})
 public class Post {
 	
 	/**

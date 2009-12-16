@@ -9,10 +9,20 @@
 <head>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-		
-			$('#menu1').css("background-color", "#4198f6");
+    	function showRSS() {
+    	    var div = $("#rssdiv");
+	        $.get(
+                    	    "${pageContext.request.contextPath}/jsp/index!fillRSS.action",
+                	        function (data,textStatus) {
+            	            div.html(data);
+        	                }
+    	         );
+		}
+
 	
+		$(document).ready(function() {
+			$('#menu1').css("background-color", "#4198f6");
+            showRSS();
 		});
 	</script>	
 
@@ -22,15 +32,12 @@
 
     <div id="doc" align="right">
         <div class="demo">
-	    <div id="divtitulo">Notícias sobre software-livre</div>
-            
-            <marquee behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 330px">					
-				<s:iterator value="noticias" >
-					<span class="newsTitle"><a href="${link}" target="blank">${titulo}</a><br /></span>
-					<span class="newsBody"><s:property value="noticia"/><br/><br></span>
-				</s:iterator>
-	    	</marquee>
-
+			<div id="divtitulo">Notícias sobre software-livre</div>
+			<marquee behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 330px">
+				<div id=rssdiv>
+			
+				</div>
+			</marquee>
         </div>
     </div>
     

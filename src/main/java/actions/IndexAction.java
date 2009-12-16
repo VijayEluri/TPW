@@ -93,9 +93,7 @@ public class IndexAction extends ActionSupport {
 	 * Metodo que preenche os dados do RSS, pega os ultimos posts, minicursos, etc
 	 * @return
 	 */
-	public String index() {		
-		fillRSS();
-		
+	public String index() {				
 		// Atualiza minicursos, eventos e blot
 		getDados();
 				
@@ -111,7 +109,7 @@ public class IndexAction extends ActionSupport {
 	/*
 	 * Preenche a lista de Noticias com os dados dos RSS
 	 */
-	private void fillRSS() {
+	public String fillRSS() {
 		SiteRSSDAO dao = (SiteRSSDAO) ctx.getBean("siteRSSDAO");
 		noticias = new ArrayList<Noticia>();
 
@@ -137,6 +135,7 @@ public class IndexAction extends ActionSupport {
 			}
 
 		}
+		return "showRSS";
 	}
 
 	/**
@@ -184,9 +183,6 @@ public class IndexAction extends ActionSupport {
 		}
 		
 		//Se tudo ocorreu normalmente, tera sido criado uma sessao
-
-		//Preenche as noticias
-		fillRSS();
 		
 		// Atualiza minicursos, eventos e blot
 		getDados();
@@ -206,9 +202,6 @@ public class IndexAction extends ActionSupport {
 		
 		//Invalida
 		session.invalidate();
-		
-		//Preenche as noticias
-		fillRSS();
 		
 		// Atualiza minicursos, eventos e blot
 		getDados();

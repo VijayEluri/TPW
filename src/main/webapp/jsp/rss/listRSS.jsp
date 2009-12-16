@@ -92,11 +92,12 @@
 				<s:textfield name="siteRSS.link" maxlength="255" cssStyle="width: 600px" />
 			</td>
 		</tr>
-
-		<td colspan="2">
-			<div style="margin-top: 20px; text-align: right" class="sepDivUp">
-				<s:submit id="btnSalvar" value="Salvar" /></div>
-		</td>
+		<tr>
+			<td colspan="2">
+				<div style="margin-top: 20px; text-align: right" class="sepDivUp">
+					<s:submit id="btnSalvar" value="Salvar" />
+				</div>
+			</td>
 		</tr>
 	</table>
 

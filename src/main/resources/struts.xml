@@ -9,6 +9,7 @@
 		
 		<action name="index!*" method="{1}" class="index">
 			<result name="index">/jsp/index.jsp</result>
+			<result name="showRSS">/jsp/rss/showRSS.jsp</result>
 		</action>
 		
 		<action name="usuario!*" method="{1}" class="usuario">

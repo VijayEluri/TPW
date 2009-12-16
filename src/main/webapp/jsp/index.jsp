@@ -41,25 +41,30 @@
         </div>
     </div>
     
-    <div id="minicursos" align="left">    	
-    	
+    <div id="minicursos" align="left" >    	 	
     	<center><h3>Próximos minicursos</h3></center>
-    	
+		<marquee behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 140px">    	
     	<s:iterator value="minicursos">
     		<span class="newsTitle">${nome} - <fmt:formatDate value="${data}" pattern="dd/MM/yyyy" type="date" /><br /></span>
    			${descricao} <br />
    			Vagas disponíveis: ${qtVagas - qtInscritos} <br /> <br />   	
-    	</s:iterator>	
-    	
+    	</s:iterator>
+    	</marquee>
+	</div>
+
+    <div id="eventos" align="left">    	    	
     	<center><h3>Próximos eventos</h3></center>
-    	
+		<marquee behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 140px">    	
     	<s:iterator value="eventos">
     		<span class="newsTitle">${nome} - <fmt:formatDate value="${data}" pattern="dd/MM/yyyy" type="date" /><br /></span>
    			${descricao} <br />
    			Vagas disponíveis: ${qtVagas - qtInscritos} <br /> <br />   	
     	</s:iterator>
-    	
+    	</marquee>
     </div>
+    	
+    	
+
        
     <div class="divTable" style="width: 900px">
  

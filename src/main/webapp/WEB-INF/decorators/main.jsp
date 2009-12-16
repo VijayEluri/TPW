@@ -29,6 +29,7 @@
 		$('.demo').corner();
 		$('#login').corner();
 		$('#minicursos').corner();
+		$('#eventos').corner();
 		
 		$(document).ready(function() {
 

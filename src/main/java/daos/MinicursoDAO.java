@@ -16,15 +16,15 @@ public class MinicursoDAO {
 		return dao.listByNamedQuery("minicurso.last", null);
 	}
 
-	public Minicurso save(Minicurso evento) {
-		if (evento.getId() != null)
-			return dao.merge(evento);
-		dao.persist(evento);
-		return evento;
+	public Minicurso save(Minicurso minicurso) {
+		if (minicurso.getId() != null)
+			return dao.merge(minicurso);
+		dao.persist(minicurso);
+		return minicurso;
 	}
 	
-	public void remove(Minicurso evento) {
-		dao.remove(evento);
+	public void remove(Minicurso minicurso) {
+		dao.remove(minicurso);
 	}
 	
 	public Minicurso selectById(Integer id) {

@@ -1,5 +1,8 @@
 package actions;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,6 +114,18 @@ public class UsuarioAction extends ActionSupport {
 			addActionError("Login já existente");
 			error = true;
 		}
+
+		//Faz a criptografia MD5 da senha do usuario
+		try {
+			MessageDigest md = MessageDigest.getInstance( "MD5" );
+			md.update( usuario.getPassword().getBytes() );  
+			BigInteger hash = new BigInteger( 1, md.digest() );  
+			usuario.setPassword(hash.toString( 16 ));
+		} catch (NoSuchAlgorithmException e) {
+			addActionError("Problemas com a senha. Tente novamente.");
+			error=true;
+			e.printStackTrace();
+		}  
 		
 		if (error)
 			return "insertError";
@@ -143,6 +158,18 @@ public class UsuarioAction extends ActionSupport {
 			error = true;
 		}
 
+		//Faz a criptografia MD5 da senha do usuario
+		try {
+			MessageDigest md = MessageDigest.getInstance( "MD5" );
+			md.update( usuario.getPassword().getBytes() );  
+			BigInteger hash = new BigInteger( 1, md.digest() );  
+			usuario.setPassword(hash.toString( 16 ));
+		} catch (NoSuchAlgorithmException e) {
+			addActionError("Problemas com a senha. Tente novamente.");
+			error=true;
+			e.printStackTrace();
+		}
+		
 		if (error)
 			return "updateError";
 		

@@ -53,7 +53,7 @@ public class MinicursoAction extends ActionSupport {
 	private String confirmacao;
 	
 	/**
-	 * Construtor: Inicializa o evento, dao e ctx
+	 * Construtor: Inicializa o minicurso, dao e ctx
 	 */
 	public MinicursoAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });

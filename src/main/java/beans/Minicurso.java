@@ -45,7 +45,7 @@ public class Minicurso {
 	private Integer id;
 
 	/**
-	 * Quantidade de Vagas totais para o evento
+	 * Quantidade de Vagas totais para o Minicurso
 	 */
 	@Column
 	private Integer qtVagas;
@@ -164,7 +164,7 @@ public class Minicurso {
 	}
 
 	/**
-	 * Incrementa o contador de inscritos no evento
+	 * Incrementa o contador de inscritos no minicurso
 	 */
 	public void addQtInscrito(){
 		if (qtInscritos==null)
@@ -173,7 +173,7 @@ public class Minicurso {
 	}
 	
 	/**
-	 * Decrementa o contador de inscritos no evento
+	 * Decrementa o contador de inscritos no minicurso
 	 */
 	public void delQtInscrito(){
 		if (qtInscritos==null)
@@ -183,9 +183,9 @@ public class Minicurso {
 	}
 	
 	/**
-	 * Método reponsável por verificar se o usuário está inscrito no evento
-	 * Usado no listEventos.jsp para mostrar as opcoes de se inscrever ou sair
-	 * @return Se o usuário logado (na sessão) está inscrito no evento
+	 * Método reponsável por verificar se o usuário está inscrito no minicurso
+	 * Usado no listMinicursos.jsp para mostrar as opcoes de se inscrever ou sair
+	 * @return Se o usuário logado (na sessão) está inscrito no minicurso
 	 */
 	public boolean getUsuarioInscrito(){
 		

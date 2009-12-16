@@ -41,6 +41,9 @@ public class MinicursoAction extends ActionSupport {
 	 */
 	private List<Minicurso> minicursos;
 
+	// Lista de inscritos no minicurso
+	private List<Usuario> inscritos;
+
 	private String strData;
 	
 	//Dao para conexao com o banco
@@ -239,6 +242,18 @@ public class MinicursoAction extends ActionSupport {
 
 		return "listMinicursos";
 	}
+
+	/**
+	 * Mostra a página de detalhes do minicurso 
+	 */
+	public String details() {
+		minicurso = dao.selectById(minicurso.getId());
+		
+		for (Usuario u : minicurso.getUsuarios())
+			inscritos.add(u);
+		
+		return "detailsMinicurso";
+	}
 	
 	/*
 	 * =================================
@@ -283,5 +298,13 @@ public class MinicursoAction extends ActionSupport {
 		}
 		
 	}
-	
+
+	public List<Usuario> getInscritos() {
+		return inscritos;
+	}
+
+	public void setInscritos(List<Usuario> inscritos) {
+		this.inscritos = inscritos;
+	}
+
 }

@@ -84,7 +84,10 @@
 	<display:table list="${minicursos}" class="defaultTable" pagesize="100" cellspacing="0" cellpadding="0"
 	sort="list" id="minicurso" requestURI="${pageContext.request.contextPath}/jsp/minicurso!listMinicursos.action">
 	 
-	<display:column title="Nome" property="nome" style="width: 100px" />
+	<display:column title="Nome">
+		<a href="${pageContext.request.contextPath}/jsp/minicurso!minicurso!details.action?minicurso.id=${minicurso.id}">${minicurso.nome}</a>
+	</display:column>
+
 	<display:column title="Descricao" property="descricao" style="width: 200px" />
 	<display:column title="Data" property="data" style="width: 100px" />
 	<display:column title="Responsavel" property="responsavel" style="width: 100px"/>

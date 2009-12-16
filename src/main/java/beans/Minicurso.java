@@ -35,8 +35,8 @@ import daos.UsuarioDAO;
 @Entity
 @Table(name = "minicurso")
 @NamedQueries({
-@NamedQuery(name="minicurso.last", query="SELECT m FROM Minicurso m ORDER BY m.data DESC limit 3"),
-@NamedQuery(name="minicurso.all", query="SELECT m FROM Minicurso m ORDER BY m.data DESC")
+	@NamedQuery(name="minicurso.last", query="SELECT m FROM Minicurso m ORDER BY m.data DESC limit 3"),
+	@NamedQuery(name="minicurso.all", query="SELECT m FROM Minicurso m ORDER BY m.data DESC")
 })
 public class Minicurso {
 

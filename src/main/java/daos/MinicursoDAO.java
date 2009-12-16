@@ -29,7 +29,7 @@ public class MinicursoDAO {
 	public List<Minicurso> selectLast() {
 		return dao.listByNamedQuery("minicurso.last", null);
 	}
-
+		
 	/**
 	 * Salva o minicurso
 	 * @param minicurso

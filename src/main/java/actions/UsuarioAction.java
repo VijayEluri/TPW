@@ -49,7 +49,7 @@ public class UsuarioAction extends ActionSupport {
 	private String confirmacao;
 	
 	/**
-	 * Construtor: Inicializa o evento, dao e ctx
+	 * Construtor: Inicializa o usuario, dao e ctx
 	 */
 	public UsuarioAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });

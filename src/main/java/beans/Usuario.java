@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author vendra
+ * @author stapait
  * Classe responsável pelo cadastro de Usuarios
  *
  */

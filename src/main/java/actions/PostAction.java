@@ -16,19 +16,40 @@ import com.opensymphony.xwork2.ActionSupport;
 import daos.PostDAO;
 import daos.UsuarioDAO;
 
+/**
+ * Classe responsável por cuidar das acoes dos Posts (Blog).
+ * Geralmente chamadas pelo struts. 
+ * @author tjcampos
+ *
+ */
 public class PostAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Post da acao
+	 */
 	private Post post;
+	
+	/**
+	 * Lista de posts
+	 */
 	private List<Post> posts;
+	
+	//Spring
 	ClassPathXmlApplicationContext ctx;
+	
+	//Daos
 	private PostDAO postDao;
 	private UsuarioDAO usuarioDao;
 	
+	//Sessao
 	private HttpServletRequest request;
 	private HttpSession session;
 	
+	/**
+	 * Construtor: Inicializa o post, dao e ctx
+	 */
 	public PostAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		postDao = (PostDAO) ctx.getBean("postDAO");
@@ -36,15 +57,24 @@ public class PostAction extends ActionSupport {
 		post = post == null ? new Post() : post;
 	}
 	
+	/**
+	 * Prepara a lista de posts com os posts do banco
+	 * @return "listPosts" para o struts
+	 */
 	public String listPosts() {
 		posts = postDao.selectAll();
 		return "listPosts";
 	}
 	
+	/**
+	 * Insere um post no banco
+	 * @return "listPosts" para o struts
+	 */
 	public String insertPost() {
 		Usuario usuario = null;
 		boolean error = false;
 
+		//Sessao
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 		
@@ -71,6 +101,7 @@ public class PostAction extends ActionSupport {
 		
 		if (error) return "insertError";
 
+		//Seta o usuario que postou o Blog
 		post.setUsuario(usuario);
 		
 		postDao.save(post);

@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Interface para o DAO
+ * @author stapait
+ *
+ * @param <PersistentObject>
+ * @param <IDType>
+ */
 public interface DAO <PersistentObject, IDType extends Serializable> {
 
 	public PersistentObject merge(PersistentObject obj);

@@ -58,6 +58,8 @@
 
         <div id="header" class="clearfix">
 			
+			<div><img src="/tpw/images/logo.png" id="imagem"></img> </div>
+			
 			<div align="right" style="padding-top: 10px; padding-right: 10px;">
 
 				<% if (session.getAttribute("login") == null) { %>

@@ -2,6 +2,7 @@ package actions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +41,11 @@ public class EventoAction extends ActionSupport {
 	 * Lista de eventos
 	 */
 	private List<Evento> eventos;
+	
+	/**
+	 *  Lista de inscritos no evento
+	 */
+	private List<Usuario> inscritos;
 	
 	//Dao para conexao com o banco
 	private EventoDAO dao;
@@ -242,6 +248,19 @@ public class EventoAction extends ActionSupport {
 		return "listEventos";
 	}
 
+	/**
+	 * Mostra a página de detalhes do evento 
+	 */
+	public String details() {
+		evento = dao.selectById(evento.getId());
+		inscritos = new ArrayList<Usuario>();
+		
+		for (Usuario u : evento.getUsuarios())
+			inscritos.add(u);
+		
+		return "detailsEvento";
+	}
+	
 	/*
 	 * ===============================
 	 * Setters e Getters
@@ -284,4 +303,12 @@ public class EventoAction extends ActionSupport {
 			e.printStackTrace();
 		}
 	}	
+	
+	public List<Usuario> getInscritos() {
+		return inscritos;
+	}
+
+	public void setInscritos(List<Usuario> inscritos) {
+		this.inscritos = inscritos;
+	}
 }

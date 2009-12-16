@@ -4,10 +4,20 @@ import java.util.List;
 
 import noticias.SiteRSS;
 
+/**
+ * Dao do SiteRSS (Acesso aos links com RSS)
+ * @author vendra
+ *
+ */
 public class SiteRSSDAO {
 
+	//dao
 	private DAO<SiteRSS, String> dao;
 
+	/**
+	 * Seleciona todos os LinksRSS
+	 * @return Lista de SiteRSS
+	 */
 	public List<SiteRSS> selectAll() {
 		return dao.list();
 	}

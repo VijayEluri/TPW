@@ -104,24 +104,36 @@ public class PostAction extends ActionSupport {
 		//Seta o usuario que postou o Blog
 		post.setUsuario(usuario);
 		
+		//Salva no banco
 		postDao.save(post);
 		posts = postDao.selectAll();
 		
 		return "listPosts";
 	}
 	
+	/**
+	 * Recebe Post do banco
+	 * Redireciona para a página de edição do post
+	 * @return "editMinicurso" para o struts
+	 */
 	public String editPost(){
 		post = postDao.selectById(post.getId());
 		return "editPost";
 	}
 	
+	/**
+	 * Altera os dados do post
+	 * @return "listPosts" para o struts
+	 */
 	public String updatePost() {
 		Usuario usuario = null;
 		boolean error = false;
 
+		//Sessao
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 
+		//Recebe os dados do usuario logado
 		String login = (String) session.getAttribute("login");
 
 		if (login == null) {
@@ -144,20 +156,29 @@ public class PostAction extends ActionSupport {
 		
 		if (error) return "updateError";
 
+		//Seta o usuario que fez o post
 		post.setUsuario(usuario);
+		
+		//Salva os dados no banco
 		postDao.save(post);
 		posts = postDao.selectAll();
 		
 		return "listPosts";
 	}
 	
+	/**
+	 * Remove os dados do post
+	 * @return "listPosts" para o struts
+	 */
 	public String deletePost() {
 		
 		boolean error = false;
 
+		//Sessao
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 
+		//Recebe os dados do usuario logado
 		String login = (String) session.getAttribute("login");
 
 		if (login == null) {
@@ -181,11 +202,17 @@ public class PostAction extends ActionSupport {
 		
 		if (error) return "deleteError";
 		
+		//Executa a remocao no banco
 		postDao.remove(post);
 		posts = postDao.selectAll();
 		return "listPosts";
 	}
 
+	/*
+	 * =================
+	 * Setters e Getters
+	 * =================
+	 */
 	public Post getPost() {
 		return post;
 	}

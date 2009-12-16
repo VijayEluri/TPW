@@ -75,7 +75,7 @@
 	<display:table list="${inscritos}" class="defaultTable" pagesize="100" cellspacing="0" cellpadding="0"
 	sort="list" id="inscrito" requestURI="${pageContext.request.contextPath}/jsp/minicurso!listInscritos.action">
 	 		
-		<display:column title="Nome" property="usuario" style="width: 300px" />
+		<display:column title="Nome" property="nome" style="width: 300px" />
 		<display:column title="Login" property="login" style="width: 300px" />
 		<display:column title="Email" property="email" style="width: 400px" />
 	

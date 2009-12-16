@@ -4,7 +4,7 @@ import java.util.List;
 import beans.Post;
 
 /**
- * 
+ * Dao do POST
  * @author tjcampos
  *
  */

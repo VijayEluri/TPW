@@ -15,13 +15,22 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import daos.MinicursoDAO;
 
+/**
+ * Teste do minicurso
+ * @author vendra
+ *
+ */
 public class MinicursoTest {
 
 	private static ApplicationContext ctx;
 	private static MinicursoDAO dao;
 
+	//Minicursos para teste
 	Minicurso minicurso1, minicurso2;
 	
+	/*
+	 * Prepara acesso ao DAO
+	 */
 	@BeforeClass
 	public static void prepare() {
 		clearDatabase();
@@ -29,6 +38,9 @@ public class MinicursoTest {
 		dao = (MinicursoDAO) ctx.getBean("minicursoDAO");
 	}
 
+	/*
+	 * Metodo chamado ao final dos testes, limpa a tabela e zera a sequence 
+	 */
 	@AfterClass
 	public static void clearDatabase() {
 		EntityManager em = Persistence.createEntityManagerFactory("tpw").createEntityManager();
@@ -39,6 +51,9 @@ public class MinicursoTest {
 		em.close();
 	}
 	
+	/*
+	 * Metodo contendo os testes
+	 */
 	@Test
 	public void runTests() {
 		
@@ -54,6 +69,9 @@ public class MinicursoTest {
 		
 	}
 	
+	/*
+	 * Metodo que testa ao salvar no banco
+	 */
 	private void save() {		
 		minicurso1 = (Minicurso) ctx.getBean("minicurso1");		
 		assertNotNull(minicurso1);
@@ -81,6 +99,9 @@ public class MinicursoTest {
 		assertEquals(minicurso1.getResponsavel(), minicurso2.getResponsavel());				
 	}
 
+	/*
+	 * Metodo que testa modificacoes
+	 */
 	private void update() {
 	
 		// Altera os dados
@@ -101,6 +122,9 @@ public class MinicursoTest {
 		assertEquals("responsavel alterado", minicurso1.getResponsavel());
 	}
 	
+	/*
+	 * Metodo que testa exclusao
+	 */
 	private void delete() {
 	
 		// Remove o usuario

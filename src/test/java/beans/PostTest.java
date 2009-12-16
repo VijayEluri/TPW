@@ -16,11 +16,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import daos.PostDAO;
 import daos.UsuarioDAO;
 
+/**
+ * Teste do Post
+ * @author tjcampos
+ */
 public class PostTest {
 	private static ApplicationContext ctx;
 	private static PostDAO daoPost;
 	private static UsuarioDAO daoUsuario;
 	
+	/*
+	 * Prepara acesso ao DAO
+	 */
 	@BeforeClass
 	public static void prepare() {
 		clearDatabase();
@@ -29,6 +36,9 @@ public class PostTest {
 		daoUsuario = (UsuarioDAO) ctx.getBean("usuarioDAO");
 	}
 
+	/*
+	 * Metodo chamado ao final dos testes, limpa a tabela e zera a sequence 
+	 */
 	@AfterClass
 	public static void clearDatabase() {
 		EntityManager em = Persistence.createEntityManagerFactory("tpw").createEntityManager();
@@ -43,6 +53,9 @@ public class PostTest {
 	private Post post1, post2;
 	private Usuario usuario;
 	
+	/*
+	 * Metodo contendo os testes
+	 */
 	@Test
 	public void runTests() {		
 		// Testa o save
@@ -55,6 +68,9 @@ public class PostTest {
 		delete();
 	}
 	
+	/*
+	 * Metodo que testa ao salvar no banco
+	 */
 	private void save() {		
 		post1 = (Post) ctx.getBean("post1");
 		assertNotNull(post1);
@@ -107,6 +123,9 @@ public class PostTest {
 		assertEquals("Texto de exemplo2", post2.getTexto());
 	}
 
+	/*
+	 * Metodo que testa modificacoes
+	 */
 	private void update() {
 		post1.setTitulo("Novo Titulo");
 		post1.setTexto("Novo texto de teste");
@@ -123,6 +142,9 @@ public class PostTest {
 		assertEquals("Novo texto de teste", post1.getTexto());
 	}
 	
+	/*
+	 * Metodo que testa exclusao
+	 */
 	private void delete() {
 		post1 = daoPost.selectById(1);
 		assertNotNull(post1);

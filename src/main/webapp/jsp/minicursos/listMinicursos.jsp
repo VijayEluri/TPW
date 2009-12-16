@@ -84,15 +84,17 @@
 	<display:table list="${minicursos}" class="defaultTable" pagesize="100" cellspacing="0" cellpadding="0"
 	sort="list" id="minicurso" requestURI="${pageContext.request.contextPath}/jsp/minicurso!listMinicursos.action">
 	 
-	<display:column title="Nome">
-		<a href="${pageContext.request.contextPath}/jsp/minicurso!minicurso!details.action?minicurso.id=${minicurso.id}">${minicurso.nome}</a>
-	</display:column>
-
+		<% if ((session.getAttribute("login") != null) && (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR"))) {	%>
+			<display:column title="Relatório" style="width: 50px">
+				<a href="${pageContext.request.contextPath}/jsp/minicurso!details.action?minicurso.id=${minicurso.id}"><img id='btnRelatorio' src='/tpw/images/relatorio.png' border=0/></a>
+			</display:column>
+		<% } %>
+	<display:column title="Nome" property="nome" style="width: 100px" />	
 	<display:column title="Descricao" property="descricao" style="width: 200px" />
 	<display:column title="Data" property="data" style="width: 100px" />
 	<display:column title="Responsavel" property="responsavel" style="width: 100px"/>
-	<display:column title="Vagas Totais" property="qtVagas" style="width: 100px" />
-	<display:column title="Qtd Inscritos" property="qtInscritos" style="width: 100px"/>
+	<display:column title="Vagas Totais" property="qtVagas" style="width: 30px" />
+	<display:column title="Qtd Inscritos" property="qtInscritos" style="width: 30px"/>
 	
 	 	<% if ((session.getAttribute("login") != null)) { %>
 			<% if (session.getAttribute("tipoUsuario").equals("ADMINISTRADOR")) {	%>

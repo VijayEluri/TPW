@@ -34,6 +34,7 @@
 			<result name="editEvento">/jsp/eventos/editEvento.jsp</result>
 			<result name="updateError">/jsp/eventos/editEvento.jsp</result>
 			<result name="listError">/jsp/eventos/listEventos.jsp</result>
+			<result name="detailsEvento">/jsp/eventos/detailsEvento.jsp</result>
 		</action>
 		
 		<action name="minicurso!*" method="{1}" class="minicurso">

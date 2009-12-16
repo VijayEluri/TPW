@@ -42,7 +42,9 @@ public class MinicursoAction extends ActionSupport {
 	 */
 	private List<Minicurso> minicursos;
 
-	// Lista de inscritos no minicurso
+	/**
+	 *  Lista de inscritos no minicurso
+	 */
 	private List<Usuario> inscritos;
 
 	private String strData;

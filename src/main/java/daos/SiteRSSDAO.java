@@ -22,10 +22,19 @@ public class SiteRSSDAO {
 		return dao.list();
 	}
 
+	/**
+	 * Remove um Link
+	 * @param site
+	 */
 	public void remove(SiteRSS site) {
 		dao.remove(site);
 	}
 
+	/**
+	 * Salva um Link
+	 * @param site
+	 * @return SiteRSS
+	 */
 	public SiteRSS save(SiteRSS site) {
 		if (site.getLink() != null)
 			return dao.merge(site);
@@ -33,14 +42,27 @@ public class SiteRSSDAO {
 		return site;
 	}
 
+	/**
+	 * Seleciona o Link pelo Link
+	 * @param link
+	 * @return SiteRSS
+	 */
 	public SiteRSS selectByLink(String link) {
 		return dao.find(link);
 	}
 
+	/**
+	 * Pega o dao
+	 * @return DAO
+	 */
 	public DAO<SiteRSS, String> getDao() {
 		return dao;
 	}
 
+	/**
+	 * Seta o dao
+	 * @param dao
+	 */
 	public void setDao(DAO<SiteRSS, String> dao) {
 		this.dao = dao;
 	}	

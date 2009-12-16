@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -33,7 +34,10 @@ import daos.UsuarioDAO;
  */
 @Entity
 @Table(name = "minicurso")
-@NamedQuery(name="minicurso.last", query="SELECT m FROM Minicurso m ORDER BY m.data DESC limit 3")
+@NamedQueries({
+@NamedQuery(name="minicurso.last", query="SELECT m FROM Minicurso m ORDER BY m.data DESC limit 3"),
+@NamedQuery(name="minicurso.all", query="SELECT m FROM Minicurso m ORDER BY m.data DESC")
+})
 public class Minicurso {
 
 	/**

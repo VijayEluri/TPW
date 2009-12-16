@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.annotations.NamedQuery;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -31,7 +32,8 @@ import daos.UsuarioDAO;
  *
  */
 @Entity
-@Table(name = "evento")   
+@Table(name = "evento")
+@NamedQuery(name="evento.all", query="SELECT e FROM Evento e ORDER BY e.data DESC")
 public class Evento {
 	
 	/**

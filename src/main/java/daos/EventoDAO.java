@@ -10,7 +10,7 @@ public class EventoDAO {
 	private DAO<Evento, Integer> dao;
 
 	public List<Evento> selectAll() {
-		return dao.list();
+		return dao.listByNamedQuery("evento.all", null);
 	}
 
 	public Evento save(Evento evento) {

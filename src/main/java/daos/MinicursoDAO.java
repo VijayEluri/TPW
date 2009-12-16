@@ -9,7 +9,7 @@ public class MinicursoDAO {
 	private DAO<Minicurso, Integer> dao;
 
 	public List<Minicurso> selectAll() {
-		return dao.list();
+		return dao.listByNamedQuery("minicurso.all", null);
 	}
 
 	public List<Minicurso> selectLast() {

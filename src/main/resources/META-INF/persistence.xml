@@ -10,6 +10,7 @@
 		<class>beans.Minicurso</class>
 		<class>beans.Evento</class>     	    	
     	<class>beans.Usuario</class>
+    	<class>beans.Post</class>
     	<class>noticias.SiteRSS</class>
 
 		<properties>

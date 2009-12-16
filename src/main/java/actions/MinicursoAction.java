@@ -2,6 +2,7 @@ package actions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -248,6 +249,7 @@ public class MinicursoAction extends ActionSupport {
 	 */
 	public String details() {
 		minicurso = dao.selectById(minicurso.getId());
+		inscritos = new ArrayList<Usuario>();
 		
 		for (Usuario u : minicurso.getUsuarios())
 			inscritos.add(u);

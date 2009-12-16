@@ -112,7 +112,7 @@ public class EventoAction extends ActionSupport {
 	 * @return "enterEvento" para o struts
 	 */
 	public String enterEvento(){
-		if (!Seguranca.checkAdministrador(this)) return "listError";
+		if (!Seguranca.checkUsuario(this)) return "listError";
 		
 		//Certifica-se que todos os dados do evento foram carregados do banco
 		evento = dao.selectById(evento.getId());

@@ -13,7 +13,7 @@ create table usuario (
 	primary key(login)
 );
 
-INSERT INTO usuario VALUES ('admin','admin','administrador',NULL,'ADMINISTRADOR');
+INSERT INTO usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','administrador',NULL,'ADMINISTRADOR');
 
 create table post (
 	id int,

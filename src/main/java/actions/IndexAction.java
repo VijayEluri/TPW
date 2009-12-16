@@ -1,5 +1,8 @@
 package actions;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,25 +34,25 @@ public class IndexAction extends ActionSupport {
 	private ApplicationContext ctx; 
 
 	private Usuario usuario;
-	
+
 	private UsuarioDAO usuarioDAO;
 	private MinicursoDAO minicursoDAO;
-	
+
 	private HttpServletRequest request;
 	private HttpSession session;
 
 	private List<Minicurso> minicursos;
-	
+
 	// Número máximo de notícias a ser pego de cada RSS
 	private final int MAX_NOTICIAS = 5;
-	
+
 	public IndexAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"});
 		usuarioDAO = (UsuarioDAO) ctx.getBean("usuarioDAO");
 		minicursoDAO = (MinicursoDAO) ctx.getBean("minicursoDAO");
 		usuario = usuario == null ? new Usuario() : usuario;
 	}
-		
+
 	public String index() {		
 		fillRSS();
 		minicursos = minicursoDAO.selectLast();
@@ -59,45 +62,64 @@ public class IndexAction extends ActionSupport {
 	private void fillRSS() {
 		SiteRSSDAO dao = (SiteRSSDAO) ctx.getBean("siteRSSDAO");
 		noticias = new ArrayList<Noticia>();
-		
+
 		// Pega todos os links de notícias cadastrados no banco
 		List<SiteRSS> sites = dao.selectAll(); 
 
 		for (SiteRSS site : sites) {
-		
+
 			RoboNoticias robo = new RoboNoticias(site.getLink());
 			noticiasAux = robo.getNoticias();
-			
+
 			int total = 0;
 			for (Noticia noticia : noticiasAux) {
 				noticias.add(noticia);
-				
+
 				// Se já pegou o número máximo de notícias pega o próximo feed
 				if (total++ >= MAX_NOTICIAS-1)
 					break;
 			}
-							
+
 		}
 	}
-	
+
 	public String login() {
 		// Busca no banco para ver se login e senha são válidos
 		Usuario u = usuarioDAO.selectByLogin(usuario.getLogin());
 
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
-		
-		if (u != null && u.getPassword().equals(usuario.getPassword())) {			
-			// Grava os dados na sessão
-			session.setAttribute("login", u.getLogin());
-			session.setAttribute("password", u.getPassword());
-			session.setAttribute("nome", u.getNome());
-			session.setAttribute("tipoUsuario", u.getTipoUsuario());
-			session.setAttribute("status", "logado");			
-		}
-		else 
+
+		if (u != null){
+
+			String hashedPassword="";
+			//Faz a criptografia MD5 da senha do usuario
+			try {
+				MessageDigest md = MessageDigest.getInstance( "MD5" );
+				md.update( usuario.getPassword().getBytes() );  
+				BigInteger hash = new BigInteger( 1, md.digest() );  
+				hashedPassword = (hash.toString( 16 ));
+			} catch (NoSuchAlgorithmException e) {
+				addActionError("Problemas com a senha. Tente novamente.");
+				e.printStackTrace();
+			}
+
+			if (u.getPassword().equals(hashedPassword)) {			
+				//Grava os dados na sessão
+				session.setAttribute("login", u.getLogin());
+				session.setAttribute("password", u.getPassword());
+				session.setAttribute("nome", u.getNome());
+				session.setAttribute("tipoUsuario", u.getTipoUsuario());
+				session.setAttribute("status", "logado");
+			}
+			else { 
+				addActionError("Usuario e Senha nao conferem!!!");
+				session.invalidate();
+			}
+		} else {
+			addActionError("Usuario e Senha nao conferem!!!");
 			session.invalidate();
-		
+		}
 		fillRSS();
 		return "index";
 	}
@@ -110,7 +132,7 @@ public class IndexAction extends ActionSupport {
 		return "index";
 	}
 
-	
+
 	public List<Noticia> getNoticias() {
 		return noticias;
 	}
@@ -150,5 +172,5 @@ public class IndexAction extends ActionSupport {
 	public void setMinicursos(List<Minicurso> minicursos) {
 		this.minicursos = minicursos;
 	}
-	
+
 }

@@ -14,28 +14,55 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author vendra
+ * Classe responsável pelo cadastro de Usuarios
+ *
+ */
 @Entity
 @Table(name = "usuario")
 public class Usuario {
 	
+	/**
+	 * id do usuario
+	 */
 	@Id
 	private String login;
 
+	/**
+	 * senha do usuario
+	 */
 	@Column(nullable = false)
 	private String password;
 
+	/**
+	 * nome do usuario
+	 */
 	@Column(nullable = false)
 	private String nome;
 
+	/**
+	 * email do usuario
+	 */
 	private String email;
 
+	/**
+	 * tipo do usuario
+	 */
 	@Column(nullable = false, name="tipo")
 	@Enumerated(value=EnumType.STRING)
 	private String tipoUsuario;
 	
+	/**
+	 * Blogs postados pelo usuario
+	 */
 	@OneToMany (mappedBy="usuario", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Post> posts;
 
+	/**
+	 * Eventos que o usuario esta inscrito
+	 */
 	@ManyToMany(
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 		    mappedBy = "usuarios",
@@ -43,6 +70,9 @@ public class Usuario {
 	)	
 	private Set<Evento> eventos;
 
+	/**
+	 * Minicursos que o usuario esta inscrito
+	 */
 	@ManyToMany(
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 		    mappedBy = "usuarios",
@@ -50,6 +80,11 @@ public class Usuario {
 	)
 	private Set<Minicurso> minicursos;
 	
+	/*
+	 * ============================
+	 * Setters e Getters
+	 * ============================
+	 */
 	public Set<Minicurso> getMinicursos(){
 		return minicursos;
 	}
@@ -130,6 +165,4 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	
-	
 }

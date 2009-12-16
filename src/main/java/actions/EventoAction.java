@@ -21,38 +21,60 @@ import com.opensymphony.xwork2.ActionSupport;
 import daos.EventoDAO;
 import daos.UsuarioDAO;
 
+/**
+ * Classe responsável por cuidar das acoes do Evento.
+ * Geralmente chamadas pelo struts. 
+ * @author vendra
+ *
+ */
 public class EventoAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Evento relacionado a esta Action
+	 */
 	private Evento evento;
-	private List<Evento> eventos;
-
-	private String strData;
 	
+	/**
+	 * Lista de eventos
+	 */
+	private List<Evento> eventos;
+	
+	//Dao para conexao com o banco
 	private EventoDAO dao;
 
+	//Spring
 	private ApplicationContext ctx;
 
 	// Confirmação da password
 	private String confirmacao;
 	
+	/**
+	 * Construtor: Inicializa o evento, dao e ctx
+	 */
 	public EventoAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		dao = (EventoDAO) ctx.getBean("eventoDAO");
 		evento = evento == null ? new Evento() : evento;		
 	}
 
-	// Retorna a string "listEventos" que será lida pelo Struts. O Struts abre
-	// o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
-	// a listEventos) e redireciona para a página listEventos.jsp
+	/** 
+	 * Retorna a string "listEventos" que será lida pelo Struts. O Struts abre
+	 * o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
+	 * a listEventos) e redireciona para a página listEventos.jsp
+	 * @return "listEventos" para o struts
+	*/
 	public String listEventos() {
 		eventos = dao.selectAll();
 		return "listEventos";
 	}
 
-	// Insere o evento no banco de dados. Esse método é chamado pelo form
-	// da página insertEvento.jsp
+	/**
+	 *  Insere o evento no banco de dados. Esse método é chamado pelo form
+	 *  da página insertEvento.jsp
+	 *  @return "listEventos" para o struts
+	 */
 	public String insertEvento() {		
 		boolean error = false;
 		
@@ -79,30 +101,50 @@ public class EventoAction extends ActionSupport {
 		return "listEventos";
 	}
 
-	// Redireciona para a página de edição do usuário
+	/**
+	 * Recebe evento do banco
+	 *  Redireciona para a página de edição do usuário
+	 *  @return "editEvento" para o struts
+	 */
 	public String editEvento() {
 		evento = dao.selectById(evento.getId());
 		return "editEvento";
 	}
 	
+	/**
+	 * Insere o usuário logado na secao na lista de usuários inscritos no evento
+	 * @return "enterEvento" para o struts
+	 */
 	public String enterEvento(){
+		
+		//Certifica-se que todos os dados do evento foram carregados do banco
 		evento = dao.selectById(evento.getId());
+		
+		//Usuario - Sera preenchido com os dados do usuario logado
 		Usuario u = new Usuario();
+		
+		//Recebe o usuario que está logado (na sessao)
 		HttpServletRequest request;
 		HttpSession session;
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Le os dados do usuario logado no banco
 		ApplicationContext ctxUsuario;
 		UsuarioDAO daoUsuario;
 		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
 		u=daoUsuario.selectByLogin(tmpLogin);
+		
+		//Adiciona o usuario na lista de usuarios inscritos
 		if (u!=null){
 			if (evento.getUsuarios()==null)
 				evento.setUsuario(new HashSet<Usuario>());
 			evento.getUsuarios().add(u);
 		}
+		
+		//Incrementa o numero de inscritos neste evento
 		if (evento.getQtInscritos()==null) evento.setQtInscritos(new Integer(0));
 		if (evento.getQtVagas()==null) evento.setQtVagas(new Integer(0));
 		if (evento.getQtInscritos()<evento.getQtVagas())
@@ -112,40 +154,65 @@ public class EventoAction extends ActionSupport {
 			listEventos();
 			return "listError";
 		}
+		
+		//Salva a transacao
 		dao.save(evento);
 		
+		//Atualiza lista de eventos, para que a pagina de retorno mostre todos os eventos
 		listEventos();
 		
 		return "enterEvento";
 	}
 	
+	/**
+	 * Remove o usuário logado na secao na lista de usuários inscritos no evento
+	 * @return "enterEvento" para o struts
+	 */
 	public String exitEvento(){
+		
+		//Certifica-se que os dados do evento estao carregados do banco
 		evento = dao.selectById(evento.getId());
+		
+		//Usuario
 		Usuario u = new Usuario();
+		
+		//Pega o usuario logado (na sessao)
 		HttpServletRequest request;
 		HttpSession session;
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Recebe os dados do usuario logado do banco
 		ApplicationContext ctxUsuario;
 		UsuarioDAO daoUsuario;
 		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
 		u=daoUsuario.selectByLogin(tmpLogin);
+		
+		//Remove usuario logado da lista de usuarios inscritos no evento
 		if (u!=null){
 			if (evento.getUsuarios()!=null){
 				evento.getUsuarios().remove(u);
 			}
 		}
+		
+		//Diminui contador de usuarios inscritos no evento
 		evento.delQtInscrito();
+		
+		//Salva a transacao
 		dao.save(evento);
 		
+		//Atualiza lista de eventos para que sejam mostrados todos na pagina de retorno
 		listEventos();
 		
 		return "enterEvento";
 	}
 	
-	// Altera os dados do usuário
+	/**
+	 * Atualiza dados do Evento
+	 * @return "listEventos" para o struts
+	 */
 	public String updateEvento() {
 		boolean error = false;
 		
@@ -164,14 +231,22 @@ public class EventoAction extends ActionSupport {
 		return "listEventos";
 	}
 	
-	// Exclui o usuário
+	/**
+	 * Remove o evento do banco
+	 * @return "listEventos" para o struts
+	 */
 	public String deleteEvento() {
 		dao.remove(evento);
 		eventos = dao.selectAll();
 
 		return "listEventos";
 	}
-	
+
+	/*
+	 * ===============================
+	 * Setters e Getters
+	 * ===============================
+	 */
 	public Evento getEvento() {
 		return evento;
 	}

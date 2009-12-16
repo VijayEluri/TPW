@@ -21,38 +21,62 @@ import com.opensymphony.xwork2.ActionSupport;
 import daos.MinicursoDAO;
 import daos.UsuarioDAO;
 
+/**
+ * Classe responsável por cuidar das acoes do Minicurso.
+ * Geralmente chamadas pelo struts. 
+ * @author vendra
+ *
+ */
 public class MinicursoAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Minicurso associado a esta acao
+	 */
 	private Minicurso minicurso;
+	
+	/**
+	 * Lista de minicursos
+	 */
 	private List<Minicurso> minicursos;
 
 	private String strData;
 	
+	//Dao para conexao com o banco
 	private MinicursoDAO dao;
 
+	//Spring
 	private ApplicationContext ctx;
 
 	// Confirmação da password
 	private String confirmacao;
 	
+	/**
+	 * Construtor: Inicializa o minicurso, dao e ctx
+	 */
 	public MinicursoAction() {
 		ctx = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		dao = (MinicursoDAO) ctx.getBean("minicursoDAO");
 		minicurso = minicurso == null ? new Minicurso() : minicurso;		
 	}
 
-	// Retorna a string "listMinicursos" que será lida pelo Struts. O Struts abre
-	// o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
-	// a listMinicursos) e redireciona para a página listMinicursos.jsp
+	/**
+	 *  Retorna a string "listMinicursos" que será lida pelo Struts. O Struts abre
+	 * o arquivo struts.xml e vê qual é o result que está sendo enviado (no caso
+	 * a listMinicursos) e redireciona para a página listMinicursos.jsp
+	 * @return "listMinicursos" para o struts
+	 */
 	public String listMinicursos() {
 		minicursos = dao.selectAll();
 		return "listMinicursos";
 	}
 
-	// Insere o minicurso no banco de dados. Esse método é chamado pelo form
-	// da página insertMinicurso.jsp
+	/**
+	 *  Insere o minicurso no banco de dados. Esse método é chamado pelo form
+	 *  da página insertMinicurso.jsp
+	 * @return "listMinicursos" para o struts
+	 */
 	public String insertMinicurso() {		
 		boolean error = false;
 		
@@ -76,13 +100,20 @@ public class MinicursoAction extends ActionSupport {
 		return "listMinicursos";
 	}
 
-	// Redireciona para a página de edição do usuário
+	/**
+	 *  Recebe minicurso do banco
+	 *  Redireciona para a página de edição do minicurso
+	 * @return "editMinicurso" para o struts
+	 */
 	public String editMinicurso() {
 		minicurso = dao.selectById(minicurso.getId());
 		return "editMinicurso";
 	}
 	
-	// Altera os dados do usuário
+	/**
+	 * Altera os dados do minicurso
+	 * @return "listMinicursos" para o struts
+	 */
 	public String updateMinicurso() {
 		boolean error = false;
 		
@@ -101,24 +132,40 @@ public class MinicursoAction extends ActionSupport {
 		return "listMinicursos";
 	}
 	
+	/**
+	 * Insere o usuário logado na secao na lista de usuários inscritos no minicurso
+	 * @return "enterMinicurso" para o struts
+	 */
 	public String enterMinicurso(){
+		
+		//Certifica-se que todos os dados do minicurso foram carregados do banco
 		minicurso = dao.selectById(minicurso.getId());
+		
+		//Usuario - Sera preenchido com os dados do usuario logado
 		Usuario u = new Usuario();
+		
+		//Recebe o usuario que está logado (na sessao)
 		HttpServletRequest request;
 		HttpSession session;
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Le os dados do usuario logado no banco
 		ApplicationContext ctxUsuario;
 		UsuarioDAO daoUsuario;
 		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
 		u=daoUsuario.selectByLogin(tmpLogin);
+		
+		//Adiciona o usuario na lista de usuarios inscritos
 		if (u!=null){
 			if (minicurso.getUsuarios()==null)
 				minicurso.setUsuario(new HashSet<Usuario>());
 			minicurso.getUsuarios().add(u);
 		}
+		
+		//Incrementa o numero de inscritos neste minicurso
 		if (minicurso.getQtInscritos()==null) minicurso.setQtInscritos(new Integer(0));
 		if (minicurso.getQtVagas()==null) minicurso.setQtVagas(new Integer(0));
 		if (minicurso.getQtInscritos()<minicurso.getQtVagas())
@@ -128,40 +175,64 @@ public class MinicursoAction extends ActionSupport {
 			listMinicursos();
 			return "listError";
 		}
+		
+		//Salva a transacao
 		dao.save(minicurso);
 		
+		//Atualiza lista de minicursos, para que a pagina de retorno mostre todos os minicursos
 		listMinicursos();
 		
 		return "enterMinicurso";
 	}
 	
+	/**
+	 * Remove o usuário logado na secao na lista de usuários inscritos no minicurso
+	 * @return "enterMinicurso" para o struts
+	 */
 	public String exitMinicurso(){
+		
+		//Certifica-se que os dados do minicurso estao carregados do banco
 		minicurso = dao.selectById(minicurso.getId());
+		
+		//Usuario
 		Usuario u = new Usuario();
+		
+		//Pega o usuario logado (na sessao)
 		HttpServletRequest request;
 		HttpSession session;
 		request = ServletActionContext.getRequest();
 		session = request.getSession();
 		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Recebe os dados do usuario logado do banco
 		ApplicationContext ctxUsuario;
 		UsuarioDAO daoUsuario;
 		ctxUsuario = new ClassPathXmlApplicationContext(new String[] { "applicationContext.xml" });
 		daoUsuario = (UsuarioDAO) ctxUsuario.getBean("usuarioDAO");
 		u=daoUsuario.selectByLogin(tmpLogin);
+		
+		//Remove usuario logado da lista de usuarios inscritos no minicurso
 		if (u!=null){
 			if (minicurso.getUsuarios()!=null){
 				minicurso.getUsuarios().remove(u);
 			}
 		}
+		
+		//Diminui contador de usuarios inscritos no minicurso
 		minicurso.delQtInscrito();
+		
+		//Salva a transacao
 		dao.save(minicurso);
 		
+		//Atualiza lista de minicursos para que sejam mostrados todos na pagina de retorno
 		listMinicursos();
 		
 		return "enterMinicurso";
 	}
 	
-	// Exclui o usuário
+	/**
+	 * Exclui o usuário do banco
+	 */
 	public String deleteMinicurso() {
 		dao.remove(minicurso);
 		minicursos = dao.selectAll();
@@ -169,6 +240,11 @@ public class MinicursoAction extends ActionSupport {
 		return "listMinicursos";
 	}
 	
+	/*
+	 * =================================
+	 * Setters e Getters
+	 * =================================
+	 */
 	public Minicurso getMinicurso() {
 		return minicurso;
 	}

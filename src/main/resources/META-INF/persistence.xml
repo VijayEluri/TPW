@@ -21,6 +21,7 @@
 			<property name="hibernate.connection.password" value="tpwpass" />
 			<property name="hibernate.hbm2dll.auto" value="none" />
 			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.connection.pool_size" value="5" />
 		</properties>
 
     </persistence-unit>

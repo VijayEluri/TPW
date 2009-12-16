@@ -185,6 +185,18 @@ public class UsuarioAction extends ActionSupport {
 	 * @return "listUsuarios" para o struts
 	 */
 	public String deleteUsuario() {
+		
+		//Verifica se usuario logado esta se deletando
+		HttpServletRequest request;
+		HttpSession session;
+		request = ServletActionContext.getRequest();
+		session = request.getSession();
+		String tmpLogin = (String) session.getAttribute("login");
+		
+		//Se ele se apagou, entao invalida a secao
+		if (usuario.getLogin().equals(tmpLogin))
+			session.invalidate();
+		
 		dao.remove(usuario);
 		listUsuarios();
 

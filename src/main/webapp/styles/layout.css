@@ -163,3 +163,11 @@ div#footer p {
 	border: solid 3px #356595;
 	height: 350px;
 }
+
+#imagem {
+	position: absolute;
+	top: 10px;
+	left: 100px;
+	height: 200px;
+	border: 2px single black solid;
+}

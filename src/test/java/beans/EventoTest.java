@@ -17,7 +17,7 @@ import daos.EventoDAO;
 
 /**
  * Teste do Evento
- * @author stapait
+ * @author vendra
  *
  */
 public class EventoTest {

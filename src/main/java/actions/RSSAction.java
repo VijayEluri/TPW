@@ -28,14 +28,14 @@ public class RSSAction extends ActionSupport {
 	}
 	
 	public String listSiteRSS(){
-		if (Seguranca.checkAdministrador(this)) return "listError";
+		if (!Seguranca.checkAdministrador(this)) return "listError";
 		
 		sitesRSS = siterssDao.selectAll();
 		return "listSiteRSS";
 	}
 	
 	public String insertSiteRSS() {
-		if (Seguranca.checkAdministrador(this)) return "insertError";
+		if (!Seguranca.checkAdministrador(this)) return "insertError";
 		
 		siterssDao.save(siteRSS);
 		sitesRSS = siterssDao.selectAll();
@@ -43,7 +43,7 @@ public class RSSAction extends ActionSupport {
 	}
 	
 	public String deleteSiteRSS(){
-		if (Seguranca.checkAdministrador(this)) return "deleteError";
+		if (!Seguranca.checkAdministrador(this)) return "deleteError";
 		
 		siterssDao.remove(siteRSS);
 		sitesRSS = siterssDao.selectAll();

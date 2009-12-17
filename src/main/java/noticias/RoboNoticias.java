@@ -38,8 +38,6 @@ public class RoboNoticias extends DefaultHandler {
 		// Pega as noticias
 		try{
 			URL rssurl = new URL(this.url);
-
-			System.out.println(url);
 			
 			XmlReader reader = new XmlReader(rssurl);
 			
@@ -52,7 +50,6 @@ public class RoboNoticias extends DefaultHandler {
 				n.setNoticia(entry.getDescription().getValue());
 				n.setTitulo(entry.getTitle());
 				noticias.add(n);
-				//break;
 			}
 			if (reader != null)
 				reader.close();

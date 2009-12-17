@@ -9,11 +9,11 @@ div.demo {
 	width: 300px;
 }
 
-div.demo a {
+#rssmarquee a {
 	text-decoration: none;
 }
 
-div.demo a:hover {
+#rssmarquee a:hover {
 	color: red;
 	background-color: #FFFFFF;
 }

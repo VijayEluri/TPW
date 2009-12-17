@@ -156,8 +156,8 @@ div#footer p {
 
 #minicursos {
 	padding: 10px 10px 10px 10px;
-	top: 20px;
-	position: absolute;
+	top: -396px;
+	position: relative;
 	width: 560px;
 	margin-left: 20px;
 	border: solid 3px #356595;
@@ -166,8 +166,8 @@ div#footer p {
 
 #eventos {
 	padding: 10px 10px 10px 10px;
-	top: 210px;
-	position: absolute;
+	top: -392px;
+	position: relative;
 	width: 560px;
 	margin-left: 20px;
 	border: solid 3px #356595;

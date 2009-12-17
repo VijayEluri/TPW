@@ -66,7 +66,7 @@
     	
 
        
-    <div class="divTable" style="width: 900px">
+    <div class="divTable" style="width: 900px; position: relative; top: -395px;">
  
 	<s:iterator value="posts" status="id">
 		<div class="postTitulo">

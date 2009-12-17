@@ -8,8 +8,8 @@ SELECT pg_catalog.setval('seq_post_id', 3, true);
 --
 
 COPY evento (id, qtvagas, qtinscritos, nome, data, descricao, responsavel) FROM stdin;
-2	50	0	Porquê JAVA?	2009-12-07 08:00:00	Esta palestra conta com os integrantes da empresa Soft. Development Ltda. onde contam suas conquistas com a linguagem JAVA e o desenvolvimento de componentes livres.	Maria J. A. e José A. N.
-1	200	2	Palestra sobre desenvolvimento em Software Livre nas Empresas	2010-01-20 16:00:00	Esta palestra conta com toda a experiência do Dr. Richard em desenvolvimentos de softwares de código aberto que são usadas atualmente no ambiente empresarial	Dr. Richard
+2	50	0	Porque JAVA?	2009-12-07 08:00:00	Esta palestra conta com os integrantes da empresa Soft. Development Ltda. onde contam suas conquistas com a linguagem JAVA e o desenvolvimento de componentes livres.	Maria J. A. e Jose A. N.
+1	200	2	Palestra sobre desenvolvimento em Software Livre nas Empresas	2010-01-20 16:00:00	Esta palestra conta com toda a experiencia do Dr. Richard em desenvolvimentos de softwares de codigo aberto que sao usadas atualmente no ambiente empresarial	Dr. Richard
 \.
 
 
@@ -22,8 +22,8 @@ COPY evento (id, qtvagas, qtinscritos, nome, data, descricao, responsavel) FROM 
 --
 
 COPY minicurso (id, qtvagas, qtinscritos, nome, data, descricao, responsavel) FROM stdin;
-2	50	0	Recompilando o kernel	2009-12-01 09:00:00	Este minicurso aborda a necessidade de recompilar o kernel no linux.<br>\r\nDurante o minicurso o aluno irá recompilar seu kernel de acordo com as necessidades desejadas.	Arthur Nascimento
-1	50	2	Desenvolvimento em SHELL	2010-01-15 11:30:00	Este minicurso aborda o desenvolvimento de shell-scripts.<br>\r\nConteúdo abordado:<br>\r\n- Variáveis<br>\r\n- Desenvolvimento	Thiago José de Campos
+2	50	0	Recompilando o kernel	2009-12-01 09:00:00	Este minicurso aborda a necessidade de recompilar o kernel no linux.<br>\r\nDurante o minicurso o aluno ira recompilar seu kernel de acordo com as necessidades desejadas.	Arthur Nascimento
+1	50	2	Desenvolvimento em SHELL	2010-01-15 11:30:00	Este minicurso aborda o desenvolvimento de shell-scripts.<br>\r\nConteudo abordado:<br>\r\n- Variaveis<br>\r\n- Desenvolvimento	Thiago Jose de Campos
 \.
 
 --
@@ -51,10 +51,9 @@ http://br-linux.org/feed/	BrLinux
 --
 
 COPY usuario (login, password, nome, email, tipo) FROM stdin;
-admin	21232f297a57a5a743894a0e4a801fc3	administrador	\N	ADMINISTRADOR
 lucas	dc53fc4f621c80bdc2fa0329a6123708	Lucas Vendramin	vendra@grad.icmc.usp.br	NORMAL
-tjcampos	b791ddc1c41d9500226b025e6314413f	Thiago José de Campos	tjcampos@gmail.com	NORMAL
-stapait	c34dd5238451425aabca86062718aa33	Fábio Stapait	stapait@gmail.com	NORMAL
+tjcampos	b791ddc1c41d9500226b025e6314413f	Thiago Jose de Campos	tjcampos@gmail.com	NORMAL
+stapait	c34dd5238451425aabca86062718aa33	Fabio Stapait	stapait@gmail.com	NORMAL
 \.
 
 --

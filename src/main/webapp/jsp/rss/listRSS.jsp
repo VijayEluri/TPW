@@ -67,8 +67,8 @@
 	 </display:table>
 </div>
 
-<div class="divPadrao" style="width: 800px"><s:form theme="simple"
-	action="rss!insertSiteRSS" namespace="/jsp">
+<div class="divPadrao" style="width: 920px;">
+	<s:form theme="simple" action="rss!insertSiteRSS" namespace="/jsp" >
 
 	<table width="100%">
 		<tr>

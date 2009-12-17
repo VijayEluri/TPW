@@ -10,6 +10,7 @@
 
 	<script type="text/javascript">
     	function showRSS() {
+    		document.getElementById('rssmarquee').stop();
     	    var div = $("#rssdiv");
 	        $.get(
                     	    "${pageContext.request.contextPath}/jsp/index!fillRSS.action",
@@ -17,6 +18,7 @@
             	            div.html(data);
         	                }
     	         );
+	         document.getElementById('rssmarquee').start();
 		}
 
 	
@@ -33,7 +35,7 @@
     <div id="doc" align="right">
         <div class="demo">
 			<div id="divtitulo">Notícias sobre software-livre</div>
-			<marquee behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 330px">
+			<marquee id="rssmarquee" behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 330px">
 				<div id=rssdiv>
 			
 				</div>

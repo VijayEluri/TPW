@@ -35,11 +35,9 @@
     <div id="doc" align="right">
         <div class="demo">
 			<div id="divtitulo">Notícias sobre software-livre</div>
-			<marquee id="rssmarquee" behavior="scroll" direction="up" scrollamount="1" width="100%" style="height: 330px">
-				<div id=rssdiv>
-			
-				</div>
-			</marquee>
+			<iframe src ="${pageContext.request.contextPath}/jsp/index!fillRSS.action" width="100%" height="330px" scrolling=no frameborder=0>
+  				<p>Your browser does not support iframes.</p>
+			</iframe>
         </div>
     </div>
     

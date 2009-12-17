@@ -9,22 +9,8 @@
 <head>
 
 	<script type="text/javascript">
-    	function showRSS() {
-    		document.getElementById('rssmarquee').stop();
-    	    var div = $("#rssdiv");
-	        $.get(
-                    	    "${pageContext.request.contextPath}/jsp/index!fillRSS.action",
-                	        function (data,textStatus) {
-            	            div.html(data);
-        	                }
-    	         );
-	         document.getElementById('rssmarquee').start();
-		}
-
-	
 		$(document).ready(function() {
 			$('#menu1').css("background-color", "#4198f6");
-            showRSS();
 		});
 	</script>	
 

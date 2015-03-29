@@ -51,9 +51,9 @@ http://br-linux.org/feed/	BrLinux
 --
 
 COPY usuario (login, password, nome, email, tipo) FROM stdin;
-lucas	dc53fc4f621c80bdc2fa0329a6123708	Lucas Vendramin	vendra@grad.icmc.usp.br	NORMAL
-tjcampos	b791ddc1c41d9500226b025e6314413f	Thiago Jose de Campos	tjcampos@gmail.com	NORMAL
-stapait	c34dd5238451425aabca86062718aa33	Fabio Stapait	stapait@gmail.com	NORMAL
+lucas	dc53fc4f621c80bdc2fa0329a6123708	Lucas Vendramin	none@email.com	NORMAL
+tjcampos	b791ddc1c41d9500226b025e6314413f	Thiago Jose de Campos	none@email.com	NORMAL
+stapait	c34dd5238451425aabca86062718aa33	Fabio Stapait	none@email.com	NORMAL
 \.
 
 --
